@@ -1,0 +1,8 @@
+La constante solar en Mercurio es 8948.06 [W/m^2] y 200253403172136777462841344 [W/AU^2] a 0.39 [AU]
+La constante solar en Venus es 2603.64 [W/m^2] y 58268323782460905506209792 [W/AU^2] a 0.72 [AU]
+La constante solar en Tierra es 1361.00 [W/m^2] y 30458542622482007398023168 [W/AU^2] a 1.00 [AU]
+La constante solar en Marte es 585.99 [W/m^2] y 13114120968477244590653440 [W/AU^2] a 1.52 [AU]
+La constante solar en Júpiter es 50.27 [W/m^2] y 1125126795130649872171008 [W/AU^2] a 5.20 [AU]
+La constante solar en Saturno es 14.96 [W/m^2] y 334736770536141215498240 [W/AU^2] a 9.54 [AU]
+La constante solar en Urano es 3.70 [W/m^2] y 82796487647570207703040 [W/AU^2] a 19.18 [AU]
+La constante solar en Neptuno es 1.51 [W/m^2] y 33707858869178935017472 [W/AU^2] a 30.06 [AU]
