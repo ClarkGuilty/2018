@@ -1,0 +1,242 @@
+\documentclass[12pt]{article}
+
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage[spanish]{babel}
+
+
+\usepackage[spanish]{babel} % silabea palabras castellanas <- Puedo poner comentarios para explicar de que va este comando en la misma línea
+
+%Encoding
+\usepackage[utf8]{inputenc} % Acepta caracteres en castellano
+\usepackage[T1]{fontenc} % Encoding de salida al pdf
+
+%Triunfó el mal
+\usepackage[normalem]{ulem}
+\useunder{\uline}{\ul}{}
+\providecommand{\e}[1]{\ensuremath{\times 10^{#1}}}
+
+\usepackage{textcomp}
+\usepackage{gensymb}
+
+
+%Hipertexto
+\usepackage[colorlinks=true,urlcolor=blue,linkcolor=blue]{hyperref} % navega por el doc: hipertexto y links
+
+%Aquello de las urls
+\usepackage{url} 
+
+%simbolos matemáticos
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{physics} %Best pack
+
+% permite insertar gráficos, imágenes y figuras, en pdf o en eps
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage[export]{adjustbox}
+% geometría del documento, encabezados y pies de páginas, márgenes
+\usepackage{geometry}
+\usepackage{comment}
+
+%\usepackage[english]{babel}
+%\usepackage[latin5]{inputenc}
+% \usepackage{hyperref}
+%\newdate{date}{10}{05}{2013}
+%\date{\displaydate{date}}
+\begin{document}
+
+
+
+
+\title{Física del Estado Sólido \\ Resonant Ultrasound Spectroscopy}
+
+\author{
+\textbf{Javier Alejandro Acevedo Barroso\thanks{e-mail: \texttt{ja.acevedo12@uniandes.edu.co}}}\\
+\textit{Universidad de los Andes, Bogotá, Colombia}\\
+ }% Hasta aquí llega el bloque "author" (son dos autores por informe, orden alfabético)
+
+\date{\today}
+%\date{Versión $\alpha \beta$ fecha del documento}
+\maketitle %Genera el título del documento
+
+
+\normalsize
+\newpage
+
+
+
+\section{Distancia a partir de paralaje}
+El paralaje es el aparente cambio de posición de una estrella en la esfera celeste respecto a estrellas mucho más lejanas y por lo tanto, con menor o hasta imperceptible) paralaje. Si se utiliza unidades de Parsec para la distancia a la estrella y segundos de arco para el ángulo del paralaje, estos de relacionan de la siguiente manera:
+\begin{equation}
+\label{paralaxToDistance}
+d[pc] = \frac{1}{p['']}
+\end{equation}
+Por lo tanto, a partir de datos del paralaje de las 10 estrellas más brillantes del cielo, se puede obtener su distancia. Haciendo uso de teorias de dispersión de error, el error de la distancia calculada a partir del paralaje estará dado por:
+\begin{equation}
+\Delta y =\abs{\dv{y}{x}} \Delta x
+\end{equation}
+Por lo tanto:
+\begin{equation}
+\Delta d = \frac{\Delta p}{p^2}
+\end{equation}
+%Objetivo general del trabajo. Empieza con un verbo en infinitivo.
+
+A continuación, una tabla con las 10 estrellas más brillantes de acuerdo a su brillo:
+
+\begin{table}[h]
+\centering
+	\begin{tabular}{|c|c| }
+	\hline
+Estrella & Magnitud relativa (m) \\ \hline
+Sirio & -1.46 \\ \hline
+Canopus & -0.74 \\ \hline
+Alpha Centauri & -0.27 \\ \hline
+Arcturus & -0.05 \\ \hline
+Vega & 0.03 \\ \hline
+Capella & 0.08 \\ \hline
+Rigel & 0.13 \\ \hline
+Procyon & 0.34 \\ \hline
+Achernar & 0.46 \\ \hline
+Betelgeuse & 0.50 \\ \hline
+	\end{tabular}
+\end{table}
+\vspace{1mm}
+
+
+
+
+Ahora, conociendo el paralaje es posible conocer la distancia. Usando la distancia y la magnitud relativa (m), es posible conocer la magnitud absoluta (M). Lo anterior está dado por la ecuación de modulo de distancia:
+\begin{equation}
+m - M = 5 \log{d} - 5
+\end{equation}
+Por lo tanto, el error en la magnitud absoluta debido al error de la distancia estará dado por:
+\begin{equation}
+\Delta M = \frac{5 \Delta d}{d \ln{10}}
+\end{equation}
+Donde la distancia $d$ está dada en Parsecs. Realizando las cuentas en Python, tomando datos de internet para magnitud relativa y paralaje, y organizando los resultados de menor magnitud relativa a mayor, se obtiene la siguiente tabla:
+
+\begin{table}[h]
+\centering
+	\begin{tabular}{|c|c|c|c|c|}
+	\hline
+Estrella & Paralaje[mas] & Distancia[pc] & m & M \\ \hline
+Sirio & 379.21 $\pm$ 1.58 & 2.64 $\pm$ 0.01 & -1.46 & 1.43 $\pm$ 0.01 \\ \hline
+Canopus & 10.55 $\pm$ 0.56 & 94.79 $\pm$ 5.03 & -0.74 & -5.62 $\pm$ 0.12 \\ \hline
+Alpha Centauri & 754.81 $\pm$ 4.11 & 1.32 $\pm$ 0.01 & -0.27 & 4.12 $\pm$ 0.01 \\ \hline
+Arcturus & 88.83 $\pm$ 0.54 & 11.26 $\pm$ 0.07 & -0.05 & -0.31 $\pm$ 0.01 \\ \hline
+Vega & 130.23 $\pm$ 0.36 & 7.68 $\pm$ 0.02 & 0.03 & 0.60 $\pm$ 0.01 \\ \hline
+Capella & 76.20 $\pm$ 0.46 & 13.12 $\pm$ 0.08 & 0.08 & -0.51 $\pm$ 0.01 \\ \hline
+Rigel & 3.78 $\pm$ 0.34 & 264.55 $\pm$ 23.80 & 0.13 & -6.98 $\pm$ 0.20 \\ \hline
+Procyon & 284.56 $\pm$ 1.26 & 3.51 $\pm$ 0.02 & 0.34 & 2.61 $\pm$ 0.01 \\ \hline
+Achernar & 23.39 $\pm$ 0.57 & 42.75 $\pm$ 1.04 & 0.46 & -2.69 $\pm$ 0.05 \\ \hline
+Betelgeuse & 4.51 $\pm$ 0.80 & 221.73 $\pm$ 39.33 & 0.50 & -6.23 $\pm$ 0.39 \\ \hline
+	\end{tabular}
+\end{table}
+\vspace{1mm}
+
+
+
+
+
+Se observa que las estrellas a menos de 10 Parsecs de distancia tienen una magnituva absoluta mayor a su magnitud relativa. Ordenando la tabla de más brillante a menos brillante a 10 Parsecs:
+
+
+
+\begin{table}[h]
+\centering
+	\begin{tabular}{|c|c|c|c|c|}
+	\hline
+Estrella & Paralaje[mas] & Distancia[pc] & m & M \\ \hline
+Rigel & 3.78 $\pm$ 0.34 & 264.55 $\pm$ 23.80 & 0.13 & -6.98 $\pm$ 0.20 \\ \hline
+Betelgeuse & 4.51 $\pm$ 0.80 & 221.73 $\pm$ 39.33 & 0.50 & -6.23 $\pm$ 0.39 \\ \hline
+Canopus & 10.55 $\pm$ 0.56 & 94.79 $\pm$ 5.03 & -0.74 & -5.62 $\pm$ 0.12 \\ \hline
+Achernar & 23.39 $\pm$ 0.57 & 42.75 $\pm$ 1.04 & 0.46 & -2.69 $\pm$ 0.05 \\ \hline
+Capella & 76.20 $\pm$ 0.46 & 13.12 $\pm$ 0.08 & 0.08 & -0.51 $\pm$ 0.01 \\ \hline
+Arcturus & 88.83 $\pm$ 0.54 & 11.26 $\pm$ 0.07 & -0.05 & -0.31 $\pm$ 0.01 \\ \hline
+Vega & 130.23 $\pm$ 0.36 & 7.68 $\pm$ 0.02 & 0.03 & 0.60 $\pm$ 0.01 \\ \hline
+Sirio & 379.21 $\pm$ 1.58 & 2.64 $\pm$ 0.01 & -1.46 & 1.43 $\pm$ 0.01 \\ \hline
+Procyon & 284.56 $\pm$ 1.26 & 3.51 $\pm$ 0.02 & 0.34 & 2.61 $\pm$ 0.01 \\ \hline
+Alpha Centauri & 754.81 $\pm$ 4.11 & 1.32 $\pm$ 0.01 & -0.27 & 4.12 $\pm$ 0.01 \\ \hline
+	\end{tabular}
+\end{table}
+\vspace{1mm}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+\section{Cronograma}
+
+\begin{table}[htb]
+	\begin{tabular}{|c|cccccccccccccccc| }
+	\hline
+	Tareas $\backslash$ Semanas & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16  \\
+	\hline
+	1 & X & X & X  &   &   &   &   &  &  &   &   &   &   &   &   &   \\
+	2 &   &  & X & X & X &  &  &   &   &  &  &  &   &  &  &   \\
+	3 &   &   &   &  & X  & X  & X  & X &   &   &   &  &   &   &  &   \\
+	4 &  &  &  &  &  &  &  & X & X & X & X &   &   &   &   &   \\
+    5 &  &  &  &  &  &  & X & X &  &  &  &   &   &   &   &   \\
+	6 &   &   &   &   &  &   &  X & X  &  &   &  X & X &  X & X  & X &   \\
+	\hline
+	\end{tabular}
+\end{table}
+\vspace{1mm}
+ 
