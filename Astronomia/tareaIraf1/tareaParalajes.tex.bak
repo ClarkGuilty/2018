@@ -1,0 +1,168 @@
+\documentclass[12pt]{article}
+
+\usepackage{graphicx}
+\usepackage{epstopdf}
+
+
+\usepackage[spanish]{babel} % silabea palabras castellanas <- Puedo poner comentarios para explicar de que va este comando en la misma línea
+\selectlanguage{spanish} 
+
+%Encoding
+\usepackage[utf8]{inputenc} % Acepta caracteres en castellano
+\usepackage[T1]{fontenc} % Encoding de salida al pdf
+
+%Triunfó el mal
+\usepackage[normalem]{ulem}
+\useunder{\uline}{\ul}{}
+\providecommand{\e}[1]{\ensuremath{\times 10^{#1}}}
+\usepackage{quotmark}
+
+\usepackage{textcomp}
+\usepackage{gensymb}
+
+
+%Hipertexto
+\usepackage[colorlinks=true,urlcolor=blue,linkcolor=blue]{hyperref} % navega por el doc: hipertexto y links
+
+%Aquello de las urls
+\usepackage{url} 
+
+%simbolos matemáticos
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{physics} %Best pack
+
+% permite insertar gráficos, imágenes y figuras, en pdf o en eps
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage[export]{adjustbox}
+% geometría del documento, encabezados y pies de páginas, márgenes
+\usepackage{geometry}
+\usepackage{comment}
+
+%\usepackage[english]{babel}
+%\usepackage[latin5]{inputenc}
+% \usepackage{hyperref}
+%\newdate{date}{10}{05}{2013}
+%\date{\displaydate{date}}
+\begin{document}
+
+
+
+
+\title{Cúmulos Abiertos \\ Introducción a IRAF}
+
+\author{
+\textbf{Javier Alejandro Acevedo Barroso\thanks{e-mail: \texttt{ja.acevedo12@uniandes.edu.co}}}\\
+\textit{Universidad de los Andes, Bogotá, Colombia}\\
+ }% Hasta aquí llega el bloque "author" (son dos autores por informe, orden alfabético)
+
+\date{\today}
+%\date{Versión $\alpha \beta$ fecha del documento}
+\maketitle %Genera el título del documento
+
+
+\normalsize
+\newpage
+
+
+
+
+
+\section{Image Reduction and Analysis Facility}
+Image Reduction and Analysis Facility (IRAF) es un software de reducción y análisis de imágenes mantenido por la \tqt{National Optical Astronomy Observatories} (NOAO) en Estados Unidos. El proyecto IRAF nace en 1981 en el Observatorio Nacional Kitt Peak, de 1982 a 1984 se escribió la primera versión del software y su lenguaje de script para el usuario \tqt{Command Language} (CL). En 1984 empezó su uso científico en el \tqt{Space Telescope Science Institute} impulsando la implementación del software en diferentes arquitecturas de máquinas de la época, en particular, se implementó para la arquitectura UNIX en 1986. Para principios de la siguiente década IRAF es el estandar científico de procesamiento de imagen en Estados Unidos y observatorios asociados\cite{IRAFinThe80}. 
+%Así mismo, durante esa década el softwafe se adaptó a las innovaciones tecnológicas, tales como: la programación orientada a objetos, que surge del refinamiento de las prácticas de programación durante los ochenta; las redes de computadores, en particular la \tqt{jóven} World Wide Web; las interfaces de usuario, que en el caso de IRAF evolucionó a XGterm y ds9; y los lenguajes de programación de alto nivel, que en ese momento eran C, C++ y Fortran.\cite{IRAFinThe90}
+Para el nuevo milenio IRAF era el estándar mundial de reducción y análisis de imagen, 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Distancia a partir de paralaje}
+El paralaje es el aparente cambio de posición de una estrella en la esfera celeste respecto a estrellas mucho más lejanas y por lo tanto, con menor o hasta imperceptible) paralaje. Si se utiliza unidades de Parsec para la distancia a la estrella y segundos de arco para el ángulo del paralaje, estos de relacionan de la siguiente manera:
+\begin{equation}
+\label{paralaxToDistance}
+d[pc] = \frac{1}{p['']}
+\end{equation}
+Por lo tanto, a partir de datos del paralaje de las 10 estrellas más brillantes del cielo, se puede obtener su distancia. Haciendo uso de teorias de dispersión de error, el error de la distancia calculada a partir del paralaje estará dado por:
+\begin{equation}
+\Delta y =\abs{\dv{y}{x}} \Delta x
+\end{equation}
+Por lo tanto:
+\begin{equation}
+\Delta d = \frac{\Delta p}{p^2}
+\end{equation}
+%Objetivo general del trabajo. Empieza con un verbo en infinitivo.
+
+A continuación, una tabla con las 10 estrellas más brillantes de acuerdo a su brillo:
+
+
+
+
+
+
+
+
+
+
+
+\bibliography{bibTes}{}
+\bibliographystyle{unsrt}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+\section{Cronograma}
+
+\begin{table}[htb]
+	\begin{tabular}{|c|cccccccccccccccc| }
+	\hline
+	Tareas $\backslash$ Semanas & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16  \\
+	\hline
+	1 & X & X & X  &   &   &   &   &  &  &   &   &   &   &   &   &   \\
+	2 &   &  & X & X & X &  &  &   &   &  &  &  &   &  &  &   \\
+	3 &   &   &   &  & X  & X  & X  & X &   &   &   &  &   &   &  &   \\
+	4 &  &  &  &  &  &  &  & X & X & X & X &   &   &   &   &   \\
+    5 &  &  &  &  &  &  & X & X &  &  &  &   &   &   &   &   \\
+	6 &   &   &   &   &  &   &  X & X  &  &   &  X & X &  X & X  & X &   \\
+	\hline
+	\end{tabular}
+\end{table}
+\vspace{1mm}
+ 
