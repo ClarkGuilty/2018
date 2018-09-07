@@ -52,46 +52,41 @@
 \begin{document}
 
 
-
-
 \title{Cúmulos Abiertos \\ Introducción a IRAF}
 
 \author{
 \textbf{Javier Alejandro Acevedo Barroso\thanks{e-mail: \texttt{ja.acevedo12@uniandes.edu.co}}}\\
 \textit{Universidad de los Andes, Bogotá, Colombia}\\
  }% Hasta aquí llega el bloque "author" (son dos autores por informe, orden alfabético)
-
+ 
 \date{\today}
 %\date{Versión $\alpha \beta$ fecha del documento}
 \maketitle %Genera el título del documento
 
-
 \normalsize
 \newpage
-
-
-
 
 
 \section{Image Reduction and Analysis Facility}
 Image Reduction and Analysis Facility (IRAF) es un software de reducción y análisis de imágenes mantenido por la \tqt{National Optical Astronomy Observatories} (NOAO) en Estados Unidos. El proyecto IRAF nace en 1981 en el Observatorio Nacional Kitt Peak, en donde de 1982 a 1984 se escribió la primera versión del software y su lenguaje de script para el usuario \tqt{Command Language} (CL). En 1984 empezó su uso científico en el \tqt{Space Telescope Science Institute} impulsando la implementación del software en diferentes arquitecturas de máquinas de la época, en particular, se implementó para la arquitectura UNIX en 1986. Para principios de la siguiente década IRAF es el estandar científico de procesamiento de imagen en Estados Unidos y observatorios asociados\cite{IRAFinThe80}. \\
 Así mismo, durante esa década el softwafe se adaptó a las innovaciones tecnológicas, tales como: la programación orientada a objetos, que surge del refinamiento de las prácticas de programación durante los ochenta; las redes de computadores, en particular la recien nacida World Wide Web; las interfaces de usuario, que en el caso de IRAF evolucionó a XGterm y DS9; y los lenguajes de programación de alto nivel, que en ese momento eran C, C++ y Fortran\cite{IRAFinThe90}.\\
 Para el nuevo milenio IRAF era el estándar mundial en reducción y análisis de imagen astronómicas, por encima de proyectos similares como \tqt{Starlink Project} que fue también un softwafe de reducción y procesamiento de datos pero escrito por la comunidad astronómica de Reino Unido.\\
-IRAF está organizado en \tqt{paquetes} que contienen rutinas específicas denomidadas \tqt{tareas}. Cada paquete agrupa tareas relacionadas de acuerdo a su uso. Por ejemplo, hay paquetes que traen todo lo relacionado a la descompresión y carga de imágenes, o paquetes dedicados a ciertos tipos de análisis como astrometría o fotometría.
+IRAF está organizado en \tqt{paquetes} que contienen rutinas específicas denominadas \tqt{tareas}. Cada paquete agrupa tareas relacionadas de acuerdo a su uso. Por ejemplo, hay paquetes que traen todo lo relacionado a la descompresión y carga de imágenes, o paquetes dedicados a ciertos tipos de análisis como astrometría o fotometría.
 
 
 
 \section{SAOImageDS9}
-SAOImageDS9 (comunmente llamado DS9) es un software de visualización y creación de imágenes a partir de datos. Las principales particularidad de DS9 son: Dado lo temprano de su desarrollo, sus algoritmos fueron un fuerte avance no solo para la astronomía, sino también para la visualización computacional en sí; su capacidad de procesar archivos de formato .fits, que es el formato más utilizado en astronomía; y la fácil comunicación con herramientas de análisis externas, como IRAF, permitiendo realizar el procesamiento de los datos en un ordenador diferente al que se usa para la visualización.\\
+SAOImageDS9 (comúnmente llamado DS9) es un software de visualización y creación de imágenes a partir de datos. Las principales particularidad de DS9 son: Dado lo temprano de su desarrollo, sus algoritmos fueron un fuerte avance no solo para la astronomía, sino también para la visualización computación en sí; su capacidad de procesar archivos de formato .fits, que es el formato más utilizado en astronomía; y la fácil comunicación con herramientas de análisis externas, como IRAF, permitiendo realizar el procesamiento de los datos en un ordenador diferente al que se usa para la visualización.\\
 La historia de DS9 empieza en 1990 cuando Mike Van Hilst escribe SAOImage en el \tqt{Smithsonian Astrophysical Observatory} (SAO). El software, siendo uno de los primeros en su tipo, representó tecnicas innovadoras en la visualización de datos, al punto de que hoy muchos programas de visualización de datos implementan algoritmos originalmente de SAOImage. El éxito inicial de SAOImage llevó al desarrollo durante los noventa de \tqt{SAOImage, The Next Generation}, que extendió la funcionalidad de SAOImage a nuevos entornos gráficos (nótese que fue en esta década que se desarrollaron los GUI como los entendemos hoy). Por último, finales de los noventa, se desarrolló el sucesor a \tqt{SAOImage, The Next Generation}, que llamaron \tqt{SAOImageDS9} para continuar con un esquema de nombres relacionado a Star Trek (The Next Generation y Deep Space 9 son los títulos de diferentes series que toman lugar en el universo de Star Trek). La primera versión de DS9 fue lanzada al público en 1999, y,gracias al financiamiento de NASA y el \tqt{Chandra X-Ray Science Center} entonces ha recibido soporte continuo de parte de SAO. La versión actual de DS9 es la 7.6 estable y la 8 en beta.\cite{ds9}
 
-
-
+\section{Formato de archivos}
+Aunque para el procesador todos los tipos de archivos son finalmente conjuntos de unos y ceros, para el usuario no es lo mismo un archivo de vídeo con extensión .avi qué un programa en c. Por esto, se definieron los formatos de archivo. Cada archivo tiene un formato que discribe el tipo de información que tiene, adicionalmente, la mayoría de sistemas operativos relacionan el formato de un archivo con la extensión del mismo. Por ejemplo, un archivo .jpeg es un archivo comprimido de imagen. La extensión puede ser un acrónimo (como Joint Photographic Expert Group JPEG) o en general cualquier conjunto de 1-4 letras. La mayoría de extensiones corresponden a protocolos particulares para ese tipo de archivo. Por ejemplo, las extensiones .avi .mkv .MPEG representan archivos de vídeos, pero a la vez representan el protocolo que se usa para comprimir o codificar los archivos y recuperar el vídeo a partir de una secuencia binaria.\\
+IRAF y la comunidad astronómica internacional se valen del formato FITS (Flexible Image Transport System) para el almacenamiento y transporte de imágenes. El formato se desarrolló a principio de los ochenta y fue pensado para transportar imágenes bastante grandes para el tamaño de las unidades de almacenamiento de la época (no era raro ver astrónomos con Gigabytes de datos almacenados en cintas magnéticas de solo cientos de Kilobytes de capacidad). Otra particularidad del formato FITS es la inclusión de un header en cada imagen que puede ser leído por el usuario (a través de tareas de IRAF) e incluye información del campo de la imagen, las coordenadas, los pixeles muertos, etc. 
 
 
 \section{Reporte de la instalación de IRAF}
 Dada la época en donde se escribió la primera versión del software, la interfaz de usuario de IRAF es bastante robusta. Si bien, se ha recopilado paquetes binarios para instalar IRAF usando un instalador automático, la necesidad de usar librerías no incluidas y software adicional como \tqt{ximtools}, así como los diferentes niveles de permisos que requiere IRAF durante su instalación, dan lugar a un zoológico de errores posibles.\\
-Por lo anterior, la instalación de IRAF tomó numerosos intentos. El software se instaló en un computador de mesa y un portátil comercial, ambos con instalaciones funcionales de Ubuntu 18.04. Los primeros intentos de instalación fallaron por errores a la hora de elegir los paquetes binarios a descargar, pues estos deben coincidir no solo con el sistema operativo (Linux) sino también con la arquitectura del procesador. Las siguientes instalaciones sufrieron de problemas a la hora de obtener las librerías de Linux que requiere IRAF pues estas cambiaron ligeramente de nombre. Tras varios intentos se logró tener una instalación exitosa en el computador de mesa, sin embargo, en el computador portatil hay errores adicionales, pues nunca se puede ejecutar correctamente el comando \tqt{ecl}. Finalmente se optó por usar el computador de mesa para el trabajo en IRAF y el portatil únicamente para tomar nota de los comandos en clase.\\
+Por lo anterior, la instalación de IRAF tomó numerosos intentos. El software se instaló en un computador de mesa y un portátil comercial, ambos con instalaciones funcionales de Ubuntu 18.04. Los primeros intentos de instalación fallaron por errores a la hora de elegir los paquetes binarios a descargar, pues estos deben coincidir no solo con el sistema operativo (Linux) sino también con la arquitectura del procesador. Las siguientes instalaciones sufrieron de problemas a la hora de obtener las librerías de Linux que requiere IRAF pues estas cambiaron ligeramente de nombre. Tras varios intentos se logró tener una instalación exitosa en el computador de mesa, sin embargo, en el computador portátil hay errores adicionales, pues nunca se puede ejecutar correctamente el comando \tqt{ecl}. Finalmente se optó por usar el computador de mesa para el trabajo en IRAF y el portátil únicamente para tomar nota de los comandos en clase.\\
 La instalación exitosa se realizó utilizando un tutorial de la universidad de Ohio para linux de 64 bits\cite{OhioTutorial}. Dado el cambio en el nombre de los paquetes, esta es la versión correcta del comando a usar:
 
 \begin{lstlisting}[language=bash]
@@ -153,7 +148,7 @@ Ahora, para alinear las imágenes, se ubicarán más de diéz estrellas en ambas
 \begin{figure}[H]
   \centering
    \includegraphics[scale= 0.6]{im05.png}
-  \caption{Perfil radial de un buen candidato a estrella. Nótece lo ceñido que están los puntos a la línea de tendencia, esto es una cuantificación visual de que tanto se ajusta el perfil radial del punto al de una estrella.}
+  \caption{Perfil radial de un buen candidato a estrella. Nótese lo ceñido que están los puntos a la línea de tendencia, esto es una cuantificación visual de que tanto se ajusta el perfil radial del punto al de una estrella.}
   \label{im05}
 \end{figure}
 
@@ -187,25 +182,7 @@ Por último, tanto el código utilizado, como los datos de las estrellas tomadas
 \bibliography{bibTes}{}
 \bibliographystyle{unsrt}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 \end{document}
-
-
-
-
-
 
 
 
