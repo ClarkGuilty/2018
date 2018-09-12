@@ -24,10 +24,10 @@ fpotCimag = np.loadtxt("fpot1.dat")
 fCtotal = fCreal**2 + fCimag**2
 dtest = densidadTheo.copy()
 Nx = 128
-xmin = 0
-xmax = 2.0
 #xmin = 0
 #xmax = 2.0
+xmin = -1.0
+xmax = 1.0
 PI = np.pi
 G = 1.0
 L = xmax-xmin
@@ -36,7 +36,8 @@ x = np.linspace(xmin,xmax,Nx, endpoint = False)
 
 
 def pot(inp, ino):
-    return -np.cos(0.5*np.pi*inp)*np.cos(0.5*np.pi*ino)
+    #return -np.cos(0.5*np.pi*inp)*np.cos(0.5*np.pi*ino)
+    return gauss(x[inp],x[ino],0.2,1)
 
 def dens(xin,yin):
     return -np.pi*pot(xin,yin)/8.0
@@ -58,7 +59,7 @@ totalMass = 0
 for i in range(Nx):
     for j in range(Nx):
         #test[i][j] = dens(x[i],t[j])
-        test[i][j] = simpleExample2(x[i],t[j],3,20)
+        test[i][j] = pot(i,j)
         dtest[i][j] = test[i][j]
         totalMass += test[i][j]*(2.0/128)**2
         potTheo[i][j]=simpleExample(x[i],t[j],3,20)
@@ -76,7 +77,9 @@ fimag = np.imag(img_ft)/Nx**2
 freal = np.real(img_ft)/Nx**2
 ftotal = freal**2 + fimag**2
 
-
+satan = fft.fft2(test)
+satan0 = fft.ifft2(satan)
+satan1 = np.real(satan0)
 
 #
 def fast3d(image, title="none"):
@@ -158,16 +161,19 @@ outC = fpotCreal+ 1j*fpotCimag
 #Hasta aqué funciona consistentemente
 ############################################################
 
+aVer= img_ft-outC
+a0 = np.real(aVer)
+a1 = np.imag(aVer)
 outMuerte= fft.fft2(potTheo) 
-fast3d(np.abs(outP), "después python")
+fast3d(np.abs(img_ft), "después python")
 fast3d(np.abs(outC), "después C")
-fast3d(np.abs(outMuerte), "Real ")
+fast3d(np.real(aVer), "Real ")
 dMuerte3 = outMuerte[3,0]/outP[3,0]
 dMuerte125 = outMuerte[125,0]/outP[125,0]
 dMuerte20 = outMuerte[0,20]/outP[0,20]
 dMuerte108 = outMuerte[0,108]/outP[0,108]
 dMuerte3R = outMuerte[3,0]/(-4.0*PI*G*(imgC[3,0]))
-
+aVerz = fft.ifft2(img_ft)
 
 #dout = outP - outC
 #plt.figure()
@@ -215,6 +221,8 @@ ddifft = testBackC - densidadTheo
 #plt.figure()
 #plt.imshow(test)
 
+def gauss(x,y, sr, amplitude):
+    return amplitude* np.exp(-x*x/(sr*sr)-y*y/(sr*sr))
 
 
 
