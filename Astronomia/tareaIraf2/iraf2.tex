@@ -54,7 +54,7 @@
 
 
 
-\title{Cúmulos Abiertos \\ Reducciones CCD 1 IRAF}
+\title{Cúmulos Abiertos \\ Reducciones IRAF CCD 1}
 
 \author{
 \textbf{Javier Alejandro Acevedo Barroso\thanks{e-mail: \texttt{ja.acevedo12@uniandes.edu.co}}}\\
@@ -72,7 +72,7 @@
 
 \section{Reducción CCD}
 
-El objetivo del ejercicio es realizar la reducción de imágenes tomadas con CCD (Charged-Coupled Device). Tales reducciones pueden realizarse de dos maneras utilizando IRAF: calculando cada etapa de la reducción con tareas específicas de IRAF para ello, o calcular directamente la corrección con el paquete CCDRED de IRAF.
+El objetivo del ejercicio es realizar la reducción de imágenes tomadas con CCD (Charged-Coupled Device). Esto se puede hacer de dos formas en IRAF: calculando cada etapa de la reducción con tareas específicas de IRAF como IMARITH e IMSTATISTICS, o calcular directamente la corrección con el paquete CCDRED de IRAF.
 
 
 
@@ -95,7 +95,7 @@ Adicionalmente a calcular el \tqt{offset}, también se debe recortar las imágen
 
 \begin{figure}[H]
   \centering
-   \includegraphics[scale= 0.5]{im02.png}
+   \includegraphics[scale= 0.4]{im02.png}
 %  \caption{•}
   \label{im02}
 \end{figure}
@@ -129,7 +129,7 @@ Por último, se utiliza IMARITH para realizar el cociente de la ecuación \ref{u
 \subsection{Segundo Camino}
 Dada la alta frecuencia con la que los astrónomos se encuentran con este tipo de cálculos, IRAF implementa una versión automática del mismo, esto se hace con el paquete CCDRED. El uso del paquete permite convertir la reducción en un proceso más automatizado, para esto, el paquete se vale de la información de los headers de las imágenes y algunos datos extra proveídos por el usuario.\\
 
-El primer paso es informar al paquete del instrumento usado en la medición, esto se hace con el comando \tqt{setinstrument}. En el caso del ejercicio se selecciona \tqt{direct}, que representa un CCD estandar. Tras elegir el instrumento, automáticamente se pone la selección de parámetros (epar) de CCDRED e inmediatamente después la de CCDPROC.  y solo debe ser seleccionado) y un archivo para los \tqt{subsets}. La tarea CCDPROC es la encargada de realizar las correcciones, desde el cálculo y resta del \tqt{offset} hasta la normalización del \tqt{Flat} y la obtención de la imagen final. Por lo anterior, la lista de parámetros de CCDPROC incluye algunos de los valores previamente calculados como las fronteras de la región del \tqt{overscan}. Tras verificar que los parámetros coincidieran con los del método anterior, se ejecuta CCDPROC, y de forma automática se corrigen las imágenes simultáneamente. 
+El primer paso es informar al paquete del instrumento usado en la medición, esto se hace con el comando \tqt{setinstrument}. En el caso del ejercicio se selecciona \tqt{direct}, que representa un CCD estandar. Tras elegir el instrumento, automáticamente se pone la selección de parámetros (epar) de CCDRED e inmediatamente después la de CCDPROC.  y solo debe ser seleccionado) y un archivo para los \tqt{subsets}. La tarea CCDPROC es la encargada de realizar las correcciones, desde el cálculo y resta del \tqt{offset} hasta la normalización del \tqt{Flat} y la obtención de la imagen final. Por lo anterior, la lista de parámetros de CCDPROC incluye algunos de los valores previamente calculados como las fronteras de la región del \tqt{overscan}. Tras verificar que los parámetros coincidieran con los del método anterior, se ejecuta CCDPROC, y de forma automática se corrigen todas las imágenes simultáneamente. 
 
 
 
