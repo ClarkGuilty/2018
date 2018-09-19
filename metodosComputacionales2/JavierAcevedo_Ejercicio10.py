@@ -129,7 +129,7 @@ def logpriorParam3(param):
 
 latest3 = np.random.uniform(0,20,len(y))
 lbtest3 = np.random.uniform(0,20,len(x))
-lctest3 = np.random.uniform(0,20,len(x))
+lctest3 = np.random.uniform(-1.0,1.0,(5,100))
 
 
 i = 1
