@@ -37,7 +37,7 @@ Once we have calculated the density, we can use the Poisson equation to calculat
 \laplacian \pot = 4 \pi G \dens
 \end{equation}
 
-To solve the Poisson equation we use the pseudo-spectral Fourier method, which allows for a very fast numerical solution by making use of the Fast Fourier Transform algorithm. The idea is simply to apply a Fast Fourier Transform (FFT), then solve the equation in the Fourier space, and then apply an inverse transform (IFFT). In the phase space the Poisson equation is given by:
+To solve the Poisson equation we use the pseudo-spectral Fourier method, which allows for very fast numerical solutions by making use of the Fast Fourier Transform algorithm. The idea is simply to apply a Fast Fourier Transform (FFT), then solve the equation in the Fourier space, and then apply an inverse transform (IFFT). In the phase space the Poisson equation is given by\cite{freePoisson} \cite{computerUsingParticles}
 
 \begin{equation}
 \lambda_{\vb{k}}^2 \hat{\Phi}(\vb{k},t) = 4 \pi G \hat{\rho}(\vb{k},t)
@@ -68,10 +68,10 @@ With $\toInt{x}$ representing the operator \tqt{to nearest integer}, so that $\v
 
 Using only integer arithmetics allows for the elimination of the rounding error but introduces lattice noise. Regardless, this method creates a one to one map with the continous solution.\cite{franco} \cite{integerLatticeDynamics}
 
-The \tqt{kick} and \tqt{drift} together are known as the \tqt{Streaming} step, and it represents the classical movement of particles under a potential but without considering the collision of particles. If we want a collisionless simulation, we can just calculate again the density and continue following the same steps. If we want a collisional simulation, we must define a collisional step.
+The \tqt{kick} and \tqt{drift} together are known as the \tqt{Streaming} step, and it represents the classical movement of particles under a potential but without considering the collision of particles. If we want a collisionless simulation, we can just calculate again the density and continue the algorithm from there. If we want a collisional simulation, we must define a collisional step.
 
 \section{The Collisional Step}
-
+As previously mentioned, solving the collisional integral is not straight-foward
 
 \section{Units and Systems to Simulate}
 
