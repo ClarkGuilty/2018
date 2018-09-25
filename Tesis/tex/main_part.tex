@@ -53,7 +53,7 @@ Therefore, solving the Poisson equation is reduced to calculating $\hat{\Phi}(\v
 
 Once we have the potential, calculating the acceleration is straight-forward:
 \begin{equation}
-\acce = -\grad \pot|
+\acce = -\grad \pot
 \end{equation}
 Which, in the context of the lattice can be calculated simply with a central difference numerical derivative.
 Now, in order to update the phase space, we must first define the time interval to simulate: we name $N_t$ the number of time intervals to simulate and $\dd t$ the length of each of such intervals.
@@ -71,7 +71,10 @@ Using only integer arithmetics allows for the elimination of the rounding error 
 The \tqt{kick} and \tqt{drift} together are known as the \tqt{Streaming} step, and it represents the classical movement of particles under a potential but without considering the collision of particles. If we want a collisionless simulation, we can just calculate again the density and continue the algorithm from there. If we want a collisional simulation, we must define a collisional step.
 
 \section{The Collisional Step}
-As previously mentioned, solving the collisional integral is not straight-foward
+As previously mentioned, solving the collisional integral $C[f]$ is not straight-forward, as it depends on the modeling of the short range interactions between particles that we decide to assign to the dark matter particle. Given that the short range interaction of dark matter is uncertain, we avoid using an specific description of the microscopic interaction and choose to use a mesoscopic approach, as discussed in section \ref{bgk}. The BGK collisional operator is given by:\\
+\begin{equation}
+C[f] = -\frac{1}{\tau}(\f - f_e(\rv))
+\end{equation}
 
 \section{Units and Systems to Simulate}
 
