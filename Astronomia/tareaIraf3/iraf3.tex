@@ -71,67 +71,54 @@
 
 
 \section{Función Inicial de Masa}
-La función inicial de masa es la función que relaciona la masa al momento de entrar a la secuencia principal, con el número de estrellas en una población entrando a la secuencia principal con esa masa. Es decir, en una población estelar recien nacida de estrellas, la función inicial de masa correspondería completamente con el histograma de las masas. La importancia de la función inicial de masa radica en que la masa con la que una estrella entra a su secuencia principal es la variable más importante para determinar su evolución.
+La función inicial de masa es la función que relaciona la masa al momento de entrar a la secuencia principal, con el número de estrellas en una población entrando a la secuencia principal con esa masa. Es decir, en una población estelar recien nacida de estrellas, la función inicial de masa correspondería completamente con el histograma de las masas. La importancia de la función inicial de masa radica en que la masa con la que una estrella entra a su secuencia principal es la variable más importante para determinar su evolución.\\
 
 
 
 \section{Fotometría de apertura}
-El objetivo de este ejercicio es realizar el procesamiento de fotometría de apertura para las imágenes del tutorial de IRAF. Esto corresponde a calcular una magnitud instrumental para los objetos del campo estelar. Por ser la primera vez que se realiza tal análisis, se realizará paso a paso y para un número límitado de estrellas. En futuros ejercicios se realizará el análisis para todo el campo, usando algoritmos implementados en IRAF para localizar los objetos.
+El objetivo de este ejercicio es realizar el procesamiento de fotometría de apertura para las imágenes del tutorial de IRAF. Esto corresponde a calcular una magnitud instrumental para los objetos del campo estelar. Por ser la primera vez que se realiza tal análisis, se realizará paso a paso y para un número límitado de estrellas. En futuros ejercicios se realizará el análisis para todo el campo, usando algoritmos implementados en IRAF para localizar los objetos.\\
 
-Las imágenes se tomaron con instrumentos CCD y por lo tanto se realizaron las respectivas correcciones de FLAT, OVERSCAN y BIAS. El ejercicio asume que las imágenes ya están corregidas.
-
-
+Las imágenes se tomaron con instrumentos CCD y por lo tanto se realizaron las respectivas correcciones de FLAT, OVERSCAN y BIAS. El ejercicio asume que las imágenes ya están corregidas.\\
 
 
+El primer paso va a ser añadir al header de las imágenes la masa de aire. El cálculo de la masa de aire requiere de cierta información, como la posición del observatorio o la coordenada exacta en el cielo del objeto. Afortunadamente IRAF incluye una tarea titulada SETAIRMASS la cual lee toda la información necesaria del header de la imagen. Usando la tarea SETAIRMASS y señalando que estamos en el observatorio kpno (Kitt Peak National Observatory), se fija en el header de cada imagen la masa de aire. Se observa que la masa de aire para las imágenes de calibración es de aproximadamente 2, esa masa de aire es irrelevante pues las imágenes de calibración no son tomas del cielo. Las masas de aire para las imágenes reales en el filtro V es 1.07 y en el filtro B 1.09.\\
 
-\subsection{Primer Camino}
-Para realizar el proceso paso a paso, se debe empiezar definiendo la región del overscan que se utilizará en la corrección. Usualmente, a las imágenes astronómicas se les añade una serie de columnas (y/o filas) que corresponden a la lectura del CCD con cero fotones recolectados, es decir, el nivel \tqt{cero} u \tqt{offset}\cite{handbookCCD}. En el caso del ejercicio, se toma la imagen \tqt{92006.fits} y manualmente se busca su región de \tqt{overscan} . Esta región corresponde a las columnas 320 hasta el final de la imagen en 352. Adicionalmente, hay un gran pico de conteos en la columna 319, justo antes de empezar la región del \tqt{overscan} . Esto se puede observar en la siguiente imagen. \\
+Una vez fijada las masas de aire, se procede a hacer la fotometría de apertura. Para ello se utiliza el paquete DIGIPOT y APPHOT. La fotometría se realizará sobre los objetos que creemos ser estrellas. Es decir, se evaluarán las curvas de intensidad radiales en cada objeto, y solo se tomará los de mejor perfil. Esto se hace con la tarea IMEXAMINE. Se observa que las estrellas tienen un FWHM de 2.65 a 3.2 y que es constante entre las diferentes imágenes.\\
 
-%\begin{figure}[H]
-%  \centering
-%   \includegraphics[scale= 0.5]{im01.png}
-%  \caption{}
-%  \label{im01}
-%\end{figure}
+Para realizar la fotometría en sí se usa la tarea QPHOT. Esta necesita el radio de apertura, el radio interior del anillo de cielo y el grosor del anillo de cielo, todo esto en pixeles. Tras ejecutar la tarea QPHOT sobre la imagen m92010, se obtiene una tabla de objetos con sus coordenadas, su magnitud, y error (si hubo). Usando la tarea txdump se extrae las coordenadas de las estrellas seleccionadas (se seleccionó a las estrellas en el modo interactivo de QPHOT). Una vez se tiene las coordenadas de las estrellas, se vuelve a correr QPHOT sobre las otras imágenes. Se seleccionaron 30 estrellas (ver figura \ref{im4}) para realizar la fotometría.
 
 
 
-Una vez identificado el overscan, se procede a definir los límites de la imagen real, es decir, la imagen sin el \tqt{overscan}  y el pico de conteos que los separa. Tras inspeccionar la imagen, se decidió que las columnas a promediar para el \tqt{offset} son de la 325 hasta la 350, esto con el fin de cubrir la mayor cantidad de columnas posibles sin incluir el pico. Para las filas se seleccionó desde la 4 hasta la 508, en este caso simplemente se dejó 4 pixeles de tolerancia con respecto a los límites de la imagen.\\
+\begin{figure}[H]
+   \includegraphics[scale=0.4]{imagenes.png}
+  \caption{Estrellas seleccionadas para la fotometría de apertura en la imagen m92010.}
+  \label{im4}
+\end{figure}
 
-Adicionalmente a calcular el \tqt{offset}, también se debe recortar las imágenes para eliminar la región del \tqt{overscan}  y otras impurezas (en este caso el pico que separa el \tqt{overscan}). Por lo anterior, se debe decidir las nuevas fronteras de la imagen recortada. En este caso se tomó desde la línea 2 hasta la 510, y desde la columna 2 hasta la 316. A continuación se puede observar la imagen incluyendo el \tqt{overscan} .
+Adicionalmente, para cada imagen se graficó la magnitud contra el error de la magnitud, de un análisis correcto se espera un comportamiento cuadrático en la gráfica $m$ vs $\Delta m $. Se observó el comportamiento cuadrático en todas las gráficas (ver figura \ref{im5}).\\
 
 
-Una vez definidas las fronteras de los cortes y los cálculos, se procede a realizar los mismos. Para ello, se utiliza la tarea COLBIAS de \tqt{noao.imred.bias} . Para usar la tarea se debe especificar el nombre de la imagen recortada, el nombre de la nueva imagen, la región a partir de la cual se calculará el \tqt{offset}, la región a preservar de la imagen, la forma en la que se interpolarán los datos, la dispersión a partir de la cual se eliminan datos, entre otros. A continuación se presenta la misma imagen anterior tras usar COLBIAS. Nótese que la imagen ya no contiene la región del \tqt{overscan} y su brillo ha cambiado ligeramente, esto último debido a la corrección del \tqt{offset}.
+Por último, para verificar que el comportamiento cuadrático se debe a un análisis correcto, se calculó la magnitud y el error en la magnitud para coordenadas aleatorias del cielo, procurando no tomar estrellas. Se observó un comportamiento muy levemente cuadrático (probablemetne un remanente de las estrellas que sí quedaron a dentro de los circulos) y una gran cantidad de puntos indeterminados, debido a que el algoritmo no logra hayar una magnitud en esas coordenadas.
 
+\begin{figure}[H]
+   \includegraphics[scale=0.4]{mvsdm0.png}
+   \includegraphics[scale=0.4]{mvsdm1.png}
 
-
-Una vez corregido el offset de las imágenes, se realiza la corrección del Bias con la imagen \tqt{tr92001} (que es la imagen \tqt{m92001} con el offset corregido). Para la corrección del Bias se utiliza la tarea de IRAF IMARITH, la cual realiza una operación aritmética entre dos imágenes y la guarda en una tercera. En este caso, se restó a cada imagen la el Bias \tqt{tr92001} y se guardó la diferencia en la imagen original. Para mayor facilidad en el proceso se creo un archivo de texto listando las imágenes a procesar, y se usó el archivo de texto como parámetro en vez de repetir el proceso con cada imagen. Es notorio que la corrección del Bias no es necesariamente evidente a simple vista, como lo fue la del \tqt{offset}.\\
-
-Por último, tras haber restado el Bias a cada imagen, se debe realizar la corrección del \tqt{Flat}, esta última está dada por la ecuación:
-\begin{equation}
-Imag = \frac{RAW\_IMAG - BIAS}{FLAT - BIAS}
-\label{unica}
-\end{equation}
-
-Pero, en la ecuación se asume qué el denominador estará normalizado. Como factor de normalización se utilizará la moda de la distribución de conteos de pixeles, para calcular la moda se hace uso de la tarea IMSTATISTICS de IRAF. Para el \tqt{Flat} en V la moda fue 1468 conteos, para el filtro en B fue 1313 conteos. Tras calcular las modas de las dos imágenes del \tqt{Flat} (una por cada filtro en el que se observa), se utiliza la tarea IMARITH para la división. Naturalmente, las imágenes resultantes serán idénticas en estructura con la original pero reescaladas.\\
-
-Por último, se utiliza IMARITH para realizar el cociente de la ecuación \ref{unica}. Las imágenes ya reducidas se guardan con el mismo nombre pero con el prefijo \tqt{n} en vez del \tqt{m} original.
-
-\subsection{Segundo Camino}
-Dada la alta frecuencia con la que los astrónomos se encuentran con este tipo de cálculos, IRAF implementa una versión automática del mismo, esto se hace con el paquete CCDRED. El uso del paquete permite convertir la reducción en un proceso más automatizado, para esto, el paquete se vale de la información de los headers de las imágenes y algunos datos extra proveídos por el usuario.\\
-
-El primer paso es informar al paquete del instrumento usado en la medición, esto se hace con el comando \tqt{setinstrument}. En el caso del ejercicio se selecciona \tqt{direct}, que representa un CCD estandar. Tras elegir el instrumento, automáticamente se pone la selección de parámetros (epar) de CCDRED e inmediatamente después la de CCDPROC.  y solo debe ser seleccionado) y un archivo para los \tqt{subsets}. La tarea CCDPROC es la encargada de realizar las correcciones, desde el cálculo y resta del \tqt{offset} hasta la normalización del \tqt{Flat} y la obtención de la imagen final. Por lo anterior, la lista de parámetros de CCDPROC incluye algunos de los valores previamente calculados como las fronteras de la región del \tqt{overscan}. Tras verificar que los parámetros coincidieran con los del método anterior, se ejecuta CCDPROC, y de forma automática se corrigen todas las imágenes simultáneamente. 
+  \caption{ A la izquierda magnitud contra error en la magnitud para las estrellas en la imagen m92010. Se observa un comportamiento cuadrático. Se anexa únicamente el caso de m92010 porque las otras gráficas son muy similares. A la derecha la misma gráfica pero para puntos que no correspondieran a estrellas, la disminución de puntos se debe a que el algoritmo no converge en muchas ocasiones debido al ruido de fondo.}
+  \label{im5}
+\end{figure}
 
 
 
+\newpage
+\section{BIAS}
+Como parte del proyecto del curso se debe realizar algunas tomas con el telescopio y el instrumento CCD disponible. Por ello, es necesario hacer calibración de FLAT y de BIAS. Se decidió empezar con la calibración de BIAS.\\
 
+La calibración de BIAS consiste en tomar los valores del detectos sin tiempo de exposición, esto para para dar cuenta del ruido intrínseco del detectos (nótese que el ruido puede variar entre pixeles).\\
 
+Se tomó 30 imágenes de calibración BIAS a diferentes temperaturas: 0 \degree C, -5 \degree C, -10 \degree C y -14 \degree C. Se calculó la mediana de las 30 imágenes para cada temperatura y se generó una nueva imágen con las medianas, esa nueva imagen es la corrección de BIAS a la temperatura correspondiente.\\
 
-
-
-
-
-
+Una vez generada la imagen de medianas para cada temperatura, se comparó el promedio de sus filas. Esto con el fin de buscar anomalías (picos) en el detector.\\
 
 
 
@@ -139,6 +126,41 @@ El primer paso es informar al paquete del instrumento usado en la medición, est
 
 \bibliography{bibTes}{}
 \bibliographystyle{unsrt}
+
+
+\begin{figure}[H]
+   \includegraphics[scale=0.4]{0c.png}
+   \includegraphics[scale=0.4]{5c.png}
+  \caption{Promedio de conteos sobre todas las líneas para 0 \degree C y -5 \degree C }
+  \label{im0}
+\end{figure}
+
+
+
+\begin{figure}[H]
+   \includegraphics[scale=0.4]{10c.png}
+   \includegraphics[scale=0.4]{14c.png}
+  \caption{Promedio de conteos sobre todas las líneas para -10 \degree C y -14 \degree C. }
+  \label{im1}
+\end{figure}
+No se observa ningún pico particular en los promedios. Sin embargo, se observa que tienen diferentes límites las curvas, implicando diferentes medianas. Adicionalmente  se observa una forma general similar entre las curvas.\\
+
+También se comparó la media de conteos contra la temperatura (ver figura \ref{imMedias}) , se observa un aumento de conteos al \emph{disminuir} la temperatura. El comportamiento del número de conteos implica una temperatura de operación óptima de 0 \degree C o superior.
+
+
+
+\begin{figure}[H]
+   \includegraphics[scale=0.7]{medias.png}
+  \caption{Promedio de conteos contra temperatura. La línea de tendencia es de una de mínimos cuadrados y está únicamente como ayuda de visualización. }
+  \label{imMedias}
+\end{figure}
+
+
+
+
+
+
+
 
 
 

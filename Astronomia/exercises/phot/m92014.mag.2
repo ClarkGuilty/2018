@@ -1,0 +1,205 @@
+#K IRAF       = NOAO/IRAFV2.16.1        version    %-23s     
+#K USER       = clarkguilty             name       %-23s     
+#K HOST       = MultiVAC                computer   %-23s     
+#K DATE       = 2018-09-28              yyyy-mm-dd %-23s     
+#K TIME       = 00:02:17                hh:mm:ss   %-23s     
+#K PACKAGE    = apphot                  name       %-23s     
+#K TASK       = phot                    name       %-23s     
+#
+#K SCALE      = 1.                      units      %-23.7g   
+#K FWHMPSF    = 2.5                     scaleunit  %-23.7g   
+#K EMISSION   = yes                     switch     %-23b     
+#K DATAMIN    = INDEF                   counts     %-23.7g   
+#K DATAMAX    = INDEF                   counts     %-23.7g   
+#K EXPOSURE   = exptime                 keyword    %-23s     
+#K AIRMASS    = airmass                 keyword    %-23s     
+#K FILTER     = filters                 keyword    %-23s     
+#K OBSTIME    = ut                      keyword    %-23s     
+#
+#K NOISE      = poisson                 model      %-23s     
+#K SIGMA      = INDEF                   counts     %-23.7g   
+#K GAIN       = ""                      keyword    %-23s     
+#K EPADU      = 14.                     e-/adu     %-23.7g   
+#K CCDREAD    = ""                      keyword    %-23s     
+#K READNOISE  = 0.                      e-         %-23.7g   
+#
+#K CALGORITHM = centroid                algorithm  %-23s     
+#K CBOXWIDTH  = 7.                      scaleunit  %-23.7g   
+#K CTHRESHOLD = 0.                      sigma      %-23.7g   
+#K MINSNRATIO = 1.                      number     %-23.7g   
+#K CMAXITER   = 10                      number     %-23d     
+#K MAXSHIFT   = 1.                      scaleunit  %-23.7g   
+#K CLEAN      = no                      switch     %-23b     
+#K RCLEAN     = 1.                      scaleunit  %-23.7g   
+#K RCLIP      = 2.                      scaleunit  %-23.7g   
+#K KCLEAN     = 3.                      sigma      %-23.7g   
+#
+#K SALGORITHM = centroid                algorithm  %-23s     
+#K ANNULUS    = 15.                     scaleunit  %-23.7g   
+#K DANNULUS   = 10.                     scaleunit  %-23.7g   
+#K SKYVALUE   = 0.                      counts     %-23.7g   
+#K KHIST      = 3.                      sigma      %-23.7g   
+#K BINSIZE    = 0.1                     sigma      %-23.7g   
+#K SMOOTH     = yes                     switch     %-23b     
+#K SMAXITER   = 10                      number     %-23d     
+#K SLOCLIP    = 0.                      percent    %-23.7g   
+#K SHICLIP    = 0.                      percent    %-23.7g   
+#K SNREJECT   = 50                      number     %-23d     
+#K SLOREJECT  = 3.                      sigma      %-23.7g   
+#K SHIREJECT  = 3.                      sigma      %-23.7g   
+#K RGROW      = 0.                      scaleunit  %-23.7g   
+#
+#K WEIGHTING  = constant                model      %-23s     
+#K APERTURES  = 10                      scaleunit  %-23s     
+#K ZMAG       = 25.                     zeropoint  %-23.7g   
+#
+#N IMAGE               XINIT     YINIT     ID    COORDS                 LID    \
+#U imagename           pixels    pixels    ##    filename               ##     \
+#F %-23s               %-10.3f   %-10.3f   %-6d  %-23s                  %-6d    
+#
+#N XCENTER    YCENTER    XSHIFT  YSHIFT  XERR    YERR            CIER CERROR   \
+#U pixels     pixels     pixels  pixels  pixels  pixels          ##   cerrors  \
+#F %-14.3f    %-11.3f    %-8.3f  %-8.3f  %-8.3f  %-15.3f         %-5d %-9s      
+#
+#N MSKY           STDEV          SSKEW          NSKY   NSREJ     SIER SERROR   \
+#U counts         counts         counts         npix   npix      ##   serrors  \
+#F %-18.7g        %-15.7g        %-15.7g        %-7d   %-9d      %-5d %-9s      
+#
+#N ITIME          XAIRMASS       IFILTER                OTIME                  \
+#U timeunit       number         name                   timeunit               \
+#F %-18.7g        %-15.7g        %-23s                  %-23s                   
+#
+#N RAPERT   SUM           AREA       FLUX          MAG    MERR   PIER PERROR   \
+#U scale    counts        pixels     counts        mag    mag    ##   perrors  \
+#F %-12.2f  %-14.7g       %-11.7g    %-14.7g       %-7.3f %-6.3f %-5d %-9s      
+#
+m92014                 276.930   5.076     1     coords2                1      \
+   276.099    2.499      -0.831  -2.577  0.017   0.016          107  BigShift  \
+   40.34499       7.392609       3.177023       637    29       0    NoError   \
+   120.           1.084596       50                      3:45:06.00            \
+   10.00    0.            0.         0.            INDEF  INDEF 301  OffImage   
+m92014                 76.645    19.141    2     coords2                2      \
+   79.006     17.093     2.361   -2.048  0.022   0.026          107  BigShift  \
+   39.99743       7.893494       4.017953       937    101      0    NoError   \
+   120.           1.084596       50                      3:45:06.00            \
+   10.00    13122.24      314.5789   539.8894      23.367 0.326 0    NoError    
+m92014                 96.915    69.363    3     coords2                3      \
+   96.438     68.371     -0.477  -0.992  0.046   0.048          0    NoError   \
+   39.72848       7.536659       3.273749       1210   51       0    NoError   \
+   120.           1.084596       50                      3:45:06.00            \
+   10.00    12674.3       314.3467   185.7862      24.525 0.877 0    NoError    
+m92014                 142.108   182.940   4     coords2                4      \
+   142.000    180.895    -0.108  -2.046  0.000   0.020          107  BigShift  \
+   39.54184       7.242386       4.001877       1234   20       0    NoError   \
+   120.           1.084596       50                      3:45:06.00            \
+   10.00    12353.89      314.5451   -83.80693     INDEF  INDEF 0    NoError    
+m92014                 69.915    102.673   5     coords2                5      \
+   69.501     101.976    -0.414  -0.697  0.053   0.053          0    NoError   \
+   39.62688       7.255276       1.392172       1252   3        0    NoError   \
+   120.           1.084596       50                      3:45:06.00            \
+   10.00    12482.75      314.4784   20.95205      26.895 7.458 0    NoError    
+m92014                 194.347   134.205   6     coords2                6      \
+   193.370    137.383    -0.977  3.178   0.031   0.025          107  BigShift  \
+   41.18176       7.239068       1.507504       1239   22       0    NoError   \
+   120.           1.084596       50                      3:45:06.00            \
+   10.00    13234.49      314.3897   287.3731      24.052 0.543 0    NoError    
+m92014                 43.077    163.158   7     coords2                7      \
+   43.783     164.035    0.706   0.877   0.056   0.059          0    NoError   \
+   40.57104       7.395965       -2.58139       1207   54       0    NoError   \
+   120.           1.084596       50                      3:45:06.00            \
+   10.00    12464.12      314.2728   -286.2524     INDEF  INDEF 0    NoError    
+m92014                 111.899   171.844   8     coords2                8      \
+   114.116    174.207    2.217   2.363   0.032   0.028          107  BigShift  \
+   39.88127       7.495398       2.772346       1225   35       0    NoError   \
+   120.           1.084596       50                      3:45:06.00            \
+   10.00    12488.39      314.351    -48.32561     INDEF  INDEF 0    NoError    
+m92014                 51.616    178.763   9     coords2                9      \
+   51.781     176.952    0.165   -1.811  0.044   0.040          107  BigShift  \
+   40.11606       7.288004       2.928822       1210   50       0    NoError   \
+   120.           1.084596       50                      3:45:06.00            \
+   10.00    12313.27      314.2984   -295.1404     INDEF  INDEF 0    NoError    
+m92014                 153.792   189.150   10    coords2                10     \
+   153.814    188.358    0.022   -0.792  0.038   0.054          0    NoError   \
+   40.06701       7.342402       3.610247       1184   68       0    NoError   \
+   120.           1.084596       50                      3:45:06.00            \
+   10.00    12437.63      314.4257   -160.4707     INDEF  INDEF 0    NoError    
+m92014                 385.088   212.390   11    coords2                11     \
+   385.088    212.390    0.000   0.000   INDEF   INDEF          101  OffImage  \
+   INDEF          INDEF          INDEF          0      0        202  EdgeImage \
+   120.           1.084596       50                      3:45:06.00            \
+   10.00    0.            0.         0.            INDEF  INDEF 301  OffImage   
+m92014                 298.816   158.170   12    coords2                12     \
+   298.348    156.850    -0.468  -1.320  0.038   0.026          107  BigShift  \
+   41.39864       7.804995       4.295053       1110   46       0    NoError   \
+   120.           1.084596       50                      3:45:06.00            \
+   10.00    13241.43      314.382    226.4387      24.311 0.752 0    NoError    
+m92014                 265.461   135.992   13    coords2                13     \
+   263.877    134.708    -1.584  -1.284  0.065   0.057          107  BigShift  \
+   40.93771       7.755724       4.539217       1211   47       0    NoError   \
+   120.           1.084596       50                      3:45:06.00            \
+   10.00    12784.84      314.365    -84.54766     INDEF  INDEF 0    NoError    
+m92014                 30.887    158.253   14    coords2                14     \
+   30.696     157.280    -0.191  -0.973  0.029   0.036          0    NoError   \
+   40.07241       6.982622       -1.412412      1232   26       0    NoError   \
+   120.           1.084596       50                      3:45:06.00            \
+   10.00    12568.84      314.5253   -34.94867     INDEF  INDEF 0    NoError    
+m92014                 142.947   258.612   15    coords2                15     \
+   138.147    260.901    -4.800  2.289   0.008   0.008          107  BigShift  \
+   40.32504       6.978066       -2.335891      1241   18       0    NoError   \
+   120.           1.084596       50                      3:45:06.00            \
+   10.00    16285.61      314.3924   3607.719      21.305 0.042 0    NoError    
+m92014                 291.629   273.487   16    coords2                16     \
+   287.099    275.718    -4.530  2.231   0.009   0.009          107  BigShift  \
+   41.35076       7.750904       4.171945       1224   34       0    NoError   \
+   120.           1.084596       50                      3:45:06.00            \
+   10.00    15596.66      314.3643   2597.456      21.662 0.065 0    NoError    
+m92014                 149.719   186.059   17    coords2                17     \
+   149.082    184.262    -0.637  -1.797  0.034   0.019          107  BigShift  \
+   39.75461       7.119743       3.25243        1248   11       0    NoError   \
+   120.           1.084596       50                      3:45:06.00            \
+   10.00    12516.91      314.3299   20.84736      26.900 7.355 0    NoError    
+m92014                 287.358   195.748   18    coords2                18     \
+   285.850    194.926    -1.508  -0.822  0.012   0.014          107  BigShift  \
+   40.52149       7.653817       3.9034         1248   9        0    NoError   \
+   120.           1.084596       50                      3:45:06.00            \
+   10.00    15228.32      314.4048   2488.167      21.708 0.067 0    NoError    
+m92014                 44.456    322.607   19    coords2                19     \
+   39.773     324.966    -4.683  2.359   0.004   0.004          107  BigShift  \
+   39.56856       7.385729       2.875364       1255   6        0    NoError   \
+   120.           1.084596       50                      3:45:06.00            \
+   10.00    26790.        314.2625   14355.08      19.805 0.011 0    NoError    
+m92014                 258.909   323.838   20    coords2                20     \
+   258.508    326.328    -0.401  2.490   0.012   0.042          107  BigShift  \
+   40.45562       7.368428       3.445986       1233   27       0    NoError   \
+   120.           1.084596       50                      3:45:06.00            \
+   10.00    12398.46      314.3911   -320.4311     INDEF  INDEF 0    NoError    
+m92014                 159.404   362.600   21    coords2                21     \
+   162.817    362.786    3.413   0.186   0.019   0.021          107  BigShift  \
+   39.81606       7.365763       2.913953       1233   26       0    NoError   \
+   120.           1.084596       50                      3:45:06.00            \
+   10.00    12676.26      314.4442   156.3332      24.713 1.016 0    NoError    
+m92014                 294.832   396.654   22    coords2                22     \
+   290.265    399.002    -4.567  2.348   0.009   0.009          107  BigShift  \
+   40.3191        7.351825       2.969448       1238   21       0    NoError   \
+   120.           1.084596       50                      3:45:06.00            \
+   10.00    16311.23      314.249    3640.996      21.295 0.044 0    NoError    
+m92014                 96.311    406.684   23    coords2                23     \
+   99.335     404.564    3.024   -2.120  0.009   0.015          107  BigShift  \
+   40.09194       7.75877        2.68848        1201   59       0    NoError   \
+   120.           1.084596       50                      3:45:06.00            \
+   10.00    13548.99      314.3938   944.3334      22.760 0.178 0    NoError    
+m92014                 54.758    412.413   24    coords2                24     \
+   55.316     411.574    0.558   -0.839  0.060   0.049          0    NoError   \
+   40.1539        7.305362       3.144667       1215   45       0    NoError   \
+   120.           1.084596       50                      3:45:06.00            \
+   10.00    13669.46      314.4062   1044.825      22.650 0.151 0    NoError    
+m92014                 154.388   425.701   25    coords2                25     \
+   152.737    425.834    -1.651  0.133   0.035   0.057          107  BigShift  \
+   39.53087       7.10742        2.69023        1254   3        0    NoError   \
+   120.           1.084596       50                      3:45:06.00            \
+   10.00    12055.08      314.3924   -373.1238     INDEF  INDEF 0    NoError    
+m92014                 194.432   479.303   26    coords2                26     \
+   194.709    479.106    0.277   -0.197  0.023   0.051          0    NoError   \
+   39.8461        6.871994       2.865074       1248   9        0    NoError   \
+   120.           1.084596       50                      3:45:06.00            \
+   10.00    12379.46      314.3717   -147.0309     INDEF  INDEF 0    NoError    
