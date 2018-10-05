@@ -1,0 +1,86 @@
+\documentclass[11pt, a4paper]{article}
+%\usepackage{fontspec} 
+\usepackage{etaremune}
+
+% DOCUMENT LAYOUT
+\usepackage{geometry} 
+\geometry{a4paper, textwidth=6.1in, textheight=10.2in, marginparsep=7pt, marginparwidth=.6in}
+\setlength\parindent{0in}
+
+\usepackage[spanish]{babel}
+\usepackage[bookmarks, colorlinks, breaklinks, 
+% ---- FILL IN HERE THE TITLE AND AUTHOR
+	pdftitle={Javier Acevedo - vita},
+	pdfauthor={Javier Acevedo},
+]{hyperref}
+
+\usepackage[utf8]{inputenc} % Acepta caracteres en castellano
+\usepackage[T1]{fontenc} % Encoding de salida al pdf
+
+\usepackage{marginnote}
+\newcommand{\years}[1]{\marginnote{\scriptsize #1}}
+\renewcommand*{\raggedleftmarginnote}{}
+\setlength{\marginparsep}{7pt}
+
+
+% ---- CUSTOM COMMANDS
+
+\newcommand{\html}[1]{\href{#1}{\scriptsize\textsc{[html]}}}
+\newcommand{\pdf}[1]{\href{#1}{\scriptsize\textsc{[pdf]}}}
+\newcommand{\doi}[1]{\href{#1}{\scriptsize\textsc{[doi]}}}
+
+\renewcommand*{\raggedleftmarginnote}{}
+\setlength{\marginparsep}{7pt}
+\reversemarginpar
+
+
+
+
+
+
+
+
+
+\begin{document}
+\begin{center}{\huge \bf Javier Alejandro Acevedo Barroso}\\[1cm]\end{center}
+\begin{minipage}[t]{0.465\textwidth}
+  Teléfono: (+57) 301-680-9844 \\
+  Email: \href{mailto:ja.acevedo12@uniandes.edu.co}{ja.acevedo12@uniandes.edu.co}\\
+  Email: \href{mailto:jaalacba@hotmail.com}{jaalacba@hotmail.com      }\\
+\end{minipage}
+
+\hrule
+
+\section*{Información Personal}
+Nacido en Bucaramanga, Colombia, el 4 de enero de 1997 (21 años de edad).\\
+
+
+\section*{Educación}
+\noindent
+\years{2015-2019}\textsc{Pregrado en Física}\\ {\emph{Institución}}: Departamento de Física, Universidad de los Andes. {\emph{Tesis}}: Simulación de materia oscura colisional con un método de Lattice-Boltzmann. {\emph{Director}}: Dr. Jaime Forero.\\
+
+\section*{Participación en Eventos}
+\years{2018}{Escuela de Astronomía Uniandes 2018.}\\ {\emph{Institución}}: Departamento de Física, Universidad de los Andes. \\
+\years{2018}{MOCa 2018: Materia Oscura en Colombia}\\ {\emph{Institución}}: Departamento de Física, Universidad de los Andes. {\emph{Poster}}: Simulating Collisional Dark Matter.\\
+
+\section*{Actividad de Investigación}
+\years{2018}{Simulación de materia oscura colisional con un método de Lattice-Boltzmann.}\\ {\emph{Institución}}: Departamento de Física, Universidad de los Andes. {\emph{Director}}: Dr. Jaime Forero.\\	
+\years{2017}{Caracterización de materiales utilizando tomografía de Muones}\\ {\emph{Institución}}: Departamento de Física, Universidad de los Andes. {\emph{Director}}: Dr. Carlos Ávila.\\
+
+\section*{Experiencia Docente}
+\years{2017-2018}{Tutor de la Clínica de Problemas de Física.}\\ {\emph{Institución}}: Departamento de Física, Universidad de los Andes. {\emph{Supervisor}}: Juan Diego Arango Montoya.\\	
+
+\section*{Reconocimientos y Becas}
+\years{2014}{Beca Bachilleres por Colombia, Programa Mario Galán Gómez } otorgada por Ecopetrol.\\
+\years{2013}{Mejor estudiande del departamento de Santander. Prueba Saber 11 2013. Otorgado por el Ministerio de Educación.}\\ 
+
+\section*{Habilidades Adicionales}
+\begin{itemize}
+\item Lenguajes: Español (nativo), Inglés (C1), Alemán (A1).
+\item Sistemas operativos Linux y Windows. 
+\item Lenguajes de programación: C, Python, Java y Bash.
+\item Uso de software adicional: IRAF, \LaTeX.
+\end{itemize}
+
+
+\end{document}
