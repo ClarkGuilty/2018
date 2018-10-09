@@ -1,0 +1,94 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Thin Formal Letter
+% LaTeX Template
+% Version 2.0 (7/2/17)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% WikiBooks (http://en.wikibooks.org/wiki/LaTeX/Letters) with modifications by 
+% Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+
+\documentclass[10pt]{letter} % 10pt font size default, 11pt and 12pt are also possible
+
+\usepackage{geometry} % Required for adjusting page dimensions
+
+%\longindentation=0pt % Un-commenting this line will push the closing "Sincerely," to the left of the page
+
+\geometry{
+	paper=a4paper, % Change to letterpaper for US letter
+	top=3cm, % Top margin
+	bottom=1.5cm, % Bottom margin
+	left=4.5cm, % Left margin
+	right=4.5cm, % Right margin
+	%showframe, % Uncomment to show how the type block is set on the page
+}
+
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+
+\usepackage{stix} % Use the Stix font by default
+\usepackage[spanish]{babel}
+
+\usepackage{setspace}
+\doublespacing
+\usepackage{microtype} % Improve justification
+\usepackage{quotmark} %Uso consistente con la RAE de comillas
+%----------------------------------------------------------------------------------------
+%	YOUR NAME & ADDRESS SECTION
+%----------------------------------------------------------------------------------------
+
+\signature{Javier Alejandro Acevedo Barroso} % Your name for the signature at the bottom
+
+\address{Calle 10 \# 2 - 26\\ Bogotá, Colombia} % Your address and phone number
+
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	ADDRESSEE SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{letter}{\\ Comité de Posgrados en Física \\ Carrera 1 \# 18A-10, Bloque Ip \\ Bogotá, Colombia} % Name/title of the addressee
+
+%----------------------------------------------------------------------------------------
+%	LETTER CONTENT SECTION
+%----------------------------------------------------------------------------------------
+
+\opening{\textbf{Señores Comité de posgrado,}}
+Con esta carta me gustaría expresar mi interés en el programa de \emph{Maestría en Ciencias-Física} de la Universidad de los Andes.
+
+Desde niño he tenido un profundo interés por la astronomía y el universo más allá de la Tierra. Eventualmente, esa pasión me condujo al pregrado en física, y ahora es mi principal motivación para continuar mis estudios con la maestría. Creo que el programa de la universidad me brindará herramientas y conocimientos esenciales para continuar mi carrera en física y astronomía.
+
+Mis principales campos de interés son la astronomía y la astrofísica, también me interesa la física de partículas y los métodos computacionales. En física de partículas trabajé con el profesor Carlos Ávila en el proyecto \tqt{Caracterización de materiales mediante tomografía de Muones}. En astrofísica y métodos computacionales he trabajado con el profesor Jaime Forero en mi proyecto de monografía \tqt{Simulación de materia oscura colisional con un método de Lattice-Boltzmann}, en donde simulo el espacio de fase de un fluido tridimencional. Así mismo, expuse en \tqt{MOCa 2018: Materia Oscura en Colombia} un avance de la monografía titulado \tqt{Simulating Collisional Dark Matter}, y participé en la \tqt{Escuela de Astronomía Uniandes 2018} en la que se trataron temas de astrofísica, astroestadística y astrometría.
+
+Mis principales objetivos educacionales son convertirme en un experto astrónomo y astrofísico. Por lo cual, mi objetivo es ser doctor en física o astrofísica. Mi plan a corto plazo es ingresar a un programa de maestría con un grupo de astronomía activo e interesante. Por eso elegí la Universidad de los Andes para continuar mis estudios, porque conozco el trabajo que se realiza en el grupo astronomía y tengo interés en participar de la investigación. La Maestría en Ciencias-Física de la Universidad de los Andes me ofrece buenas bases de investigación a través de un ambiente de alta producción académica y la adquisición de experiencia de primera mano en el curso \tqt{Laboratorio Avanzado} y en el trabajo de grado. Así mismo, a través de los cursos avanzados, la Maestría me brindaría conocimiento clave para mi crecimiento como físico y la realización de un eventual doctorado.
+
+Considero que tras vivir la experiencia del pregrado, soy un físico competente y muy apasionado. Casi siempre que me enfrenté a un problema logré solucionarlo, principalmente porque la curiosidad y las ganas de probarme a mí mismo me impulsaban a resolverlo. Por todo lo anterior, me gustaría que me consideraran para ingresar a cursar la Maestría en Ciencias-Física en el primer semestre de 2019.
+
+
+
+\vspace{2\parskip} % Extra whitespace for aesthetics
+\closing{Sinceramente,}
+\vspace{2\parskip} % Extra whitespace for aesthetics
+
+%\ps{P.S. You can find additional information attached to this letter.} % Postscript text, comment this line to remove it
+
+%----------------------------------------------------------------------------------------
+
+\end{letter}
+ 
+\end{document}
