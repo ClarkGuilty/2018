@@ -15,7 +15,7 @@ V = datos [:,3]
 B = datos [:,5]
 plt.scatter(B-V,V)
 plt.gca().invert_yaxis()
-plt.xlim(-0.1,2.5)
+#plt.xlim(-0.1,2.5)
 plt.xlabel('B-V')
 plt.ylabel('V')
 plt.title("Diagrama magnitud-color")
