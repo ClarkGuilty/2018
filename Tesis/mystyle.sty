@@ -23,21 +23,23 @@
 %Hipertexto
 \usepackage[colorlinks=true,urlcolor=blue,linkcolor=blue]{hyperref} % navega por el doc: hipertexto y links
 
-%Aquello de las urls
+%Aquello de las urls.
 \usepackage{url} 
 
-%simbolos matemáticos
+%simbolos matemáticos.
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
-\usepackage{physics} %Best pack
+\usepackage{physics} %Best pack.
 
-% permite insertar gráficos, imágenes y figuras, en pdf o en eps
+% permite insertar gráficos, imágenes y figuras, en pdf o en eps.
 \usepackage{graphicx}
 \usepackage{epstopdf}
 \usepackage{multirow}
 \usepackage{float}
 \usepackage[export]{adjustbox}
+% Permite tener environments personalizados.
+\usepackage{environ}
 % geometría del documento, encabezados y pies de páginas, márgenes
 %\usepackage[left=3cm,top=3cm,right=3cm]{geometry}
 \usepackage{geometry}
@@ -60,7 +62,13 @@
 
 
 \newcommand{\toInt}[1]{\ensuremath{\lfloor#1\rceil}}
-
+\NewEnviron{myequation}{%
+    \begin{equation}
+    \scalebox{1.1}{$\BODY$}
+    \end{equation}
+    
+    }
+    
 
 %\usepackage[english]{babel}
 %\usepackage[latin5]{inputenc}

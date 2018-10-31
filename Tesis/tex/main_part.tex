@@ -6,6 +6,7 @@ Then, one has to fix either the size of the grid or the size of the lattice.
 We named the size of the grid in the $w$ axis $N_w$ (i.e. $N_x$ or $N_{vz}$).
 The size of the lattice in the $w$ axis (which we are going to name $dw$) and the extremal values are related by:
 % $$ dk = \frac{K_{max}-K_{min} }{N_k}  $$
+
 \begin{equation}
 dw = \frac{W_{max}-W_{min} }{N_w} 
 \end{equation}
@@ -27,26 +28,33 @@ After initialization, the system evolves by classical mechanics and the modellin
     \label{flowchart}
 \end{figure}
 
+Given the phase-space density, the spatial density of matter is given by the integral:
+ 
+\begin{equation}
+\dens[t] = \int_{-\infty}^{\infty} \! \f[t] \, \dd \vb{v}.
+\end{equation}
 
+When evaluating in the lattice the integral becomes:
 
-Given the phase-space density, the spatial density of matter is given by the integral: $$ \dens[t] = \int_{-\infty}^{\infty} \! \f[t] \, \dd \vb{v}. $$ When evaluating in the lattice the integral becomes:
 \begin{equation}
 \label{defDens}
 \dens[t] = \sum_{\vb{V}_{min}}^{\vb{V}_{max}} \f[t] \, \dd \vb{v}
 \end{equation}
+
 and during initialization:
+
 \begin{equation}
 \dens[0] = \sum_{\vb{V}_{min}}^{\vb{V}_{max}} \f[0] \, \dd \vb{v}
 \end{equation}
 
 Once we have calculated the density, we can use the Poisson equation to obtain the potential due to gravitational interaction:	\cite{integerLatticeDynamics}
 
-\begin{equation}
+\begin{myequation}
 \laplacian \pot = 4 \pi G \dens
-\end{equation}
+\end{myequation}
 
 Where $\pot$ is the gravitational potential and $G$ is the gravitational constant.
-To solve the Poisson equation we use the Fourier pseudo-spectral method, which allows for very fast numerical solutions by making use of the Fast Fourier Transform algorithm. The idea is simply to apply a Fast Fourier Transform (FFT), then solve the equation in the Fourier space, and then apply an inverse transform (IFFT). In the phase space the Poisson equation is given by\cite{freePoisson} \cite{computerUsingParticles}
+To solve the Poisson equation we use the Fourier pseudo-spectral method, which allows for very fast numerical solutions by making use of the Fast Fourier Transform algorithm. The idea is simply to apply a Fast Fourier Transform (FFT), then solve the equation in the Fourier space, and then apply an inverse transform (IFFT). In the phase space the Poisson equation is given by\cite{freePoisson} \cite{computerUsingParticles}\\
 
 \begin{equation}
 \lambda_{\vb{k}}^2 \hat{\Phi}(\vb{k},t) = 4 \pi G \hat{\rho}(\vb{k},t)
@@ -62,34 +70,48 @@ In the the pseudo-spectral approximation, $\lambda_{\vb{k}}$ is given by:
 
 Therefore, solving the Poisson equation in the Fourier space is reduced to very simple numerical operations.
 Thanks to the highly efficient implementations of the Fast Fourier Transform Algorithm available nowadays, solving the Poisson equation takes very little time and computational resources.
-In this work we use the Fastest Fourier Transform of the West\cite{FFTW} subroutine to handle the Fast Fourier Transforms.
+In this work we use the Fastest Fourier Transform of the West\cite{FFTW} subroutine to handle the Fast Fourier Transforms.\\
 
 Once we have calculated potential, obtaining the acceleration is straight-forward:
+
 \begin{equation}
 \acce = -\grad \pot
 \end{equation}
-Which, in the context of the lattice can be calculated simply with a central difference numerical derivative.
+
+Which, in the context of the lattice can be calculated simply with a central difference numerical derivative.\\
 
 
 Now, in order to update the phase space, we must first define the time interval to simulate: we name $N_t$ the number of time intervals to simulate and $\dd t$ the length of each of such intervals.
 After calculating the acceleration and defining $\dd t$, we can update our phase space, the subtlety here is that we will only use integer arithmetic, which means that we do not exactly care for the change in velocity during a time $\dd t$ but for how many cells in the phase space that change represents. This is modeled by:
+
 \begin{equation}
 \vb{v}_{n+1} = \vb{v}_n + \toInt{\vb{a}_n \dd t}
 \end{equation}
+
 With $\toInt{x}$ representing the operator \tqt{to nearest integer}, so that $\vb{v}$ and $\toInt{\vb{a} \dd t}$ are vectors of integers and $n$ represents the time instant. The update of the velocity is known as \tqt{kick}. Analogously, the update of the position is known as \tqt{drift}, and is given by:
+
 \begin{equation}
 \vb{r}_{n+1} = \vb{r}_n + \toInt{\vb{v}_n \dd t}
 \end{equation}
 
-Using only integer arithmetics allows for the elimination of the rounding error but introduces lattice noise. Regardless, this method creates a one to one map with the continous solution.\cite{franco} \cite{integerLatticeDynamics}
+Using only integer arithmetics allows for the elimination of the rounding error but introduces lattice noise. Regardless, this method creates a one to one map with the continous solution.\cite{franco} \cite{integerLatticeDynamics}\\
 
-The \tqt{kick} and \tqt{drift} together are known as the \tqt{Streaming} step, and it represents the classical movement of particles under a potential but without considering the collision of particles. If we want a collisionless simulation, we can just calculate again the density and continue the algorithm from there. If we want a collisional simulation, we must define a collisional step.
+The \tqt{kick} and \tqt{drift} together are known as the \tqt{Streaming} step, and it represents the classical movement of particles under a potential but without considering the collision of particles. If we want a collisionless simulation, we can just calculate again the density and continue the algorithm from there. If we want a collisional simulation, we must define a collisional step.\\
 
 \section{The Collisional Step}
-As previously mentioned, solving the collisional integral $C[f]$ is not straight-forward, as it depends on the modeling of the short range interactions between particles that we decide to assign to the dark matter particle. Given that the short range interaction of dark matter is uncertain, we avoid using an specific description of the microscopic interaction and choose to use a mesoscopic approach, as discussed in section \ref{bgk}. The BGK collisional operator is given by:\\
+As previously mentioned, solving the collisional integral $C[f]$ is not straight-forward, as it depends on the modeling of the short range interactions that we decide to assign to the dark matter particle. Given that the short range interaction of dark matter is unknown, we avoid using an specific description of the microscopic interaction and choose to use a mesoscopic approach, as discussed in section \ref{bgk}. The BGK collisional operator is given by:\\
 \begin{equation}
 C[f] = -\frac{1}{\tau}(\f - f_e(\rv))
 \end{equation}
+
+Which in the context of the direct integration scheme used in the simulation becomes:
+\begin{myequation}
+f(\vb{r} + \vb{v} \dd t,\vb{v},t) = \f - \frac{\dd t}{\tau}(\f - f_e(\rv))
+\end{myequation}
+
+The idea behind this approach is to recover the macroscopic description of the fluid without committing to a microscopic description. In this scenario, the macroscopic effects of the collisions is a relaxation towards equilibrium, which the BKG operator models using a relaxation time $\tau$ and a equilibrium function $f_e$. In order to implement a collisional operator we add a collisional step after the streaming step, in which the system performs a relaxation with relaxation time $\tau$ towards the equilibrium function $f_e(\rv)$.\\
+
+
 
 \section{Systems to Simulate}
 
