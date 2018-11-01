@@ -15,6 +15,8 @@
 \providecommand{\e}[1]{\ensuremath{\times 10^{#1}}} %Usa \e{n} para 10^n
 \usepackage{quotmark} %Uso consistente con la RAE de comillas
 \usepackage{listings} % Comandos de la terminal
+\usepackage{setspace} % Fijar la separación
+\onehalfspacing
 
 \usepackage{textcomp}
 \usepackage{gensymb}
@@ -47,11 +49,22 @@
 %Más geometría del documento, permite páginas más interesantes.
 \usepackage{fancyhdr}
 \pagestyle{fancy}
-\fancyhf{}
-\fancyhead[L]{\leftmark}
-\fancyhead[R]{\rightmark}
-\fancyfoot[C]{\thepage}
 
+\fancyhead{} %Clean headers
+\fancyhead[RO]{\leftmark}
+\fancyhead[LE]{\rightmark}
+
+\fancypagestyle{MyStyle}{% Defino mi propio estilo para cambios rápidos.
+    \fancyhead{} %Clean headers
+	\fancyhf{}
+	\fancyhead[RO]{\leftmark}
+	\fancyhead[LE]{\rightmark}
+	\fancyfoot[C]{\thepage}
+%	\renewcommand{\chaptermark}[1]{\markboth{\thechapter. {\slshape{##1}}}{}}
+}
+   
+%\pagestyle{MyStyle}  
+  
 %Algunos comandos recurrentes
 \newcommand{\f}[1][t]{f(\vb{r},\vb{v},#1)}
 \newcommand{\dens}[1][t]{\rho(\vb{r},#1)}
@@ -67,9 +80,13 @@
     \begin{equation}
     \scalebox{1.1}{$\BODY$}
     \end{equation}
-    
     }
-    
+   
+
+%\setlength{\abovedisplayskip}{-15pt}
+%\setlength{\belowdisplayskip}{0pt}
+%\setlength{\abovedisplayshortskip}{0pt}
+%\setlength{\belowdisplayshortskip}{0pt}
 
 %\usepackage[english]{babel}
 %\usepackage[latin5]{inputenc}
