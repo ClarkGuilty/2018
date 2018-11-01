@@ -31,10 +31,11 @@ After initialization, the system evolves by classical mechanics and the modellin
 Given the phase-space density, the spatial density of matter is given by the integral:
  
 \begin{equation}
+\label{defDens0}
 \dens[t] = \int_{-\infty}^{\infty} \! \f[t] \, \dd \vb{v}.
 \end{equation}
 
-When evaluating in the lattice the integral becomes:
+When evaluating in the lattice the integral becomes a sum over the entire velocity space:
 
 \begin{equation}
 \label{defDens}
@@ -99,18 +100,56 @@ Using only integer arithmetics allows for the elimination of the rounding error 
 The \tqt{kick} and \tqt{drift} together are known as the \tqt{Streaming} step, and it represents the classical movement of particles under a potential but without considering the collision of particles. If we want a collisionless simulation, we can just calculate again the density and continue the algorithm from there. If we want a collisional simulation, we must define a collisional step.\\
 
 \section{The Collisional Step}
-As previously mentioned, solving the collisional integral $C[f]$ is not straight-forward, as it depends on the modeling of the short range interactions that we decide to assign to the dark matter particle. Given that the short range interaction of dark matter is unknown, we avoid using an specific description of the microscopic interaction and choose to use a mesoscopic approach, as discussed in section \ref{bgk}. The BGK collisional operator is given by:\\
+As previously mentioned, solving the collisional integral $C[f]$ is not straight-forward, as it depends on the modeling of the short range interactions that we decide to assign to the dark matter particle. Given that the short range interaction of dark matter is unknown, we avoid using an specific description of the microscopic interactions and choose to use a mesoscopic approach, as discussed in section \ref{bgk}. The BGK collisional operator is given by:\\
 \begin{equation}
 C[f] = -\frac{1}{\tau}(\f - f_e(\rv))
 \end{equation}
 
 Which in the context of the direct integration scheme used in the simulation becomes:
+
 \begin{myequation}
 f(\vb{r} + \vb{v} \dd t,\vb{v},t) = \f - \frac{\dd t}{\tau}(\f - f_e(\rv))
 \end{myequation}
 
-The idea behind this approach is to recover the macroscopic description of the fluid without committing to a microscopic description. In this scenario, the macroscopic effects of the collisions is a relaxation towards equilibrium, which the BKG operator models using a relaxation time $\tau$ and a equilibrium function $f_e$. In order to implement a collisional operator we add a collisional step after the streaming step, in which the system performs a relaxation with relaxation time $\tau$ towards the equilibrium function $f_e(\rv)$.\\
+The idea behind this approach is to recover the macroscopic description of the fluid without committing to a particular microscopic description. In this scenario, the macroscopic effects of the collisions is a local relaxation towards equilibrium, which the BKG operator models using a relaxation time $\tau$ and a local equilibrium distribution $f_e(\rv)$. \\
 
+
+In order to implement a collisional operator we add a collisional step after the streaming step, in which the system performs a relaxation with characteristic (relaxation) time $\tau$ towards the local equilibrium distribution $f_e(\rv)$. 
+It is important to notice that the BGK collisional operator is a \emph{scattering} operator and does not includes annihilation or creation of particles. \\
+
+After defining the collisional term, we have to choose a distribution fuction $f_e(\rv)$. We claim that the phase space distribution relaxes towards equilibrum, which means a displacement in the phase space and not the introduction or annihilation of mass.
+Therefore, the equilibrium distribution must be perfectly \emph{normalized}  in order to enforce particle number conservation. We normalize this equilibrium distribution by using macroscopic quantities obtained by integrating the velocity part of the phase space. This macroscopic quantities are: the volumetric density $\dens$, the macroscopic velocity $\vb{u}(\rv)$ and the internal energy $e(\rv)$.
+\\
+
+The volumetric density is the same density we have been using so far defined by the integral of equation \ref{defDens0}. The macroscopic velocity $\vb{u}(\rv)$ is defined by the integral:
+
+\begin{equation}
+\vb{u}(\rv) = \int_{-\infty}^{\infty} \! \f[t] \, \vb{v}  \dd \vb{v}.
+\end{equation}
+
+When evaluating in the lattice the integral becomes:
+
+\begin{equation}
+\label{defVel0}
+\vb{u} = \sum_{\vb{V}_{min}}^{\vb{V}_{max}} \f[t] \,  \vb{v} \dd \vb{v}
+\end{equation}
+
+And the internal energy is defined by the integral
+
+\begin{equation}
+e(\rv) = \frac{1}{2} \int_{-\infty}^{\infty} \! \f[t] \, (\vb{v} -\vb{u})^2 \dd \vb{v}.
+\end{equation}
+
+Which also becomes a sum when evaluating in the lattice.
+
+\begin{equation}
+\label{defVel}
+e(\rv) = \frac{1}{2} \sum_{\vb{V}_{min}}^{\vb{V}_{max}} \f[t] \,  (\vb{v} -\vb{u})^2 \dd \vb{v}
+\end{equation}
+
+Notice that we are not including explicitly the mass of the dark matter particle in this integrals because it is already included in the phase space definition.\\
+
+Now that we have well defined macroscopic variables, we can proceed to choose an equilibrium function.
 
 
 \section{Systems to Simulate}
