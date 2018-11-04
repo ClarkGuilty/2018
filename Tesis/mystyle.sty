@@ -15,8 +15,23 @@
 \providecommand{\e}[1]{\ensuremath{\times 10^{#1}}} %Usa \e{n} para 10^n
 \usepackage{quotmark} %Uso consistente con la RAE de comillas
 \usepackage{listings} % Comandos de la terminal
-\usepackage{setspace} % Fijar la separación
-\onehalfspacing
+
+
+%\usepackage[nodisplayskipstretch]{setspace} % Fijar la separación
+\usepackage{setspace}\onehalfspacing
+
+%\AtBeginDocument{%
+  %\addtolength\abovedisplayskip{-0.5\baselineskip}%
+  %\addtolength\belowdisplayskip{-0.5\baselineskip}%
+%  \addtolength\abovedisplayshortskip{-0.5\baselineskip}%
+%  \addtolength\belowdisplayshortskip{-0.5\baselineskip}%
+%}
+
+\setstretch{1.5}
+\usepackage{parskip}
+
+
+
 
 \usepackage{textcomp}
 \usepackage{gensymb}
@@ -32,6 +47,7 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
+\usepackage[nointegrals]{wasysym}
 \usepackage{physics} %Best pack.
 
 % permite insertar gráficos, imágenes y figuras, en pdf o en eps.
@@ -51,15 +67,19 @@
 \pagestyle{fancy}
 
 \fancyhead{} %Clean headers
+\fancyfoot{} %Clean footers
 \fancyhead[RO]{\leftmark}
 \fancyhead[LE]{\rightmark}
+\fancyfoot[C]{\thepage}
+%\fancyhead[LO]{\thepage}
+%\fancyhead[RE]{\thepage}
 
 \fancypagestyle{MyStyle}{% Defino mi propio estilo para cambios rápidos.
     \fancyhead{} %Clean headers
 	\fancyhf{}
 	\fancyhead[RO]{\leftmark}
 	\fancyhead[LE]{\rightmark}
-	\fancyfoot[C]{\thepage}
+
 %	\renewcommand{\chaptermark}[1]{\markboth{\thechapter. {\slshape{##1}}}{}}
 }
    
