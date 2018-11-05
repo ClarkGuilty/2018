@@ -184,10 +184,10 @@ After initialization we proceed to calculate the potential and the acceleration,
 The values used to initialize the phase space were:
 \begin{align}
 \sigma_r &= 0.2\\
-\sigma_r &= 0.2\\
+\sigma_v &= 0.2\\
 A &= 50  \ \text{um} \\
 \end{align}
-Which yields a total mass of $1.26\e{12}$ M$_{\odot}$, a very similar value with recent estimates of the total mass of our galaxy's dark matter halo. %\cite{2013JCAP...07..016N}
+Which yields a total mass of $1.26\e{12}$ M$_{\odot}$, a value in accordance with recent estimates of the total mass of our galaxy's dark matter halo \cite{2013JCAP07016N}.s
 
 
 
@@ -196,20 +196,33 @@ Which yields a total mass of $1.26\e{12}$ M$_{\odot}$, a very similar value with
     %\includegraphics[width=10cm,height =7cm]{Diapositiva1.jpg}
     \includegraphics[scale=0.6]{imag/1dInitPS.png}
     \includegraphics[scale=0.6]{imag/1dInitDens.png}
-    \caption{Up: initialization of the phase space. Down: the spatial density obtained through integration.}
+    \caption{Up: initialization of the phase space. Position is represented in the $x$ axis, and velocity in the $y$ axis of the plot. Down: the spatial density obtained through integration. }
     \label{1dInit}
 \end{figure}
 \newpage
 \begin{figure}[ht!]
     \centering
     %\includegraphics[width=10cm,height =7cm]{Diapositiva1.jpg}
-    \includegraphics[scale=0.15]{imag/flowchart.png}
-    \includegraphics[scale=0.15]{imag/flowchart.png}
-    \caption{Left: The potential obtained by solving the Poisson equation. Right: The acceleration obtain by numerical derivation of the potential.}
+    \includegraphics[scale=0.6]{imag/1dInitPot.png}
+    \includegraphics[scale=0.6]{imag/1dInitAcce.png}
+    \caption{Up: The potential obtained by solving the Poisson equation. Down: The acceleration obtain by numerical derivation of the potential.}
     \label{1dInit2}
 \end{figure}
 
 
+To test the simulation we reproduce previous work in the collisionless case. For which we run the simulation and check upon the behavior of the phase space density, the spatial density, the potential and the acceleration. 
+
+To visualize the phase space we plot the position in the $x$ axis and the velocity in the $y$ axis. When we running the simulation, we expect the cells with positive velocity to move to the right side of the plot, but, as they move to the right, they are also being attracted towards the left because of the symmetry of the initial conditions, making the phase space a clock-wise rotating spiral. This behavior can be seen in figure \ref{1dphase}, where we plot different time instants chosen to display the clock-wise spiral of the phase space evolution. This behavior is in complete accordance with previous work.
+\begin{figure}[ht!]
+    \centering
+    %\includegraphics[width=10cm,height =7cm]{Diapositiva1.jpg}
+    \includegraphics[scale=0.45]{imag/phase7.png}
+    \includegraphics[scale=0.45]{imag/phase22.png}
+    \includegraphics[scale=0.45]{imag/phase40.png}
+    \includegraphics[scale=0.45]{imag/phase90.png}
+    \caption{Upper left: Phase space 72 million years after initialization. Upper right: Phase space 227 million years after initialization. Bottom left: Phase space 413 million years after initialization. Bottom right: Phase space 930 million years after initialization. It can be observed that the phase space behaves as a clock-wise rotating spiral.}
+    \label{1dphase}
+\end{figure}
 
 
 
