@@ -1,14 +1,13 @@
-\setcounter{page}{1}% Start page number with 2
-\newpage
+\setcounter{page}{1}% Start page number with 1
 \belowdisplayshortskip=0pt
 \renewcommand{\thepage}{\arabic{page}}% Arabic numerals for page counter
 \chapter{Introduction}
 
 Traditionally, dark matter has been simulated by using N-body schemes, in which the temporal evolution of a system of N particles is simulated usually by solving the Poisson-Vlasov equation \cite{2012PDU150K}.
 These N-body simulations have been essential for the development of modern cosmology and the characterization of dark matter halos.
-For example, the development of the $\Lambda$CMD cosmology was heavily linked with a classic N-body simulation of the large scale structure of the universe, using only 32748 particles! \cite{1985ApJ292371D}.
+For example, the development of the $\Lambda$CMD cosmology was heavily linked with a classic N-body simulation of the large scale structure of the universe which used only 32748 particles! \cite{1985ApJ292371D}.
 
-On the other hand, Lattice-Boltzmann simulations have been widely used to simulate increasingly complex fluids and boundary conditions, nonetheless, the traditional Lattice-Boltzmann scheme does not simulate the entire velocity space, but simply a small number of adventive velocities. 
+On the other hand, Lattice-Boltzmann simulations have been widely used to simulate increasingly complex fluids and boundary conditions, nonetheless, the usual Lattice-Boltzmann scheme does not simulate the entire velocity space, but simply a small number of adventive velocities. 
 
 Inspired by the work of Philip Mocz, Sauro Succi \cite{integerLatticeDynamics}, and Sebastian Franco \cite{franco}, in which a Lattice-Boltzmann simulation is used to simulate the phase space of a \emph{collisionless} one dimensional dark matter fluid. We implement a Lattice-Boltzmann simulation of the phase space of a \emph{collisional} three dimensional dark matter fluid using the BGK approximation for the collisional term.
 
@@ -100,12 +99,50 @@ During the collision, each constituent reacts differently to the situation:
 
 If there was no dark matter, then after the collision the weak lensing mapping of the mass distribution would be very close to the hot gas distribution, because the hot gas would be the dominant mass density in the cluster. If dark matter were to exists, then it would dominate the mass density distribution in the galaxy cluster and the weak lensing mapping would be very similar to the galaxies distribution (because they are also collisionless).
 
-What we observe in the Bullet Cluster is the latter case, in which hot gas decouples from dark matter and galaxies. By mapping the cluster components and measuring the difference between the centroids, it was concluded that there is a dark matter component in the clusters. Very accurate measurements and estimates of the centroids show a small collisional nature in the dark matter component, such measurements allows estimate the \emph{thermally averaged cross-section} of the dark matter particle ($<\sigma v>$). Therefore, it is worth exploring the collisional dark matter scenario.
+What we observe in the Bullet Cluster is the latter case, in which hot gas decouples from dark matter and galaxies.
+By mapping the cluster components and measuring the difference between the centroids, it was concluded that there is a dark matter component in the clusters.
+Very accurate measurements and estimates of the centroids show a small collisional nature in the dark matter component, such measurements allows estimate the \emph{thermally averaged cross-section} of the dark matter particle ($<\sigma v>$).
+Therefore, it is worth exploring the collisional dark matter scenario.
 
 \section{The Boltzmann Equation}
+The Boltzmann equation was originally proposed in 1872 by Ludwig Boltzmann and is used to model the behavior of statistical systems outside of the equilibrium. 
+Formally, the Boltzmann equation describes the evolution of the phase space of a typical dark matter particle, such that $\f \dd \vb{r} \dd \vb{v}$ is the probability of finding the dark matter particle in a position between $\vb{r}$ and $\vb{r} + \dd \vb{r}$, with velocity velocity between $\vb{v}$ and $\vb{v} + \dd \vb{v}$.
+Given than a halo is made of typical dark matter particles, we can treat it as a dark matter fluid and apply the Boltzmann equation now interpreting $\f \dd \vb{r} \dd \vb{v}$ as the number of dark matter particles whose position is between $\vb{r}$ and $\vb{r} + \dd \vb{r}$ with velocity velocity between $\vb{v}$ and $\vb{v} + \dd \vb{v}$.
+Regardless of whether we are thinking of a fluid or a particle, the Boltzmann equation is given by:
+\begin{equation}
+\pdv{f}{t} + \vb{\dot{x}} \pdv{f}{\vb{x}} + \vb{\dot{v}} \pdv{f}{\vb{v}}  = C[f]
+\end{equation}
 
+The left hand side is known as the Liouville operator and the right hand side is known as the \emph{Collisional} operator. The Liouville operator represents the evolution of the system followed classical mechanics, without considering short range interaction between particles (the collisions). The collisional operator is an integral operator that relates the possibility of a collision with the state of the system $\f$. 
+In other words, the collisional operator quantifies the effect of the collisions in the phase space evolution.
+A complete modeling of the collisional operator requires knowledge of the short range interactions between particles, given that we do not know the short range interaction of a dark matter particle, we must work with approximation schemes. This is going to be expanded in \ref{bgk}.
 
-\section{Lattice Automata and Lattice Boltzmann}
+For a collisionless fluid, the Boltzmann equation becomes the Vlasov equation:
+\begin{equation}
+\pdv{f}{t} + \vb{\dot{x}} \pdv{f}{\vb{x}} + \vb{\dot{v}} \pdv{f}{\vb{v}}  = 0
+\end{equation}
+Which simply dictates that the phase space distribution function is constant along the trajectories of the system\cite{integerLatticeDynamics}
+\section{Lattice Boltzmann Method}
+\label{boltz}
+The Lattice-Boltzmann method consists of dividing the phase space into a lattice and solving the Boltzmann equation in such lattice. In each cell of the lattice there is a density which represents the amount of fluid in the position range and with a velocity range correspondent to the cell's position in the lattice. The main effect of the discretization of the phase space is that we no longer simulate the entire phase space but a countable number of velocities and positions, which allows the use of integer arithmetic when updating the lattice. The use of integer arithmetic introduces a lattice noise but eliminates the floating point error. In the limit of high resolution, the absence of floating point error and the tendency of the lattice noise towards zero guarantees that the method converges to the continuum solution and makes it a Lagragian, Symplectic and conservative algorithm. 
+
+However, this method has one big drawback. The time evolution of the phase space is calculated using a direct integration scheme, which implies that for a simulation with $N$ spatial dimensions each one having size $n$, we would need to store $n^{2N}$ numbers in each timestep. This is in fact a very heavy constrain because many cases of interest are three dimensional. For example, a three dimensional dark matter halo would have a six dimensional phase space, if the grid size were to be $64$, then we would need almost 600 Gigabytes of memory just to store the lattice! 
+
+The specifics of implementing a Lattice Boltzmann method is discussed further in section \ref{implementBoltzmann} 
+
 
 \section{BGK Approximation}
 \label{bgk}
+
+
+
+
+
+
+
+
+
+
+
+
+

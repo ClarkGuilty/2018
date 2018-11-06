@@ -1,0 +1,51 @@
+\documentclass[12pt,letterpaper,twoside,openany]{report}
+\renewcommand{\thepage}{\roman{page}}% Roman numerals for page counter
+\usepackage{mystyle}
+\setlength{\headheight}{15pt} 
+
+
+%\setlength{\abovedisplayskip}{4pt}
+%\setlength{\belowdisplayskip}{1pt}
+%\addto\captionsenglish{\renewcommand{\chaptername}{Chapter}}
+\title{ Simulating Collisional Dark Matter}
+\author{Javier Alejandro Acevedo Barroso}
+\begin{document}
+
+%\setlength{\belowdisplayskip}{0pt} \setlength{\belowdisplayshortskip}{0pt}
+%\setlength{\abovedisplayskip}{10pt} \setlength{\abovedisplayshortskip}{10pt}
+
+
+%\belowdisplayskip=12pt plus 3pt minus 9pt
+%\belowdisplayshortskip=7pt plus 3pt minus 3pt
+
+
+
+%\input{./tex/title.tex}
+\maketitle
+\tableofcontents
+\listoffigures
+%\listoftables
+
+\input{./tex/preface.tex}
+\newpage
+\input{./tex/intro.tex}
+\newpage
+\input{./tex/main_part.tex}
+\newpage
+\input{./tex/conclusions.tex}
+
+%\appendix
+%\include{./tex/myappendix.tex}
+
+
+% Bibliography:
+\clearpage
+\input{./tex/mybibliography.tex}
+
+
+%\bibliography{bibTes}
+%\bibliographystyle{unsrt}
+
+
+
+\end{document}
