@@ -13,11 +13,11 @@ dw = \frac{W_{max}-W_{min} }{N_w}
 \end{equation}%\vspace{1mm}
 In this work we are going to use the phase-space mass \emph{density}, which means that $\f \dd \vb{r} \dd \vb{v}$ is the density of dark matter whose position is between $\vb{r}$ and $\vb{r} + \dd \vb{r}$, and its velocity is between $\vb{v}$ and $\vb{v} + \dd \vb{v}$.
 Now that we have properly defined the phase space grid, we can proceed to initialization.
-For simplicity, we choose gaussian initial conditions given by:
+For simplicity, we choose Gaussian initial conditions given by:
 \begin{equation}
 \f[0]= A \exp{-\frac{\vb{r}^2}{\sigma_r^2} - \frac{\vb{v}^2}{\sigma_v^2}}
 \end{equation}
-Where $\f[0]$ is the initialization of the phase space density, $A$ is an indirect measure of the total mass in the system, $\vb{r}$ is the vector $(x,y,z)$, $\vb{v}$ is the vector $(vx,vy,vz)$, and $\sigma_i$ are a measure of the width of the gaussian profile in the given axis. Note that we use a single width for the spatial axis ($\sigma_{\vb{r}}$) and a single width for the velocity axis ($\sigma_{\vb{r}}$).
+Where $\f[0]$ is the initialization of the phase space density, $A$ is an indirect measure of the total mass in the system, $\vb{r}$ is the vector $(x,y,z)$, $\vb{v}$ is the vector $(vx,vy,vz)$, and $\sigma_i$ are a measure of the width of the Gaussian profile in the given axis. Note that we use a single width for the spatial axes ($\sigma_{\vb{r}}$) and a single width for the velocity axes ($\sigma_{\vb{r}}$).
 
 After initialization, the system evolves by the action of the Louville operator and the Collisional operator, nonetheless, the collisions are modeled as instant, which allows to concentrate they entire influence in a collisional step. The schematics of the algorithm can be seen easily in figure  \ref{flowchart}.
 
@@ -172,7 +172,7 @@ The four dimensional simulation was develop as a step to develop the six dimensi
 \section{The two dimensional phase space}
 %\vspace{-5mm} \vspace{1mm} %descomentar
 
-For the two dimensional simulation we only need two axis, which allows for a very high resolution simulation. We used an squared grid characterized by:
+For the two dimensional simulation we only need two axes, which allows for a very high resolution simulation. We used an squared grid characterized by:
 \begin{align}
 W_{min} &= -1 \ \text{us}\\
 W_{max} &= 1 \ \text{us}\\
@@ -266,12 +266,14 @@ For which the phase space behaved like three successive Gaussian profiles, that 
     \includegraphics[scale=0.45]{imag/jeans22.png}
     \includegraphics[scale=0.45]{imag/jeans40.png}
     \includegraphics[scale=0.45]{imag/jeans90.png}
-    \caption{Upper left: Phase space 72 million years after initialization. Upper right: Phase space 227 million years after initialization. Bottom left: Phase space 413 million years after initialization. Bottom right: Phase space 930 million years after initialization. The behavior is the same as three successive gaussian conditions.}
+    \caption{Upper left: Phase space 72 million years after initialization. Upper right: Phase space 227 million years after initialization. Bottom left: Phase space 413 million years after initialization. Bottom right: Phase space 930 million years after initialization. The behavior is the same as three successive Gaussian conditions.}
     \label{1dJeans}
 \end{figure}
 
 
-
+\newpage
+\section{Four dimensional phase space}
+In the case of the four dimensional phase space we need 
 \newpage
 \section{Six dimensional phase space}
 %\section{No collisional}

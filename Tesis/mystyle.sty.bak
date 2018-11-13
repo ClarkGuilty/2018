@@ -60,7 +60,7 @@
 \usepackage{environ}
 % geometría del documento, encabezados y pies de páginas, márgenes
 %\usepackage[left=3cm,top=3cm,right=3cm]{geometry}
-\usepackage{geometry}
+\usepackage[bottom=2in]{geometry}
 \usepackage{comment}
 %Más geometría del documento, permite páginas más interesantes.
 \usepackage{fancyhdr}
@@ -101,8 +101,10 @@
     \scalebox{1.1}{$\BODY$}
     \end{equation}
     }
-   
-
+%\setlength{\footskip}{25pt}
+\newenvironment{dedication}
+         {\vspace*{12ex}\begin{quotation}\begin{center}\begin{em}}
+         {\par\end{em}\end{center}\end{quotation}}
 %\setlength{\abovedisplayskip}{-15pt}
 %\setlength{\belowdisplayskip}{0pt}
 %\setlength{\abovedisplayshortskip}{0pt}
