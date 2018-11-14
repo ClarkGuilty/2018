@@ -142,7 +142,7 @@ The approximation operates under the assumption that the large amount of detail 
 This is known as an mesoscopic approach, because we disregard the microscopic interactions but preserving the macroscopic properties of the system. 
 The scheme ignores the specifics of the two-body interactions but keeps the tendency of the system towards local equilibrium and then towards global equilibrium.
 
-Local equilibrium is defined usually by the condition:
+Local equilibrium is defined by the condition:
 \begin{equation}
 C[f_e] = 0
 \end{equation}
@@ -150,8 +150,8 @@ Which simply states that in \emph{local equilibrium}, the collisions do not affe
 \begin{equation}
 C[f] = -\frac{1}{\tau}(\f - f(\rv))
 \end{equation}
-
-For most cases, the equilibrium function obeys the Maxwell-Boltzmann distribution, nontheless, Fermi-Dirac distributions were widely used in the early years of the Lattice Boltzmann methods. In recent years modified Maxwellians have been proposed to extend the BGK scheme to the quantum realm\cite{2010arXiv1009.3352F} and to include annihilation and creation of particles. 
+Where $\tau$ is a caractheristic relaxation time for the system. In most cases, the equilibrium function obeys the Maxwell-Boltzmann distribution, nontheless, Fermi-Dirac distributions were widely used in the early years of the Lattice Boltzmann methods.
+In recent years modified Maxwellians have been proposed to extend the BGK scheme to the quantum realm\cite{2010arXiv1009.3352F} and to include annihilation and creation of particles. 
 
 
 

@@ -137,31 +137,14 @@ f_e(\rv) = \frac{\rho}{[2 \pi \ e(\rv) ]^{D/2}} \exp[-\frac{(\vb{v}-\vb{u})^2}{2
 Where $D$ is the number of components in the vector $\f$. For example, if the system is a three dimensional dark matter halo, then D will be equal to three.
 The Maxwell distribution was originally used to describe the probability distribution of the velocity in gas under kinetic theory assumptions. Here, we assume collisions as a phenomena that happens instantly, and during the time in between, the mechanics of the system is governed by the self-gravitational potential. Therefore, the Maxwell distribution is a good starting point for the collisional distribution.
 
-The second equilibrium distribution we are going to use is TODO: decidir si usar maxwell truncated o solo usar una.%TODO decidir si usar fermi o low machnumber maxxwell.
+The second equilibrium distribution we are going to use is TODO: decidir si usar maxwell truncated o .solo usar una.%TODO decidir si usar fermi o low machnumber maxxwell.
 
 
 \subsection{Units on the simulation}
 
 To set the units we fix the value of one spatial unit ($us$), one unit of time ($ut$), and one unit of mass ($um$) of the simulation, and from there, we proceed to calculate the values of the physical constants in our units.
 The physical constant of interest here is the gravitational constant, since it gives the coupling of the gravitational interaction.
-We chose units to simulate a dark matter halo of dimensions akin to the Milky Way's dark matter halo.
-\begin{align}
-1\ us &= 50\ \text{kpc}\\
-1\ ut &= 0.003 \ \text{t}_0\\
-1\ um &= 10^{11} \ \text{M}_{\astrosun}
-\end{align}
-With t$_0$ being the age of the universe today, \text{M}$_{\astrosun}$ being a solar mass and a kiloparsec (kpc) is equal to $3.0857\e{19}$ m. In this units, the gravitational constant has a value of:
-\begin{equation}
-G = 0.006141 \ (1 \ us)^3 \ (1 \ um)^{-1} \ (1 \ ut)^{-2}
-\end{equation}
-
-%And for the Coma Cluster's Gaussian distribution we chose:
-%\begin{align}
-%1\ us &= satan0\\
-%1\ ut &= satan1\\
-%1\ um &= satan2
-%\end{align}
-
+We chose units to simulate a dark matter halo of dimensions akin to the Milky Way's dark matter halo. Because of stability conditions, the units may differ between runs, therefore, they are specified at the beginning of each section in the results chapter.
 
 \chapter{Results}
 For the development of this work we wrote and ran three simulations: a  two dimensional phase space simulation (one spatial and one velocity dimension), a four dimensional phase space simulation, and a six dimensional phase space simulation. 
@@ -273,7 +256,39 @@ For which the phase space behaved like three successive Gaussian profiles, that 
 
 \newpage
 \section{Four dimensional phase space}
-In the case of the four dimensional phase space we need 
+In the case of the four dimensional phase space we need four axes to describe the phase space. This increase in the number of axes in regards to the two dimensional case means that we are going to have to sacrifice a lot of resolution in order to comply to RAM memory constrains. The four dimensional grid used is characterized by:
+\begin{align}
+W_{min} &= -1\\
+W_{max} &= 1\\
+N_w &= 128\\
+dw &= 1/64
+\end{align}
+Likewise, the of units to use are:
+\begin{align}
+1\ us &= 50\ \text{kpc}\\
+1\ ut &= 0.003 \ \text{t}_0\\
+1\ um &= 10^{11} \ \text{M}_{\astrosun}
+\end{align}
+With t$_0$ being the age of the universe today, \text{M}$_{\astrosun}$ being a solar mass and a kiloparsec (kpc) is equal to $3.0857\e{19}$ m. In this units, the gravitational constant has a value of:
+\begin{equation}
+G = 0.006141 \ (1 \ us)^3 \ (1 \ um)^{-1} \ (1 \ ut)^{-2}
+\end{equation}
+\subsection{No collisional case}
+The four dimensional case is initialized with a Gaussian distribution.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \newpage
 \section{Six dimensional phase space}
 %\section{No collisional}
