@@ -86,7 +86,7 @@ Our current estimates place most of the cluster mass in the dark matter componen
 By analyzing the gravitational lensing effect (in particular the \emph{weak} gravitational lensing effect) it is possible to map the mass distribution of a galaxy cluster. 
 Lastly, we can observe the galaxies in the visual and the infrared band.
 They are the only component of a galaxy cluster that can be observed in the visual band.
-About 90 percent of the mass of a cluster is dark matter (this is not a surprise since Fritz Zwicky measured mass-to-light ratios of 50 during the 1930s). Of the remaining baryonic matter, the ionized gas mass can represent up to 90$\%$ of the mass, making galaxies responsable of about 1$\%$ of the total cluster mass.
+About 90 percent of the mass of a cluster is dark matter (this is not a surprise since Fritz Zwicky measured mass-to-light ratios of 50 during the 1930s). Of the remaining baryonic matter, the ionized gas mass can represent up to 90$\%$ of the mass, making galaxies responsible of about 1$\%$ of the total cluster mass.
 
 The object Bullet Cluster (also known as 1E 0657-558) is the aftermath of the collision of two galaxy cluster.
 Before the collision, each cluster had its own set galaxies, baryonic gas and dark matter, and the centroid of each constituent coincided with the center of mass of the whole cluster.
@@ -150,7 +150,7 @@ Which simply states that in \emph{local equilibrium}, the collisions do not affe
 \begin{equation}
 C[f] = -\frac{1}{\tau}(\f - f(\rv))
 \end{equation}
-Where $\tau$ is a caractheristic relaxation time for the system. In most cases, the equilibrium function obeys the Maxwell-Boltzmann distribution, nontheless, Fermi-Dirac distributions were widely used in the early years of the Lattice Boltzmann methods.
+Where $\tau$ is a characteristic relaxation time for the system. In most cases, the equilibrium function obeys the Maxwell-Boltzmann distribution, nonetheless, Fermi-Dirac distributions were widely used in the early years of the Lattice Boltzmann methods.
 In recent years modified Maxwellians have been proposed to extend the BGK scheme to the quantum realm\cite{2010arXiv1009.3352F} and to include annihilation and creation of particles. 
 
 

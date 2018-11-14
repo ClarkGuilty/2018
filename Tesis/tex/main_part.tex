@@ -98,7 +98,7 @@ The idea behind this approach is to recover the macroscopic description of the f
 In order to implement a collisional operator we add a collisional step after the streaming step, in which the system performs a relaxation with characteristic (relaxation) time $\tau$ towards the local equilibrium distribution $f_e(\rv)$. 
 It is important to notice that the BGK collisional operator is a \emph{scattering} operator and does not consider annihilation or creation of particles. 
 
-After defining the collisional term, we have to choose a distribution fuction $f_e(\rv)$. We claim that the phase space distribution relaxes towards equilibrum, which means a displacement in the phase space and not the introduction or annihilation of mass.
+After defining the collisional term, we have to choose a distribution function $f_e(\rv)$. We claim that the phase space distribution relaxes towards equilibrium, which means a displacement in the phase space and not the introduction or annihilation of mass.
 Therefore, the equilibrium distribution must be perfectly \emph{normalized}  in order to enforce particle number conservation. We normalize this equilibrium distribution by using macroscopic quantities obtained by integrating the velocity part of the phase space.
 This macroscopic quantities are: the volumetric density $\dens$, the macroscopic velocity $\vb{u}(\rv)$ and the internal energy $e(\rv)$.
 
@@ -128,16 +128,14 @@ Now that we have well defined macroscopic variables, we can proceed to choose an
 \begin{equation}
 C[f_e] = 0
 \end{equation}
-Which simply means that if the system is already in local equilibrium, then there is no relaxation. This condition can also be stated as \tqt{the equilibrium function must be a collisional invariant}. In order for $f_e(\rv)$ to be a collisional invariant, it must be build with variables that are also collisional invariant. Fortunately, the macroscopic variables already defined in this chapter are also collisional invariants, and so, we can use them to build equilibrium distributions. The idea behind normalization is to obtain the same macroscopical variables when integrating over $f_e(\rv)$ instead of $\f$  In this work we use distributions based on the Maxwellian velocity distribution.
+Which simply means that if the system is already in local equilibrium, then there is no relaxation. This condition can also be stated as \tqt{the equilibrium function must be a collisional invariant}. In order for $f_e(\rv)$ to be a collisional invariant, it must be build with variables that are also collisional invariant. Fortunately, the macroscopic variables already defined in this chapter are also collisional invariants, and so, we can use them to build equilibrium distributions. The idea behind normalization is to obtain the same macroscopic variables when integrating over $f_e(\rv)$ instead of $\f$.  In this work we use distributions based on the Maxwell-Boltzmann velocity distribution. Alternative equilibrium distributions functions can be considered and may be of interest, but they are beyond the scope of this work. In particular, quantum Maxwellians may be used to include annihilation and creation of particles, and the effects of Bose-Einstein, Fermi-Dirac statistics\cite{2010arXiv1009.3352F}.
 
-First, we use the classical Maxwellian distribution with proper normalization:
+The equilibrium function to use is a classical Maxwellian properly normalized for the case of interest:
 \begin{equation}
 f_e(\rv) = \frac{\rho}{[2 \pi \ e(\rv) ]^{D/2}} \exp[-\frac{(\vb{v}-\vb{u})^2}{2 \ e(\rv)}]
 \end{equation}
-Where $D$ is the number of components in the vector $\f$. For example, if the system is a three dimensional dark matter halo, then D will be equal to three.
-The Maxwell distribution was originally used to describe the probability distribution of the velocity in gas under kinetic theory assumptions. Here, we assume collisions as a phenomena that happens instantly, and during the time in between, the mechanics of the system is governed by the self-gravitational potential. Therefore, the Maxwell distribution is a good starting point for the collisional distribution.
-
-The second equilibrium distribution we are going to use is TODO: decidir si usar maxwell truncated o .solo usar una.%TODO decidir si usar fermi o low machnumber maxxwell.
+Where $D$ is the number of spatial dimensions. For example, if the system is a three dimensional dark matter halo, then D will be equal to three.
+The Maxwell distribution was originally used to describe the probability distribution of the velocity in a gas under kinetic theory assumptions. Here, we assume collisions as a phenomena that happens instantly, and during the time in between, the mechanics of the system is governed by the self-gravitational potential. Therefore, the Maxwell distribution is a good starting point for the collisional equilibrium distribution.
 
 
 \subsection{Units on the simulation}
@@ -157,10 +155,10 @@ The four dimensional simulation was develop as a step to develop the six dimensi
 
 For the two dimensional simulation we only need two axes, which allows for a very high resolution simulation. We used an squared grid characterized by:
 \begin{align}
-W_{min} &= -1 \ \text{us}\\
-W_{max} &= 1 \ \text{us}\\
+W_{min} &= -1\\
+W_{max} &= 1\\
 N_w &= 2048\\
-dw &= 1/1024 \ \text{us}
+dw &= 1/1024
 \end{align}
 We always use grid sizes of the form $N_w = 2^n$ because the Fast Fourier Transform algorithm performs better and faster when calculating discrete transforms of size $2^n \ 3^m \ 5^l$ for n,m,l positive integers.%\\ \\ 
 %\vspace{-1mm}
@@ -171,10 +169,10 @@ After initialization we proceed to calculate the potential and the acceleration,
 The values used to initialize the phase space were:
 \begin{align}
 \sigma_r &= 0.2 \ \text{us} \\
-\sigma_v &= 0.2 \ \text{us} \\
+\sigma_v &= 0.2 \ \text{us} / \text{ut} \\
 A &= 50  \ \text{um}
 \end{align}
-Which yields a total mass of $1.26\e{12}$ M$_{\odot}$, a value in accordance with recent estimates of the total mass of our galaxy's dark matter halo \cite{2013JCAP07016N}.
+Which yields a total mass of $1.26\e{12}$ M$_{\odot}$, a value in accordance with recent estimates of the total mass of our galaxy's dark matter halo \cite{2013JCAP07016N}. %TODO colocar la verdadera masa y unidades.
 
 \begin{figure}[h!]
     \centering
@@ -195,7 +193,7 @@ Which yields a total mass of $1.26\e{12}$ M$_{\odot}$, a value in accordance wit
 \end{figure}
 
 To test the simulation we reproduce previous work in the collisionless case. For which we run the simulation and check upon the behavior of the phase space density, the spatial density, the potential and the acceleration. 
-To visualize the phase space we plot the position in the $x$ axis and the velocity in the $y$ axis. We expect the cells with positive velocity to move to the right side of the plot, but, as they move to the right, they are also being attracted towards the left because of the symmetry of the initial conditions. Due to the symmetry of the initial conditions, the cells with negative velocity will move towards the upper left side of the phase space. 
+To visualize the phase space we plot position in the $x$ axis and velocity in the $y$ axis. We expect the cells with positive velocity to move to the right side of the plot, but, as they move to the right, they are also being attracted towards the left because of the symmetry of the initial conditions. Overall, the cells with negative velocity will move towards the upper left side of the phase space. %TODO
 
 \begin{figure}[h!]
     \centering
@@ -274,7 +272,7 @@ With t$_0$ being the age of the universe today, \text{M}$_{\astrosun}$ being a s
 G = 0.006141 \ (1 \ us)^3 \ (1 \ um)^{-1} \ (1 \ ut)^{-2}
 \end{equation}
 \subsection{No collisional case}
-The four dimensional case is initialized with a Gaussian distribution.
+The four dimensional case is initialized using a Gaussian distribution.
 
 
 

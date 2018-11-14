@@ -77,9 +77,13 @@
 \section{Creación del \emph{.raw}}
 El objetivo del ejercicio es encontrar candidatos a estrellas variables a partir de datos de magnitud y desviación en la magnitud. Sin embargo, primero hay que obtener un archivo con la lista de estrellas y sus respectivos estadisticos representando la magnitud y la dispersión de magnitud.
 
-Para este informe se trabajará con el promedio robusto y la desviación robusta como los estadisticos a obtener de cada archivo de fotometría estelar. El ejercicio comienza con cientos de archivos de fotometría, cada uno representando una estrella. Usando la herramienta \tqt{SIGCOL} se puede obtener los estadísticos deseados a partir de los archivos de fotometría de cada estrella.
+Para este informe se trabajará con el promedio robusto y la desviación robusta como los estadisticos a obtener de cada archivo de fotometría estelar. El ejercicio comienza con miles de archivos de fotometría, cada uno representando una estrella. Usando la herramienta \tqt{SIGCOL} se puede obtener los estadísticos deseados a partir de los archivos de fotometría de cada estrella. Se modificó el programa sigcol para añadir el ID de la estrella en cuestión a la salida del programa. Para ejecutar sigcol se debe ejecutar:
 
-Se intentó modificar el programa sigcol para que generara un único archivo final con los resultados de todas las estrellas de la carpeta, sin embargo no fue posible. En su lugar, se escribió un pequeño script de \emph{BASH} que usa sigcol para obtener un archivo \tqt{rta.txt} con las cantidades de interés. En todo caso se tuvo que modificar sigcol.c para añadir el ID de las estrellas.
+\begin{lstlisting}[language=bash]
+ $ ./sigcol archivoFotometria numeroDeColumnas columnaParaEstadistica
+\end{lstlisting}
+
+Se intentó modificar el programa sigcol para que generara un único archivo final con los resultados de todas las estrellas de la carpeta, sin embargo no fue posible. En su lugar, se escribió un pequeño script de \emph{BASH} que usa sigcol para obtener un archivo \tqt{rta.txt} con las cantidades de interés.
 
 \begin{lstlisting}[language=bash]
 #!/bin/bash
@@ -90,23 +94,25 @@ done
 \end{lstlisting}
 
 Tras ejecutar el script, se tiene un archivo \tqt{rta.txt} con un header de una línea conteniendo los nombres de las variables calculadas por sigcol (que a esta altura ya incluye el ID de la estrella). 
-Usando ahora un script de python para estudiar la distribución, se busca separar en el espacio de magnitud-dispersión de magnitud a las estrellas variables de las no variables. Para esto, se ajustará una línea de tendencia y se decidirá un threshold visualmente satisfactorio para decidir la región de estrellas variables.
+Usando ahora un script de python para estudiar la distribución, se busca separar en el espacio de magnitud-dispersión a las estrellas variables de las no variables. Para esto, se ajustará una línea de tendencia y se decidirá un threshold visualmente satisfactorio para decidir la región de estrellas variables.
 
 Para ajustar la línea de tendencia se probó un modelo exponencial y un modelo polinómico de grado 1 hasta 19. A cada modelo se le multiplicó por un threshold y las estrellas por encima de la curva del modelo serían clasificadas como candidatas a estrellas variables.
 
-Visualmente se concluyó que un threshold razonable es 2.3 y que el mejor modelo es un polinomio de grado 19. Las diferentes curvas de los modelos, así como los promedios robustos y las dispersiones robustas usados de las estrellas se pueden observar en la figura \ref{figura}
+Visualmente se concluyó que un threshold de 2.3 es razonable y que el mejor modelo es un polinomio de grado 19. Las diferentes curvas de los modelos, así como los promedios robustos y las dispersiones robustas usados para cada estrella se pueden observar en la figura \ref{figura}
 
 
 \begin{figure}[H]
   \centering
    \includegraphics[scale = 0.6]{fits.png}
-  \caption{Estrellas en el espacio de magnitud vs dispersión (usando cantidades robustas) junto a los modelos ya multiplicados por el threshold para buscar candidatos a estrellas variables }
+  \caption{Puntos purpura: estrellas en el espacio de magnitud vs dispersión (usando cantidades robustas). Curvas: modelos ya multiplicados por el threshold para buscar candidatos a estrellas variables }
   \label{figura}
 \end{figure}
 
-Tras elegir los mejores modelos, se decidió usar un polinomio de grado 13 para obtener la tendencia de los puntos y un threshold de 2.3. Se clasifica como candidatas a estrellas variables las estrellas por encima de la curva vista en la figura \ref{figura2}
+Tras elegir los mejores modelos, se decidió usar un polinomio de grado 13 para obtener la tendencia de los puntos y un threshold de 2.3. Se clasifica como candidatas a estrellas variables las estrellas por encima de la curva vista en la figura \ref{figura2}.
 
+Se guarda el ID de las estrellas candidatas en un archivo \emph{candidatas.txt}. Debido al threshold utilizado y al modelo elegido, se encontró 435 estrellas candidatas a estrellas variables. Casi el 4,4\% de las estrellas son candidatas a estrellas variables. 
 
+Todas las gráficas se hicieron en Python usando las librerías Matplotlib y Numpy. El código de Python automáticamente genera un archivo \tqt{catálogo.txt} con los ID de las estrellas candidatas a variables.
 
 \begin{figure}[ht!]
   \centering
@@ -115,7 +121,6 @@ Tras elegir los mejores modelos, se decidió usar un polinomio de grado 13 para 
   \label{figura2}
 \end{figure}
 
-Se generará una lista donde la primera entrada es el nombre de un archivo de fotometría y la segunda entrada es la última línea de dicho archivo. La tercera entrada es el nombre de otro archivo de fotometría y así sucesivamente. EL primer número de la segunda línea corresponde a al número de estrellas en el archivo, de modo que solo es mirar \tqt{a ojo} cual es archivo con más estrellas. Se encontró que el archivo con más estrellas es \tqt{WFIB351\_6.OUT} con 4649 estrellas.
 
 %\bibliography{bibte}
 \bibliographystyle{plain}
