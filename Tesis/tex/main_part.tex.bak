@@ -147,31 +147,43 @@ We chose units to simulate a dark matter halo of dimensions akin to the Milky Wa
 \chapter{Results}
 For the development of this work we wrote and ran three simulations: a  two dimensional phase space simulation (one spatial and one velocity dimension), a four dimensional phase space simulation, and a six dimensional phase space simulation. 
 The first one was develop in order to reproduce the results of Philip Mocz and Sauro Succi published in 2016 \cite{integerLatticeDynamics}, and the results of Sebastian Franco published in 2017 \cite{franco}.
-In addition to reproducing results, we also extended the simulation to account for a collisional operator and tested some equilibrium distributions.
-The four dimensional simulation was develop as a step to develop the six dimensional simulation. Developing a four dimensional simulation allows to implement and test the specifics of increasing dimensionality without much of the visualization problems that arise in a six dimensional simulation.
+In addition to reproducing results, we also extended the simulation to account for a collisional operator and tested it with different initial conditions.
+
+The four dimensional simulation was develop as a step to develop the six dimensional simulation. Developing a four dimensional simulation allows to implement and test the specifics of increasing dimensionality without much of the visualization problems that arise from a six dimensional simulation. 
+
+The six dimensional simulation is one of the main scopes of this work. The simulation was implemented successfully, however, due to the high RAM memory requirements of the Lattice-Boltzmann method, the resolution is heavily constrained. Even using the HPC cluster avalible at \tqt{Universidad de los Andes}, the resolution of the simulation was too poor to reproduce the results from the other two simulations.
 
 \section{The two dimensional phase space}
 %\vspace{-5mm} \vspace{1mm} %descomentar
 
-For the two dimensional simulation we only need two axes, which allows for a very high resolution simulation. We used an squared grid characterized by:
+For the two dimensional simulation we only need two axes, which allows for a very high resolution in the simulation. We used an squared grid characterized by:
 \begin{align}
 W_{min} &= -1\\
 W_{max} &= 1\\
 N_w &= 2048\\
 dw &= 1/1024
 \end{align}
-We always use grid sizes of the form $N_w = 2^n$ because the Fast Fourier Transform algorithm performs better and faster when calculating discrete transforms of size $2^n \ 3^m \ 5^l$ for n,m,l positive integers.%\\ \\ 
+As mentioned in section \ref{implementBoltzmann}, $W$ represents the axis (in this case $r$ or $v$), $N_w$ represents the size of the grid in the $w$ axis, $dw$ represents the size of a lattice unit in the $w$ axis and $-1$ and $1$ are the extremal values of the phase space in the $w$ axis.
+We always use grid sizes of the form $N_w = 2^n$ with $n$ positive integer, because the Fast Fourier Transform algorithm performs better and faster when calculating discrete transforms of sizes $2^n \ 3^m \ 5^l$ for n,m,l positive integers.%\\ \\ 
 %\vspace{-1mm}
+
+In this section we are going to use three initial conditions:
+\begin{itemize}
+\item A Gaussian density profile used to test the code, and explain the expected behaviors of the phase space density time-evolution.
+\item A Jeans instability test, in which we reproduce the spatial conditions for a jeans stability and use a Gaussian profile for the velocity distribution. These conditions are used to reproduce the previous work aforementioned.
+\item A Bullet Cluster-like initial conditions, in which we have two Gaussian profiles (each one with its own variance and amplitude) separated by a given distance. One of the main scopes of this work is to analyze the Bullet Cluster-like system and compare the phase space evolution of the collisional case its collisionless counterpart.
+\end{itemize}
 \subsection{No collisional case}
+We begin with the Gaussian conditions because of their simplicity and ease to analyze.
 The initialization of the phase space can be seen in figure \ref{1dInit}, along with its correspondent spatial density.
-The Gaussian nature of both the phase space and the density can be appreciated. 
+It is easily observed that the density profiles are Gaussian distributions.
 After initialization we proceed to calculate the potential and the acceleration, which can be seen in figure \ref{1dInit2}.
 The values used to initialize the phase space were:
 \begin{align}
 \sigma_r &= 0.2 \ \text{us} \\
 \sigma_v &= 0.2 \ \text{us} / \text{ut} \\
 A &= 50  \ \text{um}
-\end{align}
+\end{align} %TODO actualizar valores de simulacion, incluida masa total
 Which yields a total mass of $1.26\e{12}$ M$_{\odot}$, a value in accordance with recent estimates of the total mass of our galaxy's dark matter halo \cite{2013JCAP07016N}. %TODO colocar la verdadera masa y unidades.
 
 \begin{figure}[h!]
@@ -193,7 +205,7 @@ Which yields a total mass of $1.26\e{12}$ M$_{\odot}$, a value in accordance wit
 \end{figure}
 
 To test the simulation we reproduce previous work in the collisionless case. For which we run the simulation and check upon the behavior of the phase space density, the spatial density, the potential and the acceleration. 
-To visualize the phase space we plot position in the $x$ axis and velocity in the $y$ axis. We expect the cells with positive velocity to move to the right side of the plot, but, as they move to the right, they are also being attracted towards the left because of the symmetry of the initial conditions. Overall, the cells with negative velocity will move towards the upper left side of the phase space. 
+In the phase space grid, we expect the cells with positive velocity to move to the right side of the plot, but, as they move to the right they are also being attracted towards the left because of the symmetry of the initial conditions. Overall, the cells with positive velocity will move towards the negative velocity will move towards the upper left side of the phase space. %TODO
 
 \begin{figure}[h!]
     \centering
