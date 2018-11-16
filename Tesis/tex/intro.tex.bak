@@ -150,8 +150,10 @@ Which simply states that in \emph{local equilibrium}, the collisions do not affe
 \begin{equation}
 C[f] = -\frac{1}{\tau}(\f - f(\rv))
 \end{equation}
+
+
 Where $\tau$ is a characteristic relaxation time for the system. In most cases, the equilibrium function obeys the Maxwell-Boltzmann distribution, nonetheless, Fermi-Dirac distributions were widely used in the early years of the Lattice Boltzmann methods.
-In recent years modified Maxwellians have been proposed to extend the BGK scheme to the quantum realm\cite{2010arXiv1009.3352F} and to include annihilation and creation of particles. 
+In recent years modified Maxwellians have been proposed to extend the BGK scheme to the quantum realm\cite{2010arXiv1009.3352F} and to include annihilation and creation of particles. The specifics of our implementation of the BGK approximation are discussed in section \ref{metodologiaBGK}.
 
 
 

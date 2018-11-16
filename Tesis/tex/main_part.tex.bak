@@ -13,11 +13,11 @@ dw = \frac{W_{max}-W_{min} }{N_w}
 \end{equation}%\vspace{1mm}
 In this work we are going to use the phase-space mass \emph{density}, which means that $\f \dd \vb{r} \dd \vb{v}$ is the density of dark matter whose position is between $\vb{r}$ and $\vb{r} + \dd \vb{r}$, and its velocity is between $\vb{v}$ and $\vb{v} + \dd \vb{v}$.
 Now that we have properly defined the phase space grid, we can proceed to initialization.
-For simplicity, we choose Gaussian initial conditions given by:
+For simplicity, we developed the simulation using Gaussian initial conditions given by:
 \begin{equation}
 \f[0]= A \exp{-\frac{\vb{r}^2}{\sigma_r^2} - \frac{\vb{v}^2}{\sigma_v^2}}
 \end{equation}
-Where $\f[0]$ is the initialization of the phase space density, $A$ is an indirect measure of the total mass in the system, $\vb{r}$ is the vector $(x,y,z)$, $\vb{v}$ is the vector $(vx,vy,vz)$, and $\sigma_i$ are a measure of the width of the Gaussian profile in the given axis. Note that we use a single width for the spatial axes ($\sigma_{\vb{r}}$) and a single width for the velocity axes ($\sigma_{\vb{r}}$).
+Where $\f[0]$ is the initialization of the phase space density, $A$ is an indirect measure of the total mass in the system, $\vb{r}$ is the vector $(x,y,z)$, $\vb{v}$ is the vector $(vx,vy,vz)$, and $\sigma_i$ are a measure of the width of the Gaussian profile in the given axis. Note that we use a single width for the spatial axes ($\sigma_{\vb{r}}$) and a single width for the velocity axes ($\sigma_{\vb{r}}$). Alternative initialization distributions are going to be considered in the results chapter.
 
 After initialization, the system evolves by the action of the Louville operator and the Collisional operator, nonetheless, the collisions are modeled as instant, which allows to concentrate they entire influence in a collisional step. The schematics of the algorithm can be seen easily in figure  \ref{flowchart}.
 
@@ -84,7 +84,8 @@ The use of only integer arithmetics allows for the elimination of the rounding e
 If we want a collisionless simulation, we can just calculate again the density and continue the algorithm from there. If we want a collisional simulation, we must define a collisional step.
 
 \section{The Collisional Step}
-As previously mentioned, solving the collisional integral $C[f]$ is not straight-forward, as it depends on the modeling of the short range interactions that we decide to assign to the dark matter particle.
+\label{metodologiaBGK}
+As previously mentioned, solving the collisional integral $C[f]$ is not a straight-forward task, as it depends on the modeling of the short range interactions that we decide to assign to the dark matter particle.
 Given that the short range interaction of dark matter is unknown, we avoid using an specific description of the microscopic interactions and choose to use a mesoscopic approach instead, as discussed in section \ref{bgk}. The BGK collisional operator is given by:
 \begin{equation}
 C[f] = -\frac{1}{\tau}(\f - f_e(\rv))
@@ -135,14 +136,30 @@ The equilibrium function to use is a classical Maxwellian properly normalized fo
 f_e(\rv) = \frac{\rho}{[2 \pi \ e(\rv) ]^{D/2}} \exp[-\frac{(\vb{v}-\vb{u})^2}{2 \ e(\rv)}]
 \end{equation}
 Where $D$ is the number of spatial dimensions. For example, if the system is a three dimensional dark matter halo, then D will be equal to three.
-The Maxwell distribution was originally used to describe the probability distribution of the velocity in a gas under kinetic theory assumptions. Here, we assume collisions as a phenomena that happens instantly, and during the time in between, the mechanics of the system is governed by the self-gravitational potential. Therefore, the Maxwell distribution is a good starting point for the collisional equilibrium distribution.
-
+The Maxwell distribution was originally used to describe the probability distribution of the velocity in a gas under kinetic theory assumptions. Here, we assume collisions as a phenomena that happens instantly. During the time in between, the mechanics of the system are governed by the self-gravitational potential. Therefore, the Maxwell distribution is a good ansatz for the collisional equilibrium distribution function $f_e(\rv)$. \\
+Finally, we only need to choose a relaxation time. As in classic kinetic theory, our relaxation time will be given by: %TODO preguntarle a jaime si esto está bien.
+\begin{equation}
+\tau = \frac{1}{n <\sigma v>}
+\end{equation}
+In terms of the matter density instead of particle number:
+\begin{equation}
+\tau = \frac{m}{\rho <\sigma v>}
+\end{equation}
+With $n$ being the mean particle number in the halo, $m$ being the mass of a dark matter particle, $\rho$ being the average density of a dark matter halo and $<\sigma v>$ is the thermally averaged cross-section of the particle.\\
+For this simulation we use the average \emph{matter} density of the universe, given by the most recent results of the Planck probe\cite{2018arXiv180706209P}. We are also going to use the value of $<\sigma v>$  constrained by the Bullet Cluster data \cite{2008ApJ6791173R} \cite{2017MNRAS465569R}, and for the dark particle mass we are going to use the lowest mass possible for a fermionic dark matter particle candidate \cite{mariangela}. These values are:
+\begin{align}
+m &= 0.7 \text{KeV} \\
+<\sigma v> &= 3 \e{-26} \text{cm}^3 / \text{s}\\
+\rho = \Omega_m &= 0.312  
+\end{align}
+The final value of $\tau$ will depend on the particular set of units used in every scenario.
 
 \subsection{Units on the simulation}
 
 To set the units we fix the value of one spatial unit ($us$), one unit of time ($ut$), and one unit of mass ($um$) of the simulation, and from there, we proceed to calculate the values of the physical constants in our units.
 The physical constant of interest here is the gravitational constant, since it gives the coupling of the gravitational interaction.
-We chose units to simulate a dark matter halo of dimensions akin to the Milky Way's dark matter halo. Because of stability conditions, the units may differ between runs, therefore, they are specified at the beginning of each section in the results chapter.
+We chose units to simulate a dark matter halo of dimensions akin to the Milky Way's dark matter halo. Because of stability conditions, the units may differ between runs, therefore, they are specified at the beginning of each section in the next chapter.
+
 
 \chapter{Results}
 For the development of this work we wrote and ran three simulations: a  two dimensional phase space simulation (one spatial and one velocity dimension), a four dimensional phase space simulation, and a six dimensional phase space simulation. 
@@ -176,7 +193,6 @@ In this section we are going to use three initial conditions:
 \subsection{No collisional case}
 We begin with the Gaussian conditions because of their simplicity and ease to analyze.
 The initialization of the phase space can be seen in figure \ref{1dInit}, along with its correspondent spatial density.
-It is easily observed that the density profiles are Gaussian distributions.
 After initialization we proceed to calculate the potential and the acceleration, which can be seen in figure \ref{1dInit2}.
 The values used to initialize the phase space were:
 \begin{align}
@@ -204,16 +220,17 @@ Which yields a total mass of $1.26\e{12}$ M$_{\odot}$, a value in accordance wit
     \label{1dInit2}
 \end{figure}
 
-To test the simulation we reproduce previous work in the collisionless case. For which we run the simulation and check upon the behavior of the phase space density, the spatial density, the potential and the acceleration. 
-In the phase space grid, we expect the cells with positive velocity to move to the right side of the plot, but, as they move to the right they are also being attracted towards the left because of the symmetry of the initial conditions. Overall, the cells with positive velocity will move towards the negative velocity will move towards the upper left side of the phase space. %TODO
+To test the simulation we reproduce previous work in the collisionless case.
+For which we run the simulation and check upon the behavior of the phase space density, the spatial density, the potential and the acceleration.
+In the phase space grid, we expect the cells with positive velocity to move to the right side of the plot, but, as they move to the right they are also being attracted towards the left because of the symmetry of the initial conditions. Therefore, the cells with positive velocity will move towards the inferior-right side of the plot, while cells with negative velocity will move towards the upper left side of the phase space. Overall, the phase space behaves like a clockwise-rotating spiral. This spiral structure can be seen in figure \ref{1dphase}
 
 \begin{figure}[h!]
     \centering
     %\includegraphics[width=10cm,height =7cm]{Diapositiva1.jpg}
-    \includegraphics[scale=0.45]{imag/phase7.png}
-    \includegraphics[scale=0.45]{imag/phase22.png}
-    \includegraphics[scale=0.45]{imag/phase40.png}
-    \includegraphics[scale=0.45]{imag/phase90.png}
+    \includegraphics[scale=0.45]{imag/gauss7.png}
+    \includegraphics[scale=0.45]{imag/gauss22.png}
+    \includegraphics[scale=0.45]{imag/gauss40.png}
+    \includegraphics[scale=0.45]{imag/gauss90.png}
     \caption{Upper left: Phase space 72 million years after initialization. Upper right: Phase space 227 million years after initialization. Bottom left: Phase space 413 million years after initialization. Bottom right: Phase space 930 million years after initialization. It can be observed that the phase space behaves as a clock-wise rotating spiral.}
     \label{1dphase}
 \end{figure}
@@ -221,7 +238,7 @@ In the phase space grid, we expect the cells with positive velocity to move to t
 
 Overall, the trajectories in the phase space are a clock-wise rotating spiral. This behavior is in complete accordance with previous work and can be seen in figure \ref{1dphase}, where we plot different time instants chosen to display the clock-wise spiral of the phase space evolution.
 
-To visualize the linear density, we plot the linear density vs position. We observe an initial increase in the height of the central peak and then little bumps trying to abandon the central distribution but they are gravitationally pulled back before crossing the spatial boundaries. This behavior can be seen in figure \ref{1dDens}
+To visualize the linear density, we plot the linear density vs position. We observe an initial increase in the height of the central peak and then little bumps trying to abandon the central distribution but they are gravitationally pulled back before crossing the spatial of the lattice boundaries. This behavior can be seen in figure \ref{1dDens}
 
 
 
@@ -244,7 +261,7 @@ f(r,v,0) = \frac{\bar{\rho}}{(2 \pi \sigma^2)^{1/2})} \exp(-\frac{v^2}{2 \sigma^
 Such that $\rho$ is the average phase density of the system, $\sigma$ is a measure of the width of the velocity Gaussian profile, $A$ is the amplitude of the density fluctuation and $k$ is the wavenumber of the density fluctuation. We used the following values:
 \begin{align}
 \bar{\rho} &= 10 \  \text{um} \ \text{us}^{-1} \ (\text{us/ut})^{-1} \\
-\sigma &= 0.1 \ \text{us} \\
+\sigma &= 0.1 \ \text{us/ut} \\
 A &= 0.9999 \\
 k &= 2 \pi \ \text{us}^{-1}
 \end{align}
@@ -262,6 +279,57 @@ For which the phase space behaved like three successive Gaussian profiles, that 
     \caption{Upper left: Phase space 72 million years after initialization. Upper right: Phase space 227 million years after initialization. Bottom left: Phase space 413 million years after initialization. Bottom right: Phase space 930 million years after initialization. The behavior is the same as three successive Gaussian conditions.}
     \label{1dJeans}
 \end{figure}
+
+The last set of initial conditions is the Bullet Cluster-like scenario, in which two Gaussian distributions of mass collide due to their gravitational interaction.
+Each Gaussian has its own variance and amplitude. Reminiscent of the Bullet Cluster's conditions before the collision, we fix the mass of one halo greater than the other. The initial conditions are given by the distribution:
+\begin{equation}
+\f[0] = A_1\exp{-\frac{(x-0.4)^2}{2 \sigma_1^2} - \frac{v^2}{2 \sigma_v^2}} + A_2\exp{-\frac{(x+0.4)^2}{2 \sigma_2^2} - \frac{v^2}{2 \sigma_v^2}}
+\end{equation}
+Such that $A_i$ is a measure of the total mass of the ith halo, $\sigma_i^2$ is the variance of the Gaussian profile of the halo in the spatial axis, and $\sigma_v^2$ is the variance of the Gaussian profile in the velocity axis. The values used to initialize the simulation were:
+\begin{align}
+\sigma_1 &= 0.04 \ \text{us} \\
+\sigma_2 &= 0.04  \ \text{us} \\
+\sigma_v &= 0.06 \ \text{us} \\
+A_1 &= 30 \ \text{um} \\
+A_2 &= 40  \ \text{um}
+\end{align}
+Given the collisionless nature of this run, we expect the halos to simply pass through each other \emph{without any loss of energy} due to the collision. In other words, the \emph{density} profiles will have a periodic movement and will eventually return to their initial position.
+In the phase space we will see that each halo forms the counter-clockwise spiral from the Gaussian initial conditions. In addition to that, we can see how when the clusters occupy the same spatial position, they have very different velocities, which keeps them decoupled. The evolution of the phase space can be seen in figure \ref{phaseNoColBullet}. The oscillations in the spatial density can be seen in figure \ref{densNoColBullet}
+
+\begin{figure}[h!]
+    \centering
+    %\includegraphics[width=10cm,height =7cm]{Diapositiva1.jpg}
+    \includegraphics[scale=0.45]{imag/bullet0.png}
+    \includegraphics[scale=0.45]{imag/bullet12.png}
+    \includegraphics[scale=0.45]{imag/bullet24.png}
+    \includegraphics[scale=0.45]{imag/bullet51.png}
+    \caption{Upper left: phase space initialization of the \emph{Bullet Cluster} run. Notice that the right halo is slightly less massive (dimmer). Upper right: phase space during the spatial collision of the halos. Notice the gap in the velocity axis. Bottom left: phase space with the position of the halos switched in regards of the centre of mass. Bottom right: the system after a full period. The halos are at their initial position but their velocities have changed.}
+    \label{phaseNoColBullet}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    %\includegraphics[width=10cm,height =7cm]{Diapositiva1.jpg}
+    \includegraphics[scale=0.45]{imag/bulletD0.png}
+    \includegraphics[scale=0.45]{imag/bulletD12.png}
+    \includegraphics[scale=0.45]{imag/bulletD24.png}
+    \includegraphics[scale=0.45]{imag/bulletD51.png}
+    \caption{Upper left: density initialization of the \emph{Bullet Cluster} run. Notice that the left halo is heavier. Upper right: density during the spatial collision of the halos. Bottom left: density when the halos have switched position with regards to the centre of mass. Bottom right: the system after a full period. The halos are at their initial position but their velocities have changed.}
+    \label{densNoColBullet}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \newpage
