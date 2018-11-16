@@ -173,7 +173,7 @@ The six dimensional simulation is one of the main scopes of this work. The simul
 \section{The two dimensional phase space}
 %\vspace{-5mm} \vspace{1mm} %descomentar
 
-For the two dimensional simulation we only need two axes, which allows for a very high resolution in the simulation. We used an squared grid characterized by:
+For the two dimensional simulation we only need two axes, which allows for a very high resolution. We used an squared grid characterized by:
 \begin{align}
 W_{min} &= -1\\
 W_{max} &= 1\\
@@ -187,11 +187,11 @@ We always use grid sizes of the form $N_w = 2^n$ with $n$ positive integer, beca
 In this section we are going to use three initial conditions:
 \begin{itemize}
 \item A Gaussian density profile used to test the code, and explain the expected behaviors of the phase space density time-evolution.
-\item A Jeans instability test, in which we reproduce the spatial conditions for a jeans stability and use a Gaussian profile for the velocity distribution. These conditions are used to reproduce the previous work aforementioned.
-\item A Bullet Cluster-like initial conditions, in which we have two Gaussian profiles (each one with its own variance and amplitude) separated by a given distance. One of the main scopes of this work is to analyze the Bullet Cluster-like system and compare the phase space evolution of the collisional case its collisionless counterpart.
+\item A Jeans instability test, in which we reproduce the spatial conditions for a periodic jeans oscillation and use a Gaussian profile for the velocity distribution. These conditions are used to reproduce the previous work aforementioned.
+\item A Bullet Cluster-like initial conditions, in which we have two Gaussian profiles (each one with its own variance and amplitude) separated by a given distance. One of the main scopes of this work is to analyze the Bullet Cluster-like system and compare the phase space evolution of the collisional case its collisionless counterpart. Additionally, we are going to reproduce the behavior of the collisional baryonic gas.
 \end{itemize}
 \subsection{No collisional case}
-We begin with the Gaussian conditions because of their simplicity and ease to analyze.
+We begin with the Gaussian conditions because their simplicity and ease to analyze makes them the best introductory example.
 The initialization of the phase space can be seen in figure \ref{1dInit}, along with its correspondent spatial density.
 After initialization we proceed to calculate the potential and the acceleration, which can be seen in figure \ref{1dInit2}.
 The values used to initialize the phase space were:
@@ -222,7 +222,7 @@ Which yields a total mass of $1.26\e{12}$ M$_{\odot}$, a value in accordance wit
 
 To test the simulation we reproduce previous work in the collisionless case.
 For which we run the simulation and check upon the behavior of the phase space density, the spatial density, the potential and the acceleration.
-In the phase space grid, we expect the cells with positive velocity to move to the right side of the plot, but, as they move to the right they are also being attracted towards the left because of the symmetry of the initial conditions. Therefore, the cells with positive velocity will move towards the inferior-right side of the plot, while cells with negative velocity will move towards the upper left side of the phase space. Overall, the phase space behaves like a clockwise-rotating spiral. This spiral structure can be seen in figure \ref{1dphase}
+In the phase space grid, we expect the cells with positive velocity to move to the right side of the plot, but, as they move to the right they are also being attracted towards the left because of the symmetry of the initial conditions. Therefore, the cells with positive velocity will move towards the inferior-right side of the plot, while cells with negative velocity will move towards the upper left side of the phase space.
 
 \begin{figure}[h!]
     \centering
@@ -236,7 +236,7 @@ In the phase space grid, we expect the cells with positive velocity to move to t
 \end{figure}
 
 
-Overall, the trajectories in the phase space are a clock-wise rotating spiral. This behavior is in complete accordance with previous work and can be seen in figure \ref{1dphase}, where we plot different time instants chosen to display the clock-wise spiral of the phase space evolution.
+This behavior is in complete accordance with previous work and can be seen in figure \ref{1dphase}, where we plot different time instants chosen to display the clock-wise spiral of the phase space evolution.
 
 To visualize the linear density, we plot the linear density vs position. We observe an initial increase in the height of the central peak and then little bumps trying to abandon the central distribution but they are gravitationally pulled back before crossing the spatial of the lattice boundaries. This behavior can be seen in figure \ref{1dDens}
 
@@ -254,9 +254,9 @@ To visualize the linear density, we plot the linear density vs position. We obse
     \label{1dDens}
 \end{figure}
 
-In addition to testing Gaussian initial conditions, we reproduced the Jeans instability, which was also tested in previous work. In this scenario, the Jeans instability is given by:
+In addition to Gaussian initial conditions, we reproduced the Jeans instability, which was also tested in previous work. In this scenario, the Jeans instability is given by:
 \begin{equation}
-f(r,v,0) = \frac{\bar{\rho}}{(2 \pi \sigma^2)^{1/2})} \exp(-\frac{v^2}{2 \sigma^2}) (1 + A \cos(kr))
+f(r,v,0) = \frac{\bar{\rho}}{(2 \pi \sigma^2)^{1/2}} \exp(-\frac{v^2}{2 \sigma^2}) (1 + A \cos(kr))
 \end{equation}\\
 Such that $\rho$ is the average phase density of the system, $\sigma$ is a measure of the width of the velocity Gaussian profile, $A$ is the amplitude of the density fluctuation and $k$ is the wavenumber of the density fluctuation. We used the following values:
 \begin{align}
@@ -266,7 +266,7 @@ A &= 0.9999 \\
 k &= 2 \pi \ \text{us}^{-1}
 \end{align}
 
-For which the phase space behaved like three successive Gaussian profiles, that is because we meet the Jeans instability criteria. This result were also compatible with previous work published on one dimensional collisionless dark matter fluids. The evolution of the Jeans instability phase space can be seen in figure \ref{1dJeans}
+For which the phase space behaved like three successive Gaussian profiles, that is because we met the Jeans instability criteria. This result were also compatible with previous work published on one dimensional collisionless dark matter fluids. The evolution of the Jeans instability phase space can be seen in figure \ref{1dJeans}
 
 
 \begin{figure}[h!]
@@ -281,7 +281,9 @@ For which the phase space behaved like three successive Gaussian profiles, that 
 \end{figure}
 
 The last set of initial conditions is the Bullet Cluster-like scenario, in which two Gaussian distributions of mass collide due to their gravitational interaction.
-Each Gaussian has its own variance and amplitude. Reminiscent of the Bullet Cluster's conditions before the collision, we fix the mass of one halo greater than the other. The initial conditions are given by the distribution:
+Each Gaussian has its own variance and amplitude. Reminiscent of the Bullet Cluster's conditions before the collision, we fix the mass of one halo greater than the other. 
+
+The initial conditions are given by the distribution:
 \begin{equation}
 \f[0] = A_1\exp{-\frac{(x-0.4)^2}{2 \sigma_1^2} - \frac{v^2}{2 \sigma_v^2}} + A_2\exp{-\frac{(x+0.4)^2}{2 \sigma_2^2} - \frac{v^2}{2 \sigma_v^2}}
 \end{equation}
@@ -290,8 +292,8 @@ Such that $A_i$ is a measure of the total mass of the ith halo, $\sigma_i^2$ is 
 \sigma_1 &= 0.04 \ \text{us} \\
 \sigma_2 &= 0.04  \ \text{us} \\
 \sigma_v &= 0.06 \ \text{us} \\
-A_1 &= 30 \ \text{um} \\
-A_2 &= 40  \ \text{um}
+A_1 &= 40 \ \text{um} \\
+A_2 &= 30  \ \text{um}
 \end{align}
 Given the collisionless nature of this run, we expect the halos to simply pass through each other \emph{without any loss of energy} due to the collision. In other words, the \emph{density} profiles will have a periodic movement and will eventually return to their initial position.
 In the phase space we will see that each halo forms the counter-clockwise spiral from the Gaussian initial conditions. In addition to that, we can see how when the clusters occupy the same spatial position, they have very different velocities, which keeps them decoupled. The evolution of the phase space can be seen in figure \ref{phaseNoColBullet}. The oscillations in the spatial density can be seen in figure \ref{densNoColBullet}
@@ -303,7 +305,7 @@ In the phase space we will see that each halo forms the counter-clockwise spiral
     \includegraphics[scale=0.45]{imag/bullet12.png}
     \includegraphics[scale=0.45]{imag/bullet24.png}
     \includegraphics[scale=0.45]{imag/bullet51.png}
-    \caption{Upper left: phase space initialization of the \emph{Bullet Cluster} run. Notice that the right halo is slightly less massive (dimmer). Upper right: phase space during the spatial collision of the halos. Notice the gap in the velocity axis. Bottom left: phase space with the position of the halos switched in regards of the centre of mass. Bottom right: the system after a full period. The halos are at their initial position but their velocities have changed.}
+    \caption{Upper left: phase space initialization of the \emph{Bullet Cluster} run. The right halo is slightly less massive (dimmer). Upper right: phase space during the spatial collision of the halos. The gap in the velocity axis keeps the halos decoupled. Bottom left: phase space with the position of the halos switched in regards of the centre of mass and the initial conditions. Bottom right: the system after a full period. The halos are at their initial position but their velocities have changed due to the evolution of each Gaussian.}
     \label{phaseNoColBullet}
 \end{figure}
 
@@ -319,17 +321,27 @@ In the phase space we will see that each halo forms the counter-clockwise spiral
 \end{figure}
 
 
+\newpage
+\subsection{The collisional case}
+Now, for the collisional case we are going to repeat the same initial conditions and evolve them 
+Recalling the discussion on choosing a $\tau$ (see \ref{metodologiaBGK}), the final value was unit dependent. The value of $\tau$ in the units used in this section is $$\tau =8972$$ Once again, we start with the Gaussian initial conditions.
+We ran the simulation with exactly the same initial conditions and observed the behavior in phase space.
+The value of $\tau$ implies a very little collisional term, therefore, the difference in the phase space evolution of the Gaussian distribution can not be seen by eye. Instead, we plot the percentual difference, defined by: %TODO depronto haya que cambiar todos los porcentual a percentual 
+\begin{equation}
+Z = 100\qty(\frac{f_{\tau}(\rv,t) - f_0(\rv,t)}{f_0(\rv,t)})
+\end{equation}
+Which will allow us to interpret more easily the difference in the evolution of the distribution. The evoluation of the phase space with a collision term can be seen in figure \label{phaseColGauss}
 
-
-
-
-
-
-
-
-
-
-
+\begin{figure}[h!]
+    \centering
+    %\includegraphics[width=10cm,height =7cm]{Diapositiva1.jpg}
+    \includegraphics[scale=0.45]{imag/bulletD0.png}
+    \includegraphics[scale=0.45]{imag/bulletD12.png}
+    \includegraphics[scale=0.45]{imag/bulletD24.png}
+    \includegraphics[scale=0.45]{imag/bulletD51.png}
+    \caption{Upper left: density initialization of the \emph{Bullet Cluster} run. Notice that the left halo is heavier. Upper right: density during the spatial collision of the halos. Bottom left: density when the halos have switched position with regards to the centre of mass. Bottom right: the system after a full period. The halos are at their initial position but their velocities have changed.}
+    \label{phaseColGauss}
+\end{figure}
 
 
 \newpage
