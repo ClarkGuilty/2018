@@ -295,9 +295,9 @@ Such that $A_i$ is a measure of the total mass of the ith halo, $\sigma_i^2$ is 
 A_1 &= 40 \ \text{um} \\
 A_2 &= 30  \ \text{um}
 \end{align}
-Given the collisionless nature of this run, we expect the halos to simply pass through each other \emph{without any loss of energy} due to the collision. In other words, the \emph{density} profiles will have a periodic movement and will eventually return to their initial position.
-In the phase space we will see that each halo forms the counter-clockwise spiral from the Gaussian initial conditions. In addition to that, we can see how when the clusters occupy the same spatial position, they have very different velocities, which keeps them decoupled. The evolution of the phase space can be seen in figure \ref{phaseNoColBullet}. The oscillations in the spatial density can be seen in figure \ref{densNoColBullet}
-
+Given the collisionless nature of this run, we expect the halos to simply pass through each other \emph{without any loss of energy} due to the collision. In other words, the \emph{density} profiles will have a periodic movement and will eventually return to their initial location.
+In the phase space we see that each halo forms the counter-clockwise spiral from the Gaussian initial conditions. In addition to that, we can see how when the halos occupy the same spatial position, they have very different velocities, which keeps them decoupled. The evolution of the phase space can be seen in figure \ref{phaseNoColBullet}. The oscillations in the spatial density can be seen in figure \ref{densNoColBullet}
+\newpage
 \begin{figure}[h!]
     \centering
     %\includegraphics[width=10cm,height =7cm]{Diapositiva1.jpg}
@@ -323,25 +323,101 @@ In the phase space we will see that each halo forms the counter-clockwise spiral
 
 \newpage
 \subsection{The collisional case}
-Now, for the collisional case we are going to repeat the same initial conditions and evolve them 
-Recalling the discussion on choosing a $\tau$ (see \ref{metodologiaBGK}), the final value was unit dependent. The value of $\tau$ in the units used in this section is $$\tau =8972$$ Once again, we start with the Gaussian initial conditions.
-We ran the simulation with exactly the same initial conditions and observed the behavior in phase space.
-The value of $\tau$ implies a very little collisional term, therefore, the difference in the phase space evolution of the Gaussian distribution can not be seen by eye. Instead, we plot the percentual difference, defined by: %TODO depronto haya que cambiar todos los porcentual a percentual 
+Now, for the collisional case we are going to implement the Gaussian initial conditions as an introductory example, and then use the insight to interpret more easily the Bullet Cluster like case.
+Recalling the discussion on choosing a $\tau$ (see \ref{metodologiaBGK}), the final value was unit dependent. The value of $\tau$ in the units used in this section is $$\tau =8972 \ \text{ut}$$ Once again, we start with the Gaussian initial conditions.
+We ran the simulation with exactly the same initial conditions as in the no collisional case and observed the evolution of the phase space.
+The value of $\tau$ implies a very small collisional term.
+Therefore, if we looked at the phase space distribution of the collisional case in the same way as we did in the last section, we would not be able to spot any difference between the two cases. Instead of plotting the phase space of the collisional case, we choose plot the percentual difference between the cases: %TODO depronto haya que cambiar todos los porcentual a percentual 
 \begin{equation}
 Z = 100\qty(\frac{f_{\tau}(\rv,t) - f_0(\rv,t)}{f_0(\rv,t)})
 \end{equation}
-Which will allow us to interpret more easily the difference in the evolution of the distribution. The evoluation of the phase space with a collision term can be seen in figure \label{phaseColGauss}
+With $Z$ being the percentual difference of the collisional case with the collisionless case. This representation will allow us to interpret more easily the effects of the collisional term in the distribution.
+
+The evolution of the percentual difference in the phase space between the two cases can be seen in figure \ref{phaseColGauss}. In it we can appreciate  two main regions: a blue region (dominated by collisionless dark matter), and a red region (dominated by collisional dark matter). The collisionless fluid has higher velocities in the centre of the spatial distribution (the blue region), but the collisional distribution has a higher density in the tails of the Gaussian, implying a lower central density peak. This lower central peak in the spatial density can be observed directly in figure \ref{densColGauss}, where values higher than zero correspond to higher collisional density, and lower than zero to a higher collisionless density. Now it is easy to see that the collisional peak is about 20 percent lower than its collisionless counterpart and remains that way, even after a very long time. 
+
 
 \begin{figure}[h!]
     \centering
     %\includegraphics[width=10cm,height =7cm]{Diapositiva1.jpg}
-    \includegraphics[scale=0.45]{imag/bulletD0.png}
-    \includegraphics[scale=0.45]{imag/bulletD12.png}
-    \includegraphics[scale=0.45]{imag/bulletD24.png}
-    \includegraphics[scale=0.45]{imag/bulletD51.png}
-    \caption{Upper left: density initialization of the \emph{Bullet Cluster} run. Notice that the left halo is heavier. Upper right: density during the spatial collision of the halos. Bottom left: density when the halos have switched position with regards to the centre of mass. Bottom right: the system after a full period. The halos are at their initial position but their velocities have changed.}
+    \includegraphics[scale=0.45]{imag/cGaussPhase0.png}
+    \includegraphics[scale=0.45]{imag/cGaussPhase14.png}
+    \includegraphics[scale=0.45]{imag/cGaussPhase30.png}
+    \includegraphics[scale=0.45]{imag/cGaussPhase62.png}
+    \caption{Upper left: $Z$ at $t= 0$, we had exactly the same initial conditions in both cases. Upper right: $Z$ several timesteps after initialization. The collisional part has already a lower central peak and lower velocities in the centre. Bottom left: Eventually, the \emph{arms} of the distributions get out of sync but the general behavior remains. Bottom right: the distribution from the upper right image is now tainted by the arms. However, the general behavior is still the same, even after a long while.}
     \label{phaseColGauss}
 \end{figure}
+
+\begin{figure}[h!]
+    \centering
+    %\includegraphics[width=10cm,height =7cm]{Diapositiva1.jpg}
+    \includegraphics[scale=0.45]{imag/cGaussD0.png}
+    \includegraphics[scale=0.45]{imag/cGaussD14.png}
+    \includegraphics[scale=0.45]{imag/cGaussD30.png}
+    \includegraphics[scale=0.45]{imag/cGaussD62.png}
+    \caption{Upper left: we initialize both cases with the same distribution. Upper right: after a while the collisionless case already dominates the central region and the collisional the tails. Bottom left: we observe small \emph{oscillations} in the tails but the central behavior remains. Bottom right: after a long while, the tails and even a little of the central peak has some oscillations, nonetheless, the central behavior still remains. The oscillations correspond to the little bumps mentioned in the collisionless Gaussian case. Every density frame corresponds to the same frame in figure \ref{phaseColGauss}.}
+    \label{densColGauss}
+\end{figure}
+
+Recapitulating, due to the collisional term we have two main effects:
+\begin{itemize}
+\item There is a considerable reduction of velocity in the central part of the distribution.
+\item There is an increment in the spatial density outside of the central region. Additionally, these regions have slightly higher velocity than their collisionless counterpart.
+\end{itemize}
+
+Now that we have introduced the collisional effects with the Gaussian example, we can proceed to the real case of interest: the Bullet Cluster-like scenario. 
+
+Recalling from \ref{bulletExplain}, Galaxy Clusters have three main components: a highly collisional baryonic gas, a collisionless distribution of galaxies, and a slightly collisional dark matter part. Here, we are going to simulate the slightly collisional dark matter component and compare it with the collisionless case.% In addition to that, we are also going qualitatively the hot baryonic gas as a very collisional fluid. %TODO si queda tiempo hacer un apéndice con TAU = 50
+
+For the case of the slightly collisional dark matter component, we use the same simulation parameters as those of the no collisional case.
+In that scenario the halos had a periodic movement, that was because there was no dissipation of energy.
+Now that we include the short range interactions, there is a loss of energy every time the halos collide (in addition to the loss of energy due to the internal evolution of each collisional Gaussian halo), and because of that, the halos will not return to their starting place. How long will it take for the halos to permanently merge is directly related to the relaxation time. Our relaxation time (8972 ut) is quite high, which is why we expect them to merge after several collisions.
+
+In figure \ref{phaseColGauss} we can appreciate how the system is losing energy in function of time.
+We plot the aphelion of the halos and observe the distance between them becoming smaller with time. After six collisions, the smaller halo becomes a current in the bigger halo, and both form a single final halo. This is a very different behavior from the collisionless case, in which the halos could oscillate forever.
+In figure \ref{densColGauss} we plot the spatial density at the same time instants as in figure \ref{phaseColGauss}. It is clear that the halos are getting closer and will eventually merge. Notice that in the final frame, even though the halos have merged, the smaller halo is mostly noise around the heavier one and will fall inwards given enough time.
+
+\begin{figure}[h!]
+    \centering
+    %\includegraphics[width=10cm,height =7cm]{Diapositiva1.jpg}
+    \includegraphics[scale=0.45]{imag/cBulletPhase0.png}
+    \includegraphics[scale=0.45]{imag/cBulletPhase30.png}
+    \includegraphics[scale=0.45]{imag/cBulletPhase52.png}
+    \includegraphics[scale=0.45]{imag/cBulletPhase80.png}
+    \caption{Upper left: initial conditions for the phase space of the collisional Bullet Cluster scenario. Upper right: the phase space at their first aphelion since initialization. Notice that the halos are closer now as they have collided twice.  Bottom left: the phase space at their second aphelion since initialization, the halos have collided four times. The smaller halo is already collapsing towards the bigger one. Bottom right: the smaller halo is now only a current in the bigger halo.}
+    \label{phaseColGauss}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    %\includegraphics[width=10cm,height =7cm]{Diapositiva1.jpg}
+    \includegraphics[scale=0.45]{imag/cBulletD0.png}
+    \includegraphics[scale=0.45]{imag/cBulletD30.png}
+    \includegraphics[scale=0.45]{imag/cBulletD52.png}
+    \includegraphics[scale=0.45]{imag/cBulletD80.png}
+    \caption{The spatial densities correspondent to the frames of figure \ref{phaseColGauss}. Upper left: initial conditions. Upper right: the spatial density at the first aphelion. We observe that there are more bumps than in the collisionless case and the Gaussians are closer. Bottom left: spatial density at second aphelion. The distributions are now even closer, and the smaller Gaussian is starting to be absorbed by the bigger Gaussian. Bottom right: the spatial density at what would have been the third aphelion. The halos have merged now, but there are still some oscillations on the tails of the remainder distribution.}
+    \label{densColGauss}
+\end{figure}
+
+
+
+Finally, we close the two dimensional results comparing the phase space evolution of the collisional case with its collisionless counterpart. We plot the percentage difference $Z$ as defined for the Gaussian case in figure \ref{colBulletPhase}.
+
+\begin{figure}[h!]
+    \centering
+    %\includegraphics[width=10cm,height =7cm]{Diapositiva1.jpg}
+    \includegraphics[scale=0.45]{imag/diffBullet20.png}
+    \includegraphics[scale=0.45]{imag/diffBullet28.png}
+    \includegraphics[scale=0.45]{imag/diffBullet50.png}
+    \includegraphics[scale=0.45]{imag/diffBullet94.png}
+    \caption{Upper left: percentage difference at half the period of the collisionless case. Here they have already collided once. Upper right: here the collisional distribution is in \emph{aphelion}, meanwhile, the collisionless fluid has barely moved from last frame. Bottom left: the collisionless distribution has completed a period. The collisional smallest halo is already collapsing into a current in the heavier halo. Bottom right: the collisionless distribution has once again completed a perior (therefore has collided four times in total). The smallest collisional distribution has been tore appart by the heaviest and is now just a current in the outskirts of the final distribution }
+        \label{colBulletPhase}
+\end{figure}
+%Now, for the hot baryonic gas we choose a relaxation time that mirrors its highly collisional nature. 
+%This relaxation time is not linked to any particular investigation, as it only serves our interest of testing the simulation when the fluid is highly collisional (highly in astrophysical standards). The relaxation time chosen is $$\tau = 50 \ \text{ut}$$
+
+%This time we plot both the collisional phase space, and the percentage difference. Given our rather low relaxation time, we expect the distribution to lost a considerable amount of energy each collision. The system quickly collapses into one agglomeration of mass. 
+
+
 
 
 \newpage
