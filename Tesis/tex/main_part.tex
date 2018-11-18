@@ -148,17 +148,24 @@ In terms of the matter density instead of particle number:
 With $n$ being the mean particle number in the halo, $m$ being the mass of a dark matter particle, $\rho$ being the average density of a dark matter halo and $<\sigma v>$ is the thermally averaged cross-section of the particle.\\
 For this simulation we use the average \emph{matter} density of the universe, given by the most recent results of the Planck probe\cite{2018arXiv180706209P}. We are also going to use the value of $<\sigma v>$  constrained by the Bullet Cluster data \cite{2008ApJ6791173R} \cite{2017MNRAS465569R}, and for the dark particle mass we are going to use the lowest mass possible for a fermionic dark matter particle candidate \cite{mariangela}. These values are:
 \begin{align}
-m &= 0.7 \text{KeV} \\
-<\sigma v> &= 3 \e{-26} \text{cm}^3 / \text{s}\\
+m &= 0.7 \ \text{KeV} \\
+<\sigma v> &= 3 \e{-26} \ \text{cm}^3 / \text{s}\\
 \rho = \Omega_m &= 0.312  
 \end{align}
 The final value of $\tau$ will depend on the particular set of units used in every scenario.
 
-\subsection{Units on the simulation}
+\subsection{Parameters of the simulation}
+There are still two important aspects of the simulation to be defined: the units and the boundary conditions.
 
 To set the units we fix the value of one spatial unit ($us$), one unit of time ($ut$), and one unit of mass ($um$) of the simulation, and from there, we proceed to calculate the values of the physical constants in our units.
 The physical constant of interest here is the gravitational constant, since it gives the coupling of the gravitational interaction.
 We chose units to simulate a dark matter halo of dimensions akin to the Milky Way's dark matter halo. Because of stability conditions, the units may differ between runs, therefore, they are specified at the beginning of each section in the next chapter.
+
+For the boundaries we implement the following conditions:.
+\begin{itemize}
+\item The boundaries of the spatial axes are periodic. Any portion of mass that leaves the distribution, will re enter through the opposite extreme. This condition assumes the system as periodic.
+\item Every portion of mass that leaves the distribution through the velocity axes, will be lost forever. That means that if a particle has a velocity high than the extremal values of the simulation, the particles is no longer considered in the next time step. This condition is not very limiting because we have high extremal values for the velocity and dark matter is traditionally modeled as \emph{cold}.
+\end{itemize}
 
 
 \chapter{Results}
@@ -173,7 +180,7 @@ The six dimensional simulation is one of the main scopes of this work. The simul
 \section{The two dimensional phase space}
 %\vspace{-5mm} \vspace{1mm} %descomentar
 
-For the two dimensional simulation we only need two axes, which allows for a very high resolution. We used an squared grid characterized by:
+For the two dimensional simulation we only need two axes, which allows for very high resolution run. We used a squared grid characterized by:
 \begin{align}
 W_{min} &= -1\\
 W_{max} &= 1\\
@@ -186,9 +193,10 @@ We always use grid sizes of the form $N_w = 2^n$ with $n$ positive integer, beca
 
 In this section we are going to use three initial conditions:
 \begin{itemize}
-\item A Gaussian density profile used to test the code, and explain the expected behaviors of the phase space density time-evolution.
-\item A Jeans instability test, in which we reproduce the spatial conditions for a periodic jeans oscillation and use a Gaussian profile for the velocity distribution. These conditions are used to reproduce the previous work aforementioned.
-\item A Bullet Cluster-like initial conditions, in which we have two Gaussian profiles (each one with its own variance and amplitude) separated by a given distance. One of the main scopes of this work is to analyze the Bullet Cluster-like system and compare the phase space evolution of the collisional case its collisionless counterpart. Additionally, we are going to reproduce the behavior of the collisional baryonic gas.
+\item A Gaussian density profile used to test the code and introduce the behavior of the phase space density over time.
+\item A Jeans instability test, in which we reproduce the spatial conditions for a periodic jeans oscillation and use a Gaussian profile for the velocity distribution. These conditions are used to reproduce the previous work aforementioned. 
+\item A Bullet Cluster-like initial conditions, in which we have two Gaussian profiles (each one with its own variance and amplitude) separated by a given distance. One of the main scopes of this work is to analyze the Bullet Cluster-like system and compare the phase space evolution of the collisional case with its collisionless counterpart.
+%Additionally, we are going to reproduce the behavior of the collisional baryonic gas.
 \end{itemize}
 \subsection{No collisional case}
 We begin with the Gaussian conditions because their simplicity and ease to analyze makes them the best introductory example.
@@ -221,7 +229,7 @@ Which yields a total mass of $1.26\e{12}$ M$_{\odot}$, a value in accordance wit
 \end{figure}
 
 To test the simulation we reproduce previous work in the collisionless case.
-For which we run the simulation and check upon the behavior of the phase space density, the spatial density, the potential and the acceleration.
+To do so we run the simulation and check upon the behavior of the phase space density, the spatial density, the potential and the acceleration.
 In the phase space grid, we expect the cells with positive velocity to move to the right side of the plot, but, as they move to the right they are also being attracted towards the left because of the symmetry of the initial conditions. Therefore, the cells with positive velocity will move towards the inferior-right side of the plot, while cells with negative velocity will move towards the upper left side of the phase space.
 
 \begin{figure}[h!]
@@ -231,14 +239,14 @@ In the phase space grid, we expect the cells with positive velocity to move to t
     \includegraphics[scale=0.45]{imag/gauss22.png}
     \includegraphics[scale=0.45]{imag/gauss40.png}
     \includegraphics[scale=0.45]{imag/gauss90.png}
-    \caption{Upper left: Phase space 72 million years after initialization. Upper right: Phase space 227 million years after initialization. Bottom left: Phase space 413 million years after initialization. Bottom right: Phase space 930 million years after initialization. It can be observed that the phase space behaves as a clock-wise rotating spiral.}
+    \caption{Upper left: Phase space 72 million years after initialization. Upper right: Phase space 227 million years after initialization. Bottom left: Phase space 413 million years after initialization. Bottom right: Phase space 930 million years after initialization. It can be observed that the phase space behaves as a clockwise rotating spiral.}
     \label{1dphase}
 \end{figure}
 
 
 This behavior is in complete accordance with previous work and can be seen in figure \ref{1dphase}, where we plot different time instants chosen to display the clock-wise spiral of the phase space evolution.
 
-To visualize the linear density, we plot the linear density vs position. We observe an initial increase in the height of the central peak and then little bumps trying to abandon the central distribution but they are gravitationally pulled back before crossing the spatial of the lattice boundaries. This behavior can be seen in figure \ref{1dDens}
+To visualize the linear density, we plot the linear density vs position. We observe an initial increase in the height of the central peak and then little bumps trying to abandon the central distribution as they are gravitationally pulled back before crossing the spatial of the lattice boundaries. This behavior can be seen in figure \ref{1dDens}
 
 
 
@@ -258,15 +266,14 @@ In addition to Gaussian initial conditions, we reproduced the Jeans instability,
 \begin{equation}
 f(r,v,0) = \frac{\bar{\rho}}{(2 \pi \sigma^2)^{1/2}} \exp(-\frac{v^2}{2 \sigma^2}) (1 + A \cos(kr))
 \end{equation}\\
-Such that $\rho$ is the average phase density of the system, $\sigma$ is a measure of the width of the velocity Gaussian profile, $A$ is the amplitude of the density fluctuation and $k$ is the wavenumber of the density fluctuation. We used the following values:
+\vspace{-1mm}Such that $\rho$ is the average phase density of the system, $\sigma$ is a measure of the width of the velocity Gaussian profile, $A$ is the amplitude of the density fluctuation and $k$ is the wavenumber of the density fluctuation. We used the following values:
 \begin{align}
 \bar{\rho} &= 10 \  \text{um} \ \text{us}^{-1} \ (\text{us/ut})^{-1} \\
 \sigma &= 0.1 \ \text{us/ut} \\
 A &= 0.9999 \\
 k &= 2 \pi \ \text{us}^{-1}
 \end{align}
-
-For which the phase space behaved like three successive Gaussian profiles, that is because we met the Jeans instability criteria. This result were also compatible with previous work published on one dimensional collisionless dark matter fluids. The evolution of the Jeans instability phase space can be seen in figure \ref{1dJeans}
+For which the phase space behaved like three successive Gaussian profiles, that is because we met the Jeans instability criteria. Otherwise, the distributions would have collapsed to form just one big halo. This result were also compatible with previous work published on one dimensional collisionless dark matter fluids. The evolution of the Jeans instability phase space can be seen in figure \ref{1dJeans}
 
 
 \begin{figure}[h!]
@@ -281,7 +288,7 @@ For which the phase space behaved like three successive Gaussian profiles, that 
 \end{figure}
 
 The last set of initial conditions is the Bullet Cluster-like scenario, in which two Gaussian distributions of mass collide due to their gravitational interaction.
-Each Gaussian has its own variance and amplitude. Reminiscent of the Bullet Cluster's conditions before the collision, we fix the mass of one halo greater than the other. 
+Each Gaussian has its own variance and amplitude. In the bullet cluster scenario we had that one of the clusters was heavier, therefore, we also fix one cluster heavier than the other.
 
 The initial conditions are given by the distribution:
 \begin{equation}
@@ -296,7 +303,7 @@ A_1 &= 40 \ \text{um} \\
 A_2 &= 30  \ \text{um}
 \end{align}
 Given the collisionless nature of this run, we expect the halos to simply pass through each other \emph{without any loss of energy} due to the collision. In other words, the \emph{density} profiles will have a periodic movement and will eventually return to their initial location.
-In the phase space we see that each halo forms the counter-clockwise spiral from the Gaussian initial conditions. In addition to that, we can see how when the halos occupy the same spatial position, they have very different velocities, which keeps them decoupled. The evolution of the phase space can be seen in figure \ref{phaseNoColBullet}. The oscillations in the spatial density can be seen in figure \ref{densNoColBullet}
+In the phase space we see that each halo forms the clockwise spiral from the Gaussian initial conditions. In addition to that, we can see how when the halos occupy the same spatial position, they have very different velocities, which keeps them decoupled. The evolution of the phase space can be seen in figure \ref{phaseNoColBullet}. The oscillations in the spatial density can be seen in figure \ref{densNoColBullet}
 \newpage
 \begin{figure}[h!]
     \centering
@@ -327,8 +334,9 @@ Now, for the collisional case we are going to implement the Gaussian initial con
 Recalling the discussion on choosing a $\tau$ (see \ref{metodologiaBGK}), the final value was unit dependent. The value of $\tau$ in the units used in this section is $$\tau =8972 \ \text{ut}$$ Once again, we start with the Gaussian initial conditions.
 We ran the simulation with exactly the same initial conditions as in the no collisional case and observed the evolution of the phase space.
 The value of $\tau$ implies a very small collisional term.
-Therefore, if we looked at the phase space distribution of the collisional case in the same way as we did in the last section, we would not be able to spot any difference between the two cases. Instead of plotting the phase space of the collisional case, we choose plot the percentual difference between the cases: %TODO depronto haya que cambiar todos los porcentual a percentual 
+Therefore, if we looked at the phase space distribution of the collisional case in the same way as we did in the last section, we would not be able to spot any difference between the two cases. Instead of plotting the phase space of the collisional case, we choose plot the percentual difference between the cases: %TODO depronto haya que cambiar todos los porcentual a percentage 
 \begin{equation}
+\label{Zeta}
 Z = 100\qty(\frac{f_{\tau}(\rv,t) - f_0(\rv,t)}{f_0(\rv,t)})
 \end{equation}
 With $Z$ being the percentual difference of the collisional case with the collisionless case. This representation will allow us to interpret more easily the effects of the collisional term in the distribution.
@@ -354,7 +362,7 @@ The evolution of the percentual difference in the phase space between the two ca
     \includegraphics[scale=0.45]{imag/cGaussD14.png}
     \includegraphics[scale=0.45]{imag/cGaussD30.png}
     \includegraphics[scale=0.45]{imag/cGaussD62.png}
-    \caption{Upper left: we initialize both cases with the same distribution. Upper right: after a while the collisionless case already dominates the central region and the collisional the tails. Bottom left: we observe small \emph{oscillations} in the tails but the central behavior remains. Bottom right: after a long while, the tails and even a little of the central peak has some oscillations, nonetheless, the central behavior still remains. The oscillations correspond to the little bumps mentioned in the collisionless Gaussian case. Every density frame corresponds to the same frame in figure \ref{phaseColGauss}.}
+    \caption{Upper left: we initialize both cases with the same distribution. Upper right: after a while the collisionless case already dominates the central region and the collisional the tails. Bottom left: we observe small \emph{oscillations} in the tails but the general behavior remains. Bottom right: after a long while, the tails have some oscillations, nonetheless, the general behavior still remains. The oscillations correspond to the little bumps mentioned in the collisionless Gaussian case. Every density frame corresponds to the same frame in figure \ref{phaseColGauss}.}
     \label{densColGauss}
 \end{figure}
 
@@ -366,15 +374,16 @@ Recapitulating, due to the collisional term we have two main effects:
 
 Now that we have introduced the collisional effects with the Gaussian example, we can proceed to the real case of interest: the Bullet Cluster-like scenario. 
 
-Recalling from \ref{bulletExplain}, Galaxy Clusters have three main components: a highly collisional baryonic gas, a collisionless distribution of galaxies, and a slightly collisional dark matter part. Here, we are going to simulate the slightly collisional dark matter component and compare it with the collisionless case.% In addition to that, we are also going qualitatively the hot baryonic gas as a very collisional fluid. %TODO si queda tiempo hacer un apéndice con TAU = 50
+Recalling from \ref{bulletExplain}, Galaxy Clusters have three main components: a highly collisional baryonic gas, a collisionless distribution of galaxies, and a slightly collisional dark matter gas. Here, we are going to simulate the slightly collisional dark matter component and compare it with the collisionless case.% In addition to that, we are also going qualitatively the hot baryonic gas as a very collisional fluid. %TODO si queda tiempo hacer un apéndice con TAU = 50
 
-For the case of the slightly collisional dark matter component, we use the same simulation parameters as those of the no collisional case.
-In that scenario the halos had a periodic movement, that was because there was no dissipation of energy.
-Now that we include the short range interactions, there is a loss of energy every time the halos collide (in addition to the loss of energy due to the internal evolution of each collisional Gaussian halo), and because of that, the halos will not return to their starting place. How long will it take for the halos to permanently merge is directly related to the relaxation time. Our relaxation time (8972 ut) is quite high, which is why we expect them to merge after several collisions.
+For this run we use the same simulation parameters as those of the no collisional case.
+In the collisionless run the halos had a periodic movement, that was because there was no dissipation of energy.
+Now that we include short range interactions, there is a loss of energy every time the halos collide (in addition to the loss of energy due to the internal evolution of each collisional Gaussian halo), and because of that, the halos will not return to their initial state. How long will it take for the halos to permanently merge is directly related to the relaxation time. Our relaxation time (8972 ut) is quite high, which is why we expect them to merge only after several collisions.
 
-In figure \ref{phaseColGauss} we can appreciate how the system is losing energy in function of time.
-We plot the aphelion of the halos and observe the distance between them becoming smaller with time. After six collisions, the smaller halo becomes a current in the bigger halo, and both form a single final halo. This is a very different behavior from the collisionless case, in which the halos could oscillate forever.
-In figure \ref{densColGauss} we plot the spatial density at the same time instants as in figure \ref{phaseColGauss}. It is clear that the halos are getting closer and will eventually merge. Notice that in the final frame, even though the halos have merged, the smaller halo is mostly noise around the heavier one and will fall inwards given enough time.
+In figure \ref{phaseColBullet} we plot the phase space during the aphelion of the halos, expecting the distance between them to become smaller as time passes by. It is easy to appreciate that the system is permanently loosing energy and was bound to collapse.
+After six collisions, the smaller halo becomes a current in the bigger one forming a single final halo.
+This is a very different behavior from the collisionless case, in which the halos could oscillate forever.
+In figure \ref{densColBullet} we plot the spatial density at the same time instants as in figure \ref{phaseColBullet}. It is clear that the halos are getting closer and will eventually merge. Notice that in the final frame, even though the halos have merged, the smaller halo is mostly around the heavier one and will fall inwards given enough time.
 
 \begin{figure}[h!]
     \centering
@@ -383,8 +392,8 @@ In figure \ref{densColGauss} we plot the spatial density at the same time instan
     \includegraphics[scale=0.45]{imag/cBulletPhase30.png}
     \includegraphics[scale=0.45]{imag/cBulletPhase52.png}
     \includegraphics[scale=0.45]{imag/cBulletPhase80.png}
-    \caption{Upper left: initial conditions for the phase space of the collisional Bullet Cluster scenario. Upper right: the phase space at their first aphelion since initialization. Notice that the halos are closer now as they have collided twice.  Bottom left: the phase space at their second aphelion since initialization, the halos have collided four times. The smaller halo is already collapsing towards the bigger one. Bottom right: the smaller halo is now only a current in the bigger halo.}
-    \label{phaseColGauss}
+    \caption{Upper left: initial conditions for the phase space of the collisional Bullet Cluster scenario. Upper right: the phase space during the first aphelion since initialization. Note that the halos are closer together now as they have collided twice.  Bottom left: the phase space at their second aphelion since initialization, the halos have collided four times. The smaller halo is already collapsing towards the bigger one. Bottom right: the smaller halo has already collapsed into a current of  the bigger halo.}
+    \label{phaseColBullet}
 \end{figure}
 
 \begin{figure}[h!]
@@ -394,13 +403,19 @@ In figure \ref{densColGauss} we plot the spatial density at the same time instan
     \includegraphics[scale=0.45]{imag/cBulletD30.png}
     \includegraphics[scale=0.45]{imag/cBulletD52.png}
     \includegraphics[scale=0.45]{imag/cBulletD80.png}
-    \caption{The spatial densities correspondent to the frames of figure \ref{phaseColGauss}. Upper left: initial conditions. Upper right: the spatial density at the first aphelion. We observe that there are more bumps than in the collisionless case and the Gaussians are closer. Bottom left: spatial density at second aphelion. The distributions are now even closer, and the smaller Gaussian is starting to be absorbed by the bigger Gaussian. Bottom right: the spatial density at what would have been the third aphelion. The halos have merged now, but there are still some oscillations on the tails of the remainder distribution.}
-    \label{densColGauss}
+    \caption{The spatial densities correspondent to the frames of figure \ref{phaseColBullet}. Upper left: initial conditions. Upper right: density during the first aphelion. We observe that there are more bumps than in the collisionless case and the Gaussians are closer. Bottom left: spatial density at second aphelion. The distributions are now even closer, and the smaller Gaussian is starting to be absorbed by the bigger Gaussian. Bottom right: the spatial density at what would have been the third aphelion. The halos have merged now, but there are still some oscillations on the tails of the remainder distribution.}
+    \label{densColBullet}
 \end{figure}
 
+\newpage
+%TODO quitar el new page si es necesario
 
-
-Finally, we close the two dimensional results comparing the phase space evolution of the collisional case with its collisionless counterpart. We plot the percentage difference $Z$ as defined for the Gaussian case in figure \ref{colBulletPhase}.
+Finally, we close the two dimensional results comparing the phase space evolution of the collisional case with its no collisional counterpart.
+We plot the percentage difference $Z$ as defined for the Gaussian case in figure \ref{colBulletPhase}.
+The first frame shows the distributions at their first aphelion, here the two distributions are not too different but the halos of the collisional case are closer together.
+In the second frame we observe the collisional distribution on its second aphelion, but the collisionless distribution (blue) has barely moved. The third frame is during the second aphelion of the no collisional distribution, and shows that the collisional halos are already collapsing into one heavier halo.
+The last frame shows the third aphelion of the no collisional case, here, the smaller halo of the collisional distribution has collapsed into a current in the bigger halo.
+In the figure we can appreciate that after the first collision, the collisional distribution is the first one to collide again. The reduction on the oscillation period is an expected effect of the dissipation of energy due to the short range interactions..
 
 \begin{figure}[h!]
     \centering
@@ -409,15 +424,14 @@ Finally, we close the two dimensional results comparing the phase space evolutio
     \includegraphics[scale=0.45]{imag/diffBullet28.png}
     \includegraphics[scale=0.45]{imag/diffBullet50.png}
     \includegraphics[scale=0.45]{imag/diffBullet94.png}
-    \caption{Upper left: percentage difference at half the period of the collisionless case. Here they have already collided once. Upper right: here the collisional distribution is in \emph{aphelion}, meanwhile, the collisionless fluid has barely moved from last frame. Bottom left: the collisionless distribution has completed a period. The collisional smallest halo is already collapsing into a current in the heavier halo. Bottom right: the collisionless distribution has once again completed a perior (therefore has collided four times in total). The smallest collisional distribution has been tore appart by the heaviest and is now just a current in the outskirts of the final distribution }
+    \caption{Upper left: percentage difference at half the period of the collisionless case. Here they have collided once. Upper right: here the collisional distribution has completed one oscillation, meanwhile, the collisionless fluid has barely moved from last frame. Bottom left: the collisionless distribution has completed a period. The collisional smallest halo is already collapsing into a current in the heavier halo. Bottom right: the collisionless distribution has once again completed a period (has collided four times in total). The smallest collisional distribution has been completely tore apart by the heaviest and is now just a current in the outskirts of the final distribution }
         \label{colBulletPhase}
 \end{figure}
+%TODO arreglar aphelio.
 %Now, for the hot baryonic gas we choose a relaxation time that mirrors its highly collisional nature. 
 %This relaxation time is not linked to any particular investigation, as it only serves our interest of testing the simulation when the fluid is highly collisional (highly in astrophysical standards). The relaxation time chosen is $$\tau = 50 \ \text{ut}$$
 
 %This time we plot both the collisional phase space, and the percentage difference. Given our rather low relaxation time, we expect the distribution to lost a considerable amount of energy each collision. The system quickly collapses into one agglomeration of mass. 
-
-
 
 
 \newpage
@@ -440,12 +454,76 @@ With t$_0$ being the age of the universe today, \text{M}$_{\astrosun}$ being a s
 G = 0.006141 \ (1 \ us)^3 \ (1 \ um)^{-1} \ (1 \ ut)^{-2}
 \end{equation}
 \subsection{No collisional case}
-The four dimensional case is initialized using a Gaussian distribution.
+The four dimensional case is initialized using a Gaussian distribution. The main interest in the Gaussian case is to test the simulation and calibrate the stability requirements based on certain simulation parameters. 
+
+The four dimensional phase space is initialized using the following parameters:
+\begin{align}
+\sigma_r &= 0.2 \ \text{us} \\
+\sigma_v &= 0.2 \ \text{us} / \text{ut} \\
+A &= 50  \ \text{um}
+\end{align}
+
+Which yields a total mass of $7.8 \ M_{\odot} \e{10}$, a value similar to the mass of the Triangulum Galaxy (M 33) \cite{2003MNRAS342199C}.
+
+The initialization of the Gaussian conditions can be seen in figure \ref{2dInit}. Here we plot a 2D cut of the four dimensional phase space. We take the cut $f(x,y=0,vx,vy=0)$ because is a direct analog of the phase space we saw in last section. We also plot the potential of the system, and the spatial density along with the correspondent acceleration vector field.
+
+
+\begin{figure}[h!]
+    \centering
+    %\includegraphics[width=10cm,height =7cm]{Diapositiva1.jpg}
+    \includegraphics[scale=0.42]{imag/2dInitPhase.png}
+    \includegraphics[scale=0.42]{imag/2dInitPot.png}
+    \includegraphics[scale=0.60]{imag/2dInitAcceDens.png}
+    \caption{Upper left: the cut $f(x,y=0,vx,vy=0)$ at $t=0$ of the phase space. It is equivalent to the initial Gaussian conditions from last section. Upper right: the potential due initial conditions, it is a bidimensional version of the potential of last section. Bottom: the density from initialization along with the acceleration vector field (white arrows). Initially the system is accelerating towards its centre. }
+    \label{2dInit}
+\end{figure}
+
+Let's consider first the two dimensional spatial density. The distribution initially collapses very quickly and then emits little matter of bumps. However, once again, the bumps are gravitationally pulled back before leaving the boundaries of the simulation. This behavior is completely equivalent to the one dimensional spatial density from last section. The spatial density can be observed in figure \ref{2dDens}.
+
+\begin{figure}[h!]
+    \centering
+    %\includegraphics[width=10cm,height =7cm]{Diapositiva1.jpg}
+    \includegraphics[scale=0.45]{imag/2dDens3.png}
+    \includegraphics[scale=0.45]{imag/2dDens7.png}
+    \includegraphics[scale=0.45]{imag/2dDens18.png}
+    \includegraphics[scale=0.45]{imag/2dDens40.png}
+    \caption{Upper left: density at t = 1.5 ut, the instant of the initial collapse, note that this frame has a higher color scale. Upper right: density it t=3.5 ut, here we observe the first bump of matter being expelled from the halo. Bottom left: now the spatial density multiple bumps of matter, these bumps are being gravitationally pulled back and lose intensity as they propagate. Bottom right: the bumps are now invisible at this color scale but the distribution is still bumpy. }
+    \label{2dDens}
+\end{figure}
 
 
 
+To analyze the phase space we plot a two dimensional cut of the phase space. In figure \ref{2dPhase} we can see the evolution of the cut of the phase space. Once again, we see the phase space forming a clockwise spiral. Nonetheless, due to the low resolution, the arms are not well defined after a long time, this is the same effect the makes the density bumps invisible in figure \ref{2dDens}.
 
+\begin{figure}[h!]
+    \centering
+    %\includegraphics[width=10cm,height =7cm]{Diapositiva1.jpg}
+    \includegraphics[scale=0.45]{imag/2dPhase3.png}
+    \includegraphics[scale=0.45]{imag/2dPhase7.png}
+    \includegraphics[scale=0.45]{imag/2dPhase18.png}
+    \includegraphics[scale=0.45]{imag/2dPhase40.png}
+    \caption{Upper left: phase space at t = 1.5, here the phase space is starting to form its caracteristic clockwise rotating spiral. Upper right. The system keeps evolving into the spiral, note that there are no regions behaving as a single pixel. Bottom left: after a while the distribution forms the arms which characterize the bumps seen in figure \ref{2dDens}. Bottom right: due the low resolution, the arm structure can no longer be distinguished.  }
+    \label{2dPhase}
+\end{figure}
 
+Due to the discretization, we must be careful when choosing the size of the time step ($dt$). If we choose it too small, it will be shorter than the time the \emph{information} needs to propagate in the lattice. When this happens, we will see sections of the phase space completely frozen in time until information has had enough time to propagate. If we choose a time step too big, the time integration will diverge from the real solution because of the direct integration scheme used. The effect of a poorly chosen time step can be appreciated in figure \ref{2dBadTime}, where we have chosen the time step to be $0.1$ ut, that is one forth of its previous value. In order to guarantee that the time step is big enough, it should be bigger than $\frac{1}{3} \dv{x}{v}$. 
+
+\begin{figure}[h!]
+    \centering
+    %\includegraphics[width=10cm,height =7cm]{Diapositiva1.jpg}
+    \includegraphics[scale=0.45]{imag/2dBad3.png}
+    \includegraphics[scale=0.45]{imag/2dBad10.png}
+    \includegraphics[scale=0.45]{imag/2dBad18.png}
+    \includegraphics[scale=0.45]{imag/2dBad24.png}
+    \caption{The evolution of the phase space when the time step is poorly chosen. The phase space is divided in regions that only update every few time steps. In the upper left frame we can see the initial segmentation of the distribution. Upper right: the divided phase space trying to for its traditional clockwise spiral. Bottom left: the regions have changed internally, nonetheless the interface of the regions has a lasting influence on the distribution. Bottom right: the phase space spiral. This solution of the phase space is inaccurate because of the error introduced by the pixeling of the distribution.}
+    \label{2dBadTime}
+\end{figure}
+
+\section{The collisional case}
+
+For the collisional case of the four dimensional phase space we are going keep using the Gaussian conditions. The value of $\tau$ in the units used in this section is: $$\tau = 11963$$ ut. As in the collisional case from last section, we do not plot the evolution of the cut $f(x,0,vx,0)$ of the velocity space, but the percentage difference $Z$ as define in equation \ref{zeta}
+
+The effect of the collisional term in the phase space is quite similar to the two dimensional case (that's not a surprise given since the central cut of the phase space is an analog of the two dimensional phase space)
 
 
 
@@ -457,6 +535,24 @@ The four dimensional case is initialized using a Gaussian distribution.
 
 \newpage
 \section{Six dimensional phase space}
+In the case of the six dimensional phase space we need six axes to model the phase space. This increase in the number of axes implies an even lower resolution than in the four dimensional case. The six dimensional grid is characterized by the following parameters:
+\begin{align}
+W_{min} &= -1\\
+W_{max} &= 1\\
+N_w &= 32\\
+dw &= 1/16
+\end{align}
+and the of units to use are:
+\begin{align}
+1\ us &= 35\ \text{kpc}\\
+1\ ut &= 0.004 \ \text{t}_0\\
+1\ um &= 10^{11} \ \text{M}_{\astrosun}
+\end{align}
+With t$_0$ being the age of the universe today, \text{M}$_{\astrosun}$ being a solar mass and a kiloparsec (kpc) is equal to $3.0857\e{19}$ m. In this units, the gravitational constant has a value of:
+\begin{equation}
+G = 0.031830 \ (1 \ us)^3 \ (1 \ um)^{-1} \ (1 \ ut)^{-2}
+\end{equation}
+This low resolution carries along heavy visualization problems along with a very high lattice noise. With such low resolution, we can not claim that the simulation is indeed recovering the continuum Boltzmann equation. More optimization is needed in order to obtain viable results from the six dimensional case.
 %\section{No collisional}
 %\section{Collisional with reported $<\sigma v>$}
 %\section{Different equlibrium distributions}

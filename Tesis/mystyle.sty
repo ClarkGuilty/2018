@@ -62,6 +62,11 @@
 %\usepackage[left=3cm,top=3cm,right=3cm]{geometry}
 \usepackage[bottom=2in]{geometry}
 \usepackage{comment}
+
+%Renombrar bibliografía a un capitulo
+\usepackage{etoolbox}
+\patchcmd{\thebibliography}{\chapter*}{\chapter}{}{}
+
 %Más geometría del documento, permite páginas más interesantes.
 \usepackage{fancyhdr}
 \pagestyle{fancy}
