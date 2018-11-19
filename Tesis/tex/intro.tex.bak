@@ -7,7 +7,7 @@ Traditionally, dark matter has been simulated by using N-body schemes, in which 
 These N-body simulations have been essential for the development of modern cosmology and the characterization of dark matter halos.
 For example, the development of the $\Lambda$CMD cosmology was heavily linked with a classic N-body simulation of the large scale structure of the universe which used only 32748 particles! \cite{1985ApJ292371D}.
 
-On the other hand, Lattice-Boltzmann simulations have been widely used to simulate increasingly complex fluids and boundary conditions, nonetheless, the usual Lattice-Boltzmann scheme does not simulate the entire velocity space, but simply a small number of adventive velocities. 
+On the other hand, Lattice-Boltzmann simulations have been widely used to recreate increasingly complex fluids and boundary conditions, nonetheless, the usual Lattice-Boltzmann scheme does not simulate the entire velocity space, but simply a small number of adventive velocities. 
 
 Inspired by the work of Philip Mocz, Sauro Succi \cite{integerLatticeDynamics}, and Sebastian Franco \cite{franco}, in which a Lattice-Boltzmann simulation is used to simulate the phase space of a \emph{collisionless} one dimensional dark matter fluid. We implement a Lattice-Boltzmann simulation of the phase space of a \emph{collisional} three dimensional dark matter fluid using the BGK approximation for the collisional term.
 
@@ -15,9 +15,9 @@ Inspired by the work of Philip Mocz, Sauro Succi \cite{integerLatticeDynamics}, 
 To simulate the phase space of a collisional dark matter fluid using a Lattice-Boltzmann method.
 \section{Specific objetives}
 \begin{itemize}
+\item To implement a Lattice-Boltzmann simulation using a 2-dimensional phase space and a varying collisional term.
 \item To implement a Lattice-Boltzmann simulation using a 4-dimensional phase space and a varying collisional term.
 \item To implement a Lattice-Boltzmann simulation using a 6-dimensional phase space and a varying collisional term.
-\item To study the dynamical behavior of a dark matter fluid using different equilibrium distributions in the collisional term.
 \item To simulate the phase space of a collisional dark matter fluid using literature values for the thermally averaged cross-section and compare it with its collisionless version.
 \end{itemize}
 

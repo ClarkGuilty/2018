@@ -137,7 +137,7 @@ f_e(\rv) = \frac{\rho}{[2 \pi \ e(\rv) ]^{D/2}} \exp[-\frac{(\vb{v}-\vb{u})^2}{2
 \end{equation}
 Where $D$ is the number of spatial dimensions. For example, if the system is a three dimensional dark matter halo, then D will be equal to three.
 The Maxwell distribution was originally used to describe the probability distribution of the velocity in a gas under kinetic theory assumptions. Here, we assume collisions as a phenomena that happens instantly. During the time in between, the mechanics of the system are governed by the self-gravitational potential. Therefore, the Maxwell distribution is a good ansatz for the collisional equilibrium distribution function $f_e(\rv)$. \\
-Finally, we only need to choose a relaxation time. As in classic kinetic theory, our relaxation time will be given by: %TODO preguntarle a jaime si esto está bien.
+Finally, the only thing left to choose a relaxation time. As in classic kinetic theory, our relaxation time will be given by: 
 \begin{equation}
 \tau = \frac{1}{n <\sigma v>}
 \end{equation}
@@ -204,11 +204,11 @@ The initialization of the phase space can be seen in figure \ref{1dInit}, along 
 After initialization we proceed to calculate the potential and the acceleration, which can be seen in figure \ref{1dInit2}.
 The values used to initialize the phase space were:
 \begin{align}
-\sigma_r &= 0.2 \ \text{us} \\
-\sigma_v &= 0.2 \ \text{us} / \text{ut} \\
-A &= 50  \ \text{um}
+\sigma_r &= 0.06 \ \text{us} \\
+\sigma_v &= 0.06 \ \text{us} / \text{ut} \\
+A &= 40  \ \text{um}
 \end{align} %TODO actualizar valores de simulacion, incluida masa total
-Which yields a total mass of $1.26\e{12}$ M$_{\odot}$, a value in accordance with recent estimates of the total mass of our galaxy's dark matter halo \cite{2013JCAP07016N}. %TODO colocar la verdadera masa y unidades.
+Which yields a total mass of $9 \e{9}$ M$_{\odot}$, a value in accordance with recent estimates of the total mass of the Small Magallanic Cloud \cite{2009MNRAS395342B}. 
 
 \begin{figure}[h!]
     \centering
@@ -235,11 +235,11 @@ In the phase space grid, we expect the cells with positive velocity to move to t
 \begin{figure}[h!]
     \centering
     %\includegraphics[width=10cm,height =7cm]{Diapositiva1.jpg}
-    \includegraphics[scale=0.45]{imag/gauss7.png}
-    \includegraphics[scale=0.45]{imag/gauss22.png}
-    \includegraphics[scale=0.45]{imag/gauss40.png}
-    \includegraphics[scale=0.45]{imag/gauss90.png}
-    \caption{Upper left: Phase space 72 million years after initialization. Upper right: Phase space 227 million years after initialization. Bottom left: Phase space 413 million years after initialization. Bottom right: Phase space 930 million years after initialization. It can be observed that the phase space behaves as a clockwise rotating spiral.}
+    \includegraphics[scale=0.45]{imag/gauss8.png}
+    \includegraphics[scale=0.45]{imag/gauss20.png}
+    \includegraphics[scale=0.45]{imag/gauss38.png}
+    \includegraphics[scale=0.45]{imag/gauss81.png}
+    \caption{Upper left: Phase space 154 million years after initialization. Upper right: Phase space 484 million years after initialization. Bottom left: Phase space 881 million years after initialization. Bottom right: Phase space 1983 million years after initialization. It is evident that the phase space behaves as a clockwise rotating spiral.}
     \label{1dphase}
 \end{figure}
 
@@ -254,19 +254,19 @@ To visualize the linear density, we plot the linear density vs position. We obse
 \begin{figure}[h!]
     \centering
     %\includegraphics[width=10cm,height =7cm]{Diapositiva1.jpg}
-    \includegraphics[scale=0.45]{imag/gaussD3.png}
-    \includegraphics[scale=0.45]{imag/gaussD11.png}
-    \includegraphics[scale=0.45]{imag/gaussD29.png}
-    \includegraphics[scale=0.45]{imag/gaussD89.png}
-    \caption{Upper left: linear density with its central peak at maximum height. Upper right: linear density the peak at a local minima after having reached maximum height . Bottom left: little bumps can be seen at the tails of the distribution. Bottom right: the tails of the distribution are completely bumpy and so is the base of the peak. The images are from 31, 114, 300 and 920 million years after initialization.  }
+    \includegraphics[scale=0.45]{imag/gaussD2.png}
+    \includegraphics[scale=0.45]{imag/gaussD5.png}
+    \includegraphics[scale=0.45]{imag/gaussD20.png}
+    \includegraphics[scale=0.45]{imag/gaussD54.png}
+    \caption{Upper left: linear density with its central peak at maximum height. Upper right: linear density with its peak at a local minima after having reached maximum height . Bottom left: little bumps can be seen at the tails of the distribution. Bottom right: the tails of the distribution are completely bumpy and so is the base of the peak. These bumps is are the same arms observed in the phase space.}
     \label{1dDens}
 \end{figure}
 
-In addition to Gaussian initial conditions, we reproduced the Jeans instability, which was also tested in previous work. In this scenario, the Jeans instability is given by:
+In addition to the Gaussian initial conditions, we reproduced the Jeans instability, which was also tested in previous work. In this scenario, the Jeans instability is given by:
 \begin{equation}
 f(r,v,0) = \frac{\bar{\rho}}{(2 \pi \sigma^2)^{1/2}} \exp(-\frac{v^2}{2 \sigma^2}) (1 + A \cos(kr))
 \end{equation}\\
-\vspace{-1mm}Such that $\rho$ is the average phase density of the system, $\sigma$ is a measure of the width of the velocity Gaussian profile, $A$ is the amplitude of the density fluctuation and $k$ is the wavenumber of the density fluctuation. We used the following values:
+\vspace{-1mm}Such that $\rho$ is the average phase density of the system, $\sigma$ is a measure of the width of the velocity Gaussian profile, $A$ is the amplitude of the density fluctuation and $k$ is the wave number of the density fluctuation. We used the following values:
 \begin{align}
 \bar{\rho} &= 10 \  \text{um} \ \text{us}^{-1} \ (\text{us/ut})^{-1} \\
 \sigma &= 0.1 \ \text{us/ut} \\
@@ -368,7 +368,7 @@ The evolution of the percentual difference in the phase space between the two ca
 
 Recapitulating, due to the collisional term we have two main effects:
 \begin{itemize}
-\item There is a considerable reduction of velocity in the central part of the distribution.
+\item There is a considerable reduction of velocity in the central part of the spatial distribution.
 \item There is an increment in the spatial density outside of the central region. Additionally, these regions have slightly higher velocity than their collisionless counterpart.
 \end{itemize}
 
@@ -415,7 +415,7 @@ We plot the percentage difference $Z$ as defined for the Gaussian case in figure
 The first frame shows the distributions at their first aphelion, here the two distributions are not too different but the halos of the collisional case are closer together.
 In the second frame we observe the collisional distribution on its second aphelion, but the collisionless distribution (blue) has barely moved. The third frame is during the second aphelion of the no collisional distribution, and shows that the collisional halos are already collapsing into one heavier halo.
 The last frame shows the third aphelion of the no collisional case, here, the smaller halo of the collisional distribution has collapsed into a current in the bigger halo.
-In the figure we can appreciate that after the first collision, the collisional distribution is the first one to collide again. The reduction on the oscillation period is an expected effect of the dissipation of energy due to the short range interactions..
+
 
 \begin{figure}[h!]
     \centering
@@ -515,23 +515,51 @@ Due to the discretization, we must be careful when choosing the size of the time
     \includegraphics[scale=0.45]{imag/2dBad10.png}
     \includegraphics[scale=0.45]{imag/2dBad18.png}
     \includegraphics[scale=0.45]{imag/2dBad24.png}
-    \caption{The evolution of the phase space when the time step is poorly chosen. The phase space is divided in regions that only update every few time steps. In the upper left frame we can see the initial segmentation of the distribution. Upper right: the divided phase space trying to for its traditional clockwise spiral. Bottom left: the regions have changed internally, nonetheless the interface of the regions has a lasting influence on the distribution. Bottom right: the phase space spiral. This solution of the phase space is inaccurate because of the error introduced by the pixeling of the distribution.}
+    \caption{The evolution of the phase space when the time step is poorly chosen. The phase space is divided in regions that only update every few time steps. In the upper left frame we can see the initial segmentation of the distribution. Upper right: the divided phase space is trying to form its traditional clockwise spiral. Bottom left: the regions have changed internally, nonetheless the interface of the regions has a lasting influence on the distribution. Bottom right: the phase space spiral. This solution of the phase space is inaccurate because of the error introduced by the pixeling of the distribution.}
     \label{2dBadTime}
 \end{figure}
 
-\section{The collisional case}
+\subsection{The collisional case}
 
-For the collisional case of the four dimensional phase space we are going keep using the Gaussian conditions. The value of $\tau$ in the units used in this section is: $$\tau = 11963$$ ut. As in the collisional case from last section, we do not plot the evolution of the cut $f(x,0,vx,0)$ of the velocity space, but the percentage difference $Z$ as define in equation \ref{zeta}
+For the collisional case of the four dimensional phase space we are going keep using the Gaussian conditions. The value of $\tau$ in the units used in this section is: $$\tau = 11963 \ \text{ut}$$ As in the collisional case from last section, we do not plot the evolution of the cut $f(x,0,vx,0)$ of the phase space, but the percentage difference $Z$ between the cuts as define in equation \ref{Zeta}.
 
-The effect of the collisional term in the phase space is quite similar to the two dimensional case (that's not a surprise given since the central cut of the phase space is an analog of the two dimensional phase space)
-
-
-
+In figure \ref{2dPhaseCol} we can plot the time evolution of $Z$. The general form of $Z$ is exactly the same as in figure \ref{phaseColGauss}, where the collisional case (red) agglomerates outside of the central peak with low velocity, and the collisionless case agglomerates in the central peak with higher velocity than its collisional counterpart.
+Once again the collisional term implies a reduction in the central density peak along with lower velocities in general.
 
 
 
+\begin{figure}[h!]
+    \centering
+    %\includegraphics[width=10cm,height =7cm]{Diapositiva1.jpg}
+    \includegraphics[scale=0.45]{imag/c2dPhase4.png}
+    \includegraphics[scale=0.45]{imag/c2dPhase12.png}
+    \includegraphics[scale=0.45]{imag/c2dPhase26.png}
+    \includegraphics[scale=0.45]{imag/c2dPhase48.png}
+    \caption{Upper left Z at t = 1.6 ut. Here the no collisional part has already a higher concentration of mass with higher velocity in the central region. We also observe a higher concentration of the collisional case right outside the central peak. Upper right: as time progresses  both distributions start forming their typical clockwise rotating spiral. Besides the arms, the distributions still have the same organization as in last frame. Bottom left: due to the relatively low resolution, the arm structure of the distributions is barely visible anymore, however, the general behavior can still be recognized. Bottom right: the arm distribution cannot longer be resolved and again, the collisional density has a lower central peak. This shows that the behavior is indeed general and is retained even after a very long time.}
+    \label{2dPhaseCol}
+\end{figure}
 
 
+From the results of comparing the percentage difference of the cuts of the phase space, we can expect the density distribution of the collisional case to have a lower central density peak and heavier tails than its collisionless counterpart. To see more clearly the behavior of the collisional density, we plot in figure \ref{2dDensCol} the percentage difference, now defined as:
+\begin{equation}
+\label{Zetadens}
+Z = 100\qty(\frac{\rho_{\tau}(\vb{r},t) - \rho_0(\vb{r},t)}{\rho_0(\vb{r},t)})
+\end{equation}
+
+
+\begin{figure}[h!]
+    \centering
+    %\includegraphics[width=10cm,height =7cm]{Diapositiva1.jpg}
+    \includegraphics[scale=0.45]{imag/c2dDens4.png}
+    \includegraphics[scale=0.45]{imag/c2dDens12.png}
+    \includegraphics[scale=0.45]{imag/c2dDens26.png}
+    \includegraphics[scale=0.45]{imag/c2dDens48.png}
+    \caption{Upper left: $Z$ at t = 1.6 ut. Here we observe that the collisionless distribution (blue) already dominates the central peak, and the collisional one has heavier tails. Upper right: the collisionless distribution still dominates the central peak. We also observe that the mass bumps expelled by the collisionless distribution are out of sync with the ones emitted from the collisional one. Also the radius of the central peak has decreased  Bottom left: just as in the two dimensional phase space, the mass bumps expelled taint the collisional disribution (red), regardless, the general behavior remains. Bottom right: after a long time the mass bumps become more uniform but the peak of the collisional distribution is still lower, just as in figure \ref{densColGauss}. }
+    \label{2dDensCol}
+\end{figure}
+
+To conclude this section, the influence of the collisional term in the four dimensional phase space is the reduction of the density of particles in the central peak of the spatial distribution, along with an increase in the velocity and density of the regions immediately outside the central peak (the tails of the distribution). 
+These were the same effects we listed in at the end of the last section.
 
 \newpage
 \section{Six dimensional phase space}
@@ -552,12 +580,26 @@ With t$_0$ being the age of the universe today, \text{M}$_{\astrosun}$ being a s
 \begin{equation}
 G = 0.031830 \ (1 \ us)^3 \ (1 \ um)^{-1} \ (1 \ ut)^{-2}
 \end{equation}
-This low resolution carries along heavy visualization problems along with a very high lattice noise. With such low resolution, we can not claim that the simulation is indeed recovering the continuum Boltzmann equation. More optimization is need
+
+This low resolution carries along heavy visualization problems and a very high lattice noise. With such low resolution, we can not claim that the simulation is indeed recovering the continuum Boltzmann equation. More optimization is needed in order to obtain viable results from the six dimensional case.
+
+The simulation treats the phase space density of a cell in the lattice as a \emph{Double-precision floating-point} number, which in the end means that each lattice cell occupies 8 bytes of memory space, and the whole lattice occupies $8N_w^6$ bytes of memory. In the case of the six dimensional phase space, the memory requirement of the simulation is given by:
+\begin{equation}
+M = 2.5(8N_w^6)
+\end{equation}
+We multiplied the size of the phase space grid in memory by 2.5 in order to account for the multiple lattices used in the simulation.
+
+We initialized the phase space using a Gaussian distribution with the following parameters:
+\begin{align}
+\sigma_r &= 0.1 \ \text{us} \\
+\sigma_v &= 0.1 \ \text{us} / \text{ut} \\
+A &= 80  \ \text{um}
+\end{align}
 %\section{No collisional}
 %\section{Collisional with reported $<\sigma v>$}
 %\section{Different equlibrium distributions}
 
-
+Which yields a total mass of 1.98$\e{10} \ M_{\odot}$, a value similar to the mass of the Small Magallanic Cloud \cite{2009MNRAS395342B}
 
 
 

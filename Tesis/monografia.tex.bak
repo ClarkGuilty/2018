@@ -20,7 +20,7 @@
 \input{./tex/preface.tex}
 %\maketitle
 \tableofcontents
-\listoffigures
+%\listoffigures
 %\listoftables
 
 \newpage
