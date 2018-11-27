@@ -1,0 +1,171 @@
+\documentclass[12pt]{article}
+
+\usepackage{graphicx}
+\usepackage{epstopdf}
+
+
+\usepackage[spanish]{babel} % silabea palabras castellanas <- Puedo poner comentarios para explicar de que va este comando en la misma línea
+\selectlanguage{spanish} 
+
+%Encoding
+\usepackage[utf8]{inputenc} % Acepta caracteres en castellano
+\usepackage[T1]{fontenc} % Encoding de salida al pdf
+
+%Triunfó el mal
+\usepackage[normalem]{ulem}
+\useunder{\uline}{\ul}{}
+\providecommand{\e}[1]{\ensuremath{\times 10^{#1}}}
+\usepackage{quotmark} %Uso consistente con la RAE de comillas
+\usepackage{listings} % Comandos de la terminal
+
+\usepackage{textcomp}
+\usepackage{gensymb}
+
+
+%Hipertexto
+\usepackage[colorlinks=true,urlcolor=blue,linkcolor=blue]{hyperref} % navega por el doc: hipertexto y links
+
+%Aquello de las urls
+\usepackage{url} 
+
+%simbolos matemáticos
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{physics} %Best pack
+
+% permite insertar gráficos, imágenes y figuras, en pdf o en eps
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage[export]{adjustbox}
+% geometría del documento, encabezados y pies de páginas, márgenes
+\usepackage[left=2cm, right=5cm, top=2cm]{geometry}
+%\geometry{letterpaper,left=1mm}
+\usepackage{comment}
+
+%\usepackage[english]{babel}
+%\usepackage[latin5]{inputenc}
+% \usepackage{hyperref}
+%\newdate{date}{10}{05}{2013}
+%\date{\displaydate{date}}
+\usepackage{setspace} 
+\onehalfspacing
+%\setlength{\parindent}{4em}
+\setlength{\parskip}{1em}
+\renewcommand{\baselinestretch}{2.0}
+\begin{document}
+\title{Cúmulos Abiertos \\ Trabajo Final \\ Diagrama HR de IC4651}
+
+\author{
+\textbf{Javier Alejandro Acevedo Barroso\thanks{e-mail: \texttt{ja.acevedo12@uniandes.edu.co}}}\\
+\textit{Universidad de los Andes, Bogotá, Colombia}\\
+ }% Hasta aquí llega el bloque "author" (son dos autores por informe, orden alfabético)
+
+\date{\today}
+%\date{Versión $\alpha \beta$ fecha del documento}
+\maketitle %Genera el título del documento
+
+
+\normalsize
+\newpage
+
+El objetivo del ejercicio es obtener diagramas HR del cúmulo IC 4651 usando imágenes tomadas con el instrumento Wide Field Imager (WFI) del telescopio MPG en el European Southern Observatory (ESO) en La Silla.
+Se recuperará de la página web de ESO imágenes del objeto IC 4651 sin procesar en diferentes filtros, así como las imágenes de calibración pertinentes. 
+Se hará las correcciones a las imágenes ciencia del cúmulo, se elegirá los \emph{chips}\footnote{Dado que el instrumento WFI devuelve imágenes en mosaico, se debe ubicar en qué chips efectivamente está el cúmulo.} a utilizar y se hará fotometría en los diferentes filtros.
+Una vez listo el catálogo por filtro, se calculará el color usando las herramientas DAOMATCH y DAOMASTER para relacionar las estrellas y generar el diagrama HR.
+
+
+\section{Obtención y reducción de imágenes}
+Las imágenes se descargaron desde el portal de ESO en donde se encuentran disponibles imágenes tomadas por diferentes telescopios de ESO. Para este ejercicio se utilizará únicamente las imágenes del instrumento WFI montado en el telescopio de MGP de ESO en La Silla. Las imágenes ciencia fueron tomadas el 11 de junio de 2000. Se descargaron imágenes en filtro B/99, V89 y RC/162. Así mismo, no se logró encontrar imágenes flat para el 11 de junio de 2000, entonces se descargó imágenes flat y bias del 9 de junio de 2000, pues se procura tener imágenes de calibración de un mismo día.
+
+Para la reducción el primer paso es cargar el instrumento, esto se hace con el paquete \tqt{ESOWFI} simplemente ejecutando la tarea:
+\begin{lstlisting}[language=bash]
+ esowfi> esosetinst
+\end{lstlisting}
+
+Luego, aún en el paquete ESOWFI, se \emph{descomprime} el header de las imágenes usando la tarea \tqt{ESOHDR} en cada imagen.
+
+El siguiente paso es combinar todas las imágenes de BIAS en una única imagen. Esto se hace con la tarea \tqt{ZEROCOMBINE} tal cuál como se ha hecho en el pasado, solo que en vez de usar el paquete \tqt{CCDRED} se usa \tqt{MSCRED} :
+\begin{lstlisting}[language=bash]
+ mscred> zerocombine @listaBias
+\end{lstlisting}
+Para el caso de los flats se hace lo mismo pero con \tqt{SFLATCOMBINE}.
+Ahora, como se cargó el instrumento (ESOWFI), ya están cargadas las listas de filtros y no es necesario hacer este paso una vez por cada filtro. SFLATCOMBINE tiene en cuenta el filtro de cada imagen y genera entonces tres imágenes de flat, una para cada filtro.
+\begin{lstlisting}[language=bash]
+ mscred> sflatcombine @listaFlats
+\end{lstlisting}
+
+Una vez combinadas las imágenes de calibración, se procede a reducir las imágenes ciencia. A estas alturas solo tenemos 3 imágenes flat, tres imágenes ciencia y una imagen bias. La reducción se hace con la clásica tarea\tqt{CCDPROC} del paquete \tqt{MSCRED}. En esta ocasión sí se redujo cada imagen una por una por seguridad. Como se cargó el instrumento, solo es necesario señalar el nombre del archivo de bias, el nombre del archivo de flat, el nombre del archivo a reducir y que no se realizará correción de DARK. Teniendo ahora una imagen ciencia reducida por cada filtro, se puede proceder a la fotometría.
+
+A cada imagen reducida se le realizó el siguiente proceso:
+\begin{itemize}
+\item Se separó la imagen y se encontró que los chips de interés son el 2,3,6 y 7.
+\item Usando IMEXAMINE se encontró un FWHM promedio y una desviación estándar promedio: FWHM promedio fue 4.20, la desviación promedio fue $\sigma$ = 10. Adicionalmente se tomó un número de conteos máximo de 64000, de forma que se excluyen las estrellas saturadas. Usando esos datos y la tarea DAOFIND se generó una lista de coordenadas para cada chip.
+\item Usando la lista de coordenadas se corre PHOT tal cual como se ha hecho en ejercicios pasados. Los datos de cada chip ya están incluidos en el header y se leen sin problema gracias a ESOSETINST.
+\item Se define un radio para el anillo de cielo y el radio de apertura. En este caso, dada la cercanía de algunas estrellas, se toma de radio de apertura 9 pixeles, de radio interior para el anillo de cielo de 12 pixeles y de grosor para el anillo de cielo se tomó 8 pixeles.
+\item Se usa TXDUMP para seleccionar seleccionar las columnas correctas para ejecutar DAOMATCH y DAOMASTER. Esto se hace con el comando:
+
+\end{itemize}
+Una vez se ha realizado fotometría en cada filtro y chip, se ejecuta DAOMATCH y DAOMASTER entre las imágenes en B y las imágenes en V. Asi se obtiene los datos necesarios para generar un diagrama HR. Se repite el proceso entre V y Rc.
+\item Se g
+
+
+%\bibliography{bibte}
+\bibliographystyle{plain}
+
+
+\end{document}
+
+\begin{figure}[ht!]
+  \centering
+   \includegraphics[scale = 0.6]{fits2.png}
+  \caption{Estrellas en el espacio de magnitud vs dispersión (usando cantidades robustas) junto a los modelos ya multiplicados por el threshold para buscar candidatos a estrellas variables }
+  \label{figura2}
+\end{figure}
+
+
+
+\begin{figure}[H]
+  \centering
+   \includegraphics[width= 3.60in]{HRdiag.png}
+  %\caption{Diagrama HR de 22000 estrellas del catálogo HIPPARCOS.\cite{hrdiag}  }
+  \label{diag}
+\end{figure}
+
+
+
+\begin{table}[htb]
+    \centering
+    \label{tabla}
+	\begin{tabular}{|c|c|c|c|c| }
+	\hline
+	Cúmulo & $E(B-V)$ & $m-M$ & Distancia [$pcs$] & Edad del cúmulo [millones de años]  \\ \hline
+	NCG 752 & -0.03 & 8.02 & 401.79 & 1259  \\ \hline
+	Mel 20 & +0.09 & 6.35 & 186.2 & 63  \\ \hline
+	M45 & +0.04 & 5.50 & 125.89 & 126  \\ \hline
+	Hyades & 0.00 & 2.84 & 36.98 & 891  \\ \hline
+	M44 & +0.04 & 6.21 & 174.58 & 794  \\ \hline
+	M67 & -0.03 & 9.32 & 731.14 & 5623  \\ \hline
+	IC 4665 & 0.18 & 7.86 & 373.25 & 224  \\ \hline
+	M39 & +0.01 & 6.87 & 238.78 & 447  \\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[htb]
+	\begin{tabular}{|c|cccccccccccccccc| }
+	\hline
+	Tareas $\backslash$ Semanas & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16  \\
+	\hline
+	1 & X & X & X  &   &   &   &   &  &  &   &   &   &   &   &   &   \\
+	2 &   &  & X & X & X &  &  &   &   &  &  &  &   &  &  &   \\
+	3 &   &   &   &  & X  & X  & X  & X &   &   &   &  &   &   &  &   \\
+	4 &  &  &  &  &  &  &  & X & X & X & X &   &   &   &   &   \\
+    5 &  &  &  &  &  &  & X & X &  &  &  &   &   &   &   &   \\
+	6 &   &   &   &   &  &   &  X & X  &  &   &  X & X &  X & X  & X &   \\
+	\hline
+	\end{tabular}
+\end{table}
+\vspace{1mm}
+%CCDRED se encarga de la corrección en sí, sus parámetros son: el tipo de dato de los pixeles (real, short, etc), el nombre del backup (en caso de querer un backup), el archivo de traducción del instrumento (que para una CCD estandar ya viene incluido en IRAF
