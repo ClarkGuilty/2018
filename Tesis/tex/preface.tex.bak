@@ -45,7 +45,6 @@
       %\vspace{-4mm}\Large\textbf{BOLTZMANN METHOD}\\
 \vspace{07mm}
       \Large\textbf{Javier Alejandro Acevedo Barroso}\\
-      \vspace{04mm}\Large{Submitted for the degree of Physicist}\\
       \vspace{-4mm}\Large{November, 2018}\\
       
 \vspace{07mm}
@@ -53,7 +52,7 @@
       \vspace{05mm}\small\justify{
 Usually, dark matter is simulated with N-body schemes, that sample the phase space to solve the Poisson-Vlasov equation \cite{2012PDU150K}.
 These kind of simulations have been essential for the development of modern cosmology and the characterization of dark matter halos. With the development of particle physics, we ultimately expect dark matter to be a particle outside of the standard model of physics. Recent measurements on the aftermath of Galaxy Cluster collisions allow us to constrain the value of the thermally averaged cross section $\crosssection$, motivating the development of \emph{collisional} simulations.\\
-On the other hand, Lattice-Boltzmann simulations have been widely used to recreate increasingly complex fluids and boundary conditions, nonetheless, the usual Lattice-Boltzmann scheme does not simulate the entire velocity space, but simply a small number of adventive velocities. \\
+On the other hand, Lattice-Boltzmann simulations have been widely used to recreate increasingly complex fluids and boundary conditions, nonetheless, the usual Lattice-Boltzmann scheme does not simulate the entirety of the velocity space, but simply a small number of adventive velocities. \\
 Inspired by the work of Philip Mocz, Sauro Succi \cite{integerLatticeDynamics}, and Sebastian Franco \cite{franco}, in which a Lattice-Boltzmann scheme is used to simulate the phase space of a \emph{collisionless} one dimensional dark matter fluid. We implement a Lattice-Boltzmann simulations of the phase space of a \emph{collisional} one, two, and three dimensional dark matter fluid. For the collisional step, we use the BGK approximation modeled by a relaxation time $\tau$ chosen accordingly to recent measurements of the $\crosssection$.}\\
 %      \vspace{-4mm}\Large\textbf{Using a Lattice Boltzmann Method}\\	
 \end{center}

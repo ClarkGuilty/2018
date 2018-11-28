@@ -6,16 +6,13 @@
 In order to follow the ideas and developments of the upcoming chapters, it is essential to understand some concepts and computational techniques.
 In this chapter, we discuss all the necessary knowledge for the proper understanding of this work.
 \section{Dark Matter}
-Modern cosmology describes the universe as being dominated by two fundamental components: dark energy and matter\footnote{In relativity, mass and energy are equivalent.}, with dark energy being associate with a cosmological constant and matter being divided into two categories: dark matter and standard model matter\footnote{Which often is called \tqt{Baryonic matter} due to Baryons being the largest fraction of this mass.}.
-The energy density of the universe is $69\%$ dark energy and $31\%$ matter\cite{2018arXiv180706209P}.
+Modern cosmology describes the universe as being dominated by two fundamental components: dark energy and matter\footnote{In relativity, mass and energy are equivalent.}.
+Dark energy is usually associated with a cosmological constant.
 
-
-Standard model matter includes all the particles whose interactions can be properly described by the standard model of physics, such as: Protons, Electrons, Atoms and naturally, any structure that they form, like humans or stars.
-On the other hand, dark matter is all the matter we measure from astrophysical sources which cannot be explained by baryonic matter.
-We know of the existence of dark matter entirely from astrophysical evidence, during this section we are going to do an historical review of such evidence.
+We know of the existence of dark matter entirely from astronomical evidence. In this section we review some of these observations.
 
 \subsection{The missing mass problem in Galaxy Clusters}
-The traditional history of dark matter begins in the 1930s with the swiss astronomer Fritz Zwicky\cite{aHistory} \cite{tasiCline}, who noticed an unusually high velocity dispersion between the galaxies of the Coma Cluster.
+The traditional history of dark matter begins in the 1930s with the swiss astronomer Fritz Zwicky\cite{aHistory} \cite{tasiCline}, who measured an unusually high velocity dispersion between the galaxies of the Coma Cluster.
 To tackle the problem, Zwicky assumed that the Coma Cluster \tqt{had already reached a mechanically stationary state} \cite{englishZwicky} and such, the virial theorem could be applied.
 By counting galaxies, along with assuming that matter is distributed uniformly in the cluster and using Hubble's estimate of the mean mass of a galaxy, Zwicky was able to estimate the potential energy of the Cluster.
 Using his estimate of the visible mass and the virial theorem, Zwicky concluded that the velocity dispersion had to be close to $\sqrt{\bar{v^2}} = 80$ km/s.
@@ -35,11 +32,11 @@ Consider a star in the galaxy disk with mass $m$ at a distance $r$ from the gala
 Given that we can disregard the interaction between starts, the sum of forces acting on the object is simply the gravitational attraction towards the centre of the galaxy:
 \begin{equation}
 \label{heh}
-m\frac{v^2}{r} = G \frac{mM}{r^2}
+m\frac{v^2}{r} = G \frac{mM}{r^2} \ \text{,}
 \end{equation}\\
-\vspace{-1mm}With $M$ being the mass enclosed by the star orbit and $v$ being the orbital velocity of the star. Finally, the galaxy rotation curve for such galaxy will be given by:
+\vspace{-1mm}with $M$ being the mass enclosed by the star orbit and $v$ being the orbital velocity of the star. Finally, the galaxy rotation curve for such galaxy will be given by
 \begin{equation}
-v(r) = \sqrt{\frac{GM}{r}}
+v(r) = \sqrt{\frac{GM}{r}} \text{.}
 \end{equation}%\vspace{2mm}
 Which means that for objects outside of the galaxy disk (but still under the influence of the galaxy gravitational pull) the enclosed mass will be constant regardless of the radius, and thus, the orbital velocity will be proportional to $r^{-1/2}$. With the advent of radio astronomy and the invention of the Image Tube Spectrograph, astronomers were able to measure orbital velocities way beyond the apparent end of the luminous galaxy disks, only to find that the orbital velocity did not decay proportionally to $r^{-1/2}$ but it stayed more or less constant\cite{h21Line} \cite{galactoDistance} \cite{veraFirst}. This behavior can be seen easily in the figure \ref{galaxyCurve}:%\cite{parnovskyCosmology} TODO
 \begin{figure}[ht]
@@ -55,7 +52,7 @@ The overwhelming amount of high quality galaxy rotation curves measure during th
 
 Throughout the use of numerical simulations and the measurement of more galaxy rotation curves during the 1980s and the 1990s, it was concluded that the dark matter density in galaxies was well modeled by the Navarro-Frenk-White (NFW) profile:\cite{FWN}\cite{mariangela}
 \begin{equation}
-\rho(r) = \frac{\rho_0}{r/r_s(1+r/r_s)^2}
+\rho(r) = \frac{\rho_0}{r/r_s(1+r/r_s)^2} \text{.}
 \end{equation}
 \subsection{The Bullet Cluster}
 \label{bulletExplain}
@@ -82,34 +79,47 @@ If there was no dark matter, then after the collision the weak lensing mapping o
 
 What we observe in the Bullet Cluster is the latter case, in which hot gas decouples from dark matter and galaxies.
 By mapping the cluster components and measuring the difference between the centroids, it was concluded that there is a dark matter component in the clusters.
-Very accurate measurements and estimates of the centroids show a small collisional nature in the dark matter component, such measurements allows to estimate the \emph{thermally averaged cross-section} of the dark matter particle ($<\sigma v>$).
+Very accurate measurements and estimates of the centroids show a small collisional nature in the dark matter component, such measurements allows to estimate the \emph{thermally averaged cross-section} of the dark matter particle ( $\crosssection$ ).
 Therefore, it is worth exploring the collisional dark matter scenario.
+
+\section{Particle Dark Matter}
+So far when talking about Dark matter we have talked about an astrophysics problem, however, this problem has also been tackled by the particle physics community. In quantum field theory, particles are modeled as an excitation of space-time fields, and their interactions as interference among those fields. 
+
+The first good candidate for a Dark matter particle is the neutrino. 
+It is a stable particle, and it does not experience electromagnetic or strong interaction\cite{aHistory}. 
+From the measurements of the cosmic microwave background, it is possible to estimate the number of neutrinos that existed in thermal equilibrium during the early universe and the temperature at which they decoupled from the primordial plasma, allowing to define a \emph{thermal relic density}, which is the density of neutrinos (or any specie) at the moment of the decoupling. 
+From there, using general relativity, we can study how this density affects the expansion of the universe and place limits on the mass of the particle.\cite{Gershtein:1966gg}
+All in all, the neutrino mass was too small to allow for the formation of the large scale structure of the universe. And so, the neutrino was eliminated as a candidate.
+
+In order to form large scale structure in a Dark matter dominated universe, the Dark matter particle must decouple as a cold relic\footnote{A particle that decouples from the primordial plasma with a non-relativistic velocity.}. This constrain and the neutrino case (where there is weak and gravitational interaction) lead to the proposal of many \emph{weakly interacting massive particles} (WIMPs) as Dark matter particle candidates. This candidates have masses in the GeV regime and a cross section in the same order of magnitude as the weak interaction cross section.  The fact that many extensions of the standard model offered WIMP particles with almost the same thermal relic density as the Dark matter particle was known as the WIMP miracle.
+
+There are many other candidates for a Dark matter particle, but in the end, every candidate must reproduce the thermal relic density, allow for the formation of halos and large scale structure, and not interact with the electromagnetic field. Any interaction that the dark matter particle has (besides gravitational) implies a cross section $\sigma v$ thus making Dark matter collisional. The thermally averaged cross-section $\crosssection$ can be measured using collisions of galaxy clusters such as the Bullet Cluster, once again motivating the study of collisional Dark matter.
+
 
 \section{The Boltzmann Equation}
 The Boltzmann equation was originally proposed in 1872 by Ludwig Boltzmann and is used to model the behavior of statistical systems outside of the equilibrium. 
 Formally, the Boltzmann equation describes the evolution of the phase space of a typical dark matter particle, such that $\f \dd \vb{r} \dd \vb{v}$ is the probability of finding the dark matter particle in a position between $\vb{r}$ and $\vb{r} + \dd \vb{r}$, with velocity velocity between $\vb{v}$ and $\vb{v} + \dd \vb{v}$.
-Given than a halo is made of typical dark matter particles, we can treat it as a dark matter fluid and apply the Boltzmann equation now interpreting $\f \dd \vb{r} \dd \vb{v}$ as the number of dark matter particles whose position is between $\vb{r}$ and $\vb{r} + \dd \vb{r}$ with velocity velocity between $\vb{v}$ and $\vb{v} + \dd \vb{v}$.
-Regardless of whether we are thinking of a fluid or a particle, the Boltzmann equation is given by:
+By multiplying the probability phase space by the mass of a Dark matter particle and the number of particles enclosed in the volume of interest ($n$), we can use the Boltzmann equation to describe the phase space mass density of a fluid, instead of the phase space probability of a single particle.
+In this work we are interested in the phase space mass density of a Dark matter fluid, whose time evolution is described by the Boltzmann equation
 \begin{equation}
-\pdv{f}{t} + \vb{\dot{x}} \pdv{f}{\vb{x}} + \vb{\dot{v}} \pdv{f}{\vb{v}}  = C[f]
+\pdv{f}{t} + \vb{\dot{x}} \pdv{f}{\vb{x}} + \vb{\dot{v}} \pdv{f}{\vb{v}}  = C[f]  \text{,}
 \end{equation}
-The left hand side is known as the Liouville operator and the right hand side is known as the \emph{Collisional} operator. The Liouville operator represents the evolution of the system following classical mechanics, without considering short range interaction between particles (the collisions).
+the left hand side is known as the Liouville operator and the right hand side is known as the \emph{Collisional} operator. The Liouville operator represents the evolution of the system following classical mechanics, without considering short range interaction between particles (the collisions).
 The collisional operator is an integral operator that relates the possibility of a collision with the state of the system $\f$. 
 In other words, the collisional operator quantifies the effect of the collisions in the phase space evolution.
-A complete modeling of the collisional operator requires knowledge of the short range interactions between particles, given that we do not know the short range interaction of a dark matter particle, we must work with approximation schemes. This is going to be expanded in section \ref{bgk}.
-
-For a collisionless fluid, the Boltzmann equation becomes the Vlasov equation:
+A complete modeling of the collisional operator requires knowledge of the short range interactions between particles, given that we do not know the short range interaction of a dark matter particle, we must work with approximation schemes. This is going to be expanded in section \ref{bgk}.\vspace{5mm}\\
+\vspace{1mm}For a collisionless fluid, the Boltzmann equation becomes the Vlasov equation:
 \begin{equation}
-\pdv{f}{t} + \vb{\dot{x}} \pdv{f}{\vb{x}} + \vb{\dot{v}} \pdv{f}{\vb{v}}  = 0
+\pdv{f}{t} + \vb{\dot{x}} \pdv{f}{\vb{x}} + \vb{\dot{v}} \pdv{f}{\vb{v}}  = 0 \text{,}
 \end{equation}
 Which simply dictates that the phase space distribution function is constant along the trajectories of the system\cite{integerLatticeDynamics}
 \section{Lattice Boltzmann Method}
 \label{boltz}
-The Lattice-Boltzmann method consists of dividing the phase space into a lattice and solving the Boltzmann equation in such lattice.
-In each cell of the lattice there is a density which represents the amount of fluid in the position and velocity range correspondent to the cell's location in the lattice.
-The main effect of the discretization of the phase space is that we no longer simulate the entire phase space, but a countable number of velocities and positions, which allows for the use of integer arithmetic when updating the lattice. The use of integer arithmetic introduces a lattice noise but eliminates the floating point error. In the limit of high resolution, the absence of floating point error and the tendency of the lattice noise towards zero guarantees that the method converges to the continuum solution and makes it a Lagragian, Symplectic and conservative algorithm. 
+The Lattice-Boltzmann method divides the phase space into a lattice and solving the Boltzmann equation in such lattice.
+In each cell of the lattice there is a density which represents the mass of fluid in the position and velocity range correspondent to the cell's location in the lattice.
+The main effect of the discretization of the phase space is that we no longer simulate the entire phase space, but a discrete number of velocities and positions, which allows for the use of integer arithmetic. The use of integer arithmetic introduces lattice noise but eliminates the floating point error. In the limit of high resolution, the absence of floating point error and the tendency of the lattice noise towards zero guarantees that the method converges to the continuum solution and makes it a Lagragian, Symplectic and conservative algorithm. 
 
-However, this method has one big drawback. The time evolution of the phase space is calculated using a direct integration scheme, which implies that for a simulation with $N$ spatial dimensions each one having size $n$, we would need to store $n^{2N}$ cell units per timestep. This is in fact a very heavy constrain because most cases of interest are three dimensional. For example, consider a three dimensional dark matter halo, if the grid size were to be $64$, then we would need almost 600 Gigabytes of memory just to store the lattice! 
+However, this method has one big drawback. The time evolution of the phase space is calculated using a direct integration scheme, which implies that for a simulation with $N$ spatial dimensions each one having size $n$, we would need to store $n^{2N}$ cell units per timestep. This is in fact a very heavy constrain because most cases of interest are three dimensional. For example, in a three dimensional distribution, if the grid size were to be $64$, then we would need almost 600 Gigabytes of memory just to store the lattice. 
 The specifics of implementing a Lattice Boltzmann method are discussed further in section \ref{implementBoltzmann}.
 
 
@@ -120,20 +130,20 @@ The main challenge when solving the Boltzmann equation is the collisional operat
 
 The Bhatnagar–Gross–Krook approximation was proposed in 1954 \cite{1954PhRv...94..511B} in order to simplify the collision integral.
 The approximation operates under the assumption that the large amount of detail involved in the two-body interactions are not likely to significantly influence the macroscopic variables\cite{asinari}.
-This is known as an mesoscopic approach, because we disregard the microscopic interactions but preserving the macroscopic properties of the system. 
+This is known as an mesoscopic approach, because we disregard the microscopic interactions while preserving the macroscopic properties of the system. 
 The scheme ignores the specifics of the two-body interactions but keeps the tendency of the system towards local equilibrium and then global equilibrium.
 
 Local equilibrium is defined by the following condition:
 \begin{equation}
-C[f_e] = 0
+C[f_e] = 0\text{.}
 \end{equation}
 Which simply states that in \emph{local equilibrium}, the collisions do not affect the time derivative of the distribution function. Note that local equilibrium does not mean that the macroscopic variables of the system are constant in space and time, but that the local value of  $\f$ corresponds to the local value of $f_e(\rv)$, for an appropriate equilibrium distribution function $f_e(\rv)$. Finally, the BGK operator can be stated as:
 \begin{equation}
-C[f] = -\frac{1}{\tau}(\f - f(\rv))
+C[f] = -\frac{1}{\tau}(\f - f(\rv)) \text{,}
 \end{equation}
 
 
-Where $\tau$ is a characteristic relaxation time for the system. In most cases, the equilibrium function obeys the Maxwell-Boltzmann distribution, however, Fermi-Dirac distributions were widely used in the early years of the Lattice Boltzmann methods.
+where $\tau$ is a characteristic relaxation time for the system. In most cases, the equilibrium function obeys the Maxwell-Boltzmann distribution, however, Fermi-Dirac distributions were widely used in the early years of the Lattice Boltzmann methods.
 In recent years modified Maxwellians have been proposed to extend the BGK scheme to the quantum realm\cite{2010arXiv1009.3352F} and to include annihilation and creation of particles. The specifics of our implementation of the BGK approximation are discussed in section \ref{metodologiaBGK}.
 
 
