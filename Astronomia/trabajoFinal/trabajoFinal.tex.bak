@@ -97,7 +97,17 @@ Ahora, como se cargó el instrumento (ESOWFI), ya están cargadas las listas de 
  mscred> sflatcombine @listaFlats
 \end{lstlisting}
 
-Una vez combinadas las imágenes de calibración, se procede a reducir las imágenes ciencia. A estas alturas solo tenemos 3 imágenes flat, tres imágenes ciencia y una imagen bias. La reducción se hace con la clásica tarea \tqt{CCDPROC} ahora en el paquete \tqt{MSCRED}. En esta ocasión sí se redujo cada imagen una por una por seguridad. Como se cargó el instrumento, solo es necesario señalar el nombre del archivo de bias, el nombre del archivo de flat, el nombre del archivo a reducir y que no se realizará correción de DARK. Teniendo ahora una imagen ciencia reducida por cada filtro, se puede proceder a la fotometría.
+Una vez combinadas las imágenes de calibración, se procede a reducir las imágenes ciencia. A estas alturas solo tenemos 3 imágenes flat, tres imágenes ciencia y una imagen bias. La reducción se hace con la clásica tarea \tqt{CCDPROC} ahora en el paquete \tqt{MSCRED}. En esta ocasión sí se redujo cada imagen una por una por seguridad. Como se cargó el instrumento, solo es necesario señalar el nombre del archivo de bias, el nombre del archivo de flat, el nombre del archivo a reducir y que no se realizará correción de DARK. Teniendo ahora una imagen ciencia reducida por cada filtro, se puede proceder a la fotometría. A continuación se presentan la imagen sin reducir en filtro B y su versión reducida. Nótese que se  eliminó el aviñetamiento y no se aprecian a simple vista \tqt{donas} debido a la óptica.
+
+\begin{figure}[H]
+  \centering
+   \includegraphics[width = 4in]{mosaicoBVineta.png}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+   \includegraphics[width = 4in]{mosaicoB.png}
+\end{figure}
 
 A cada imagen reducida se le realizó el siguiente proceso:
 \begin{itemize}
@@ -116,8 +126,7 @@ grep -v INDEF > imagen.out
 \end{itemize}
 
 \section{Resultados}
-A continuación se presentan los diagrama color magnitud obtenidos para los diferentes chips. Se separá esta sección en subsecciones para cada chip.
-\subsection{Chip 2}
+A continuación se presentan los diagrama color magnitud obtenidos para los diferentes chips. 
 \begin{figure}[H]
   \centering
    \includegraphics[width = 4in]{B-V2.png}
@@ -127,6 +136,49 @@ A continuación se presentan los diagrama color magnitud obtenidos para los dife
    \includegraphics[width = 4in]{V-Rc2.png}
 \end{figure}
 
+\begin{figure}[H]
+  \centering
+   \includegraphics[width = 4in]{B-V3.png}
+\end{figure}
+\begin{figure}[H]
+  \centering
+   \includegraphics[width = 4in]{V-Rc3.png}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+   \includegraphics[width = 4in]{B-V6.png}
+\end{figure}
+\begin{figure}[H]
+  \centering
+   \includegraphics[width = 4in]{V-Rc6.png}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+   \includegraphics[width = 4in]{B-V7.png}
+\end{figure}
+\begin{figure}[H]
+  \centering
+   \includegraphics[width = 4in]{V-Rc7.png}
+\end{figure}
+   
+  Se observa que para los chips 2 y 6 se logró relacionar un buen número de estrellas, sin embargo, para el chip 3 solo se encontró bastantes estrellas en el caso B-V. Para el chip 7 ningún caso logró encontrar un buen número de estrellas. Los problemas para relacionar estrellas entre los frames pueden deberse a los parámetros utilizados en la fotometría.
+
+Finalmente, se presentan a continuación los diagramas magnitud-color de todos los chips de interés:
+
+
+\begin{figure}[H]
+  \centering
+   \includegraphics[width = 4in]{diagramaMagnitudColor.png}
+\end{figure}
+\begin{figure}[H]
+  \centering
+   \includegraphics[width = 4in]{diagramaMagnitudColor2.png}
+\end{figure}
+   
+
+En ambos diagramas se puede apreciar 
 
 %\bibliography{bibte}
 \bibliographystyle{plain}
