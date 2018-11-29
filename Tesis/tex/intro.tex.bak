@@ -83,24 +83,24 @@ Very accurate measurements and estimates of the centroids show a small collision
 Therefore, it is worth exploring the collisional dark matter scenario.
 
 \section{Particle Dark Matter}
-So far when talking about Dark matter we have talked about an astrophysics problem, however, this problem has also been tackled by the particle physics community. In quantum field theory, particles are modeled as an excitation of space-time fields, and their interactions as interference among those fields. 
+So far when talking about dark matter we have talked about an astrophysics problem, however, this problem has also been tackled by the particle physics community. In quantum field theory, particles are modeled as an excitation of space-time fields, and their interactions as interference among those fields. 
 
-The first good candidate for a Dark matter particle is the neutrino. 
+The first good candidate for a dark matter particle is the neutrino. 
 It is a stable particle, and it does not experience electromagnetic or strong interaction\cite{aHistory}. 
 From the measurements of the cosmic microwave background, it is possible to estimate the number of neutrinos that existed in thermal equilibrium during the early universe and the temperature at which they decoupled from the primordial plasma, allowing to define a \emph{thermal relic density}, which is the density of neutrinos (or any specie) at the moment of the decoupling. 
 From there, using general relativity, we can study how this density affects the expansion of the universe and place limits on the mass of the particle.\cite{Gershtein:1966gg}
-All in all, the neutrino mass was too small to allow for the formation of the large scale structure of the universe. And so, the neutrino was eliminated as a candidate.
+All in all, the neutrino mass was too small to allow for the formation of the large scale structure of the universe. And so, the neutrino was eliminated as a candidate. 
 
-In order to form large scale structure in a Dark matter dominated universe, the Dark matter particle must decouple as a cold relic\footnote{A particle that decouples from the primordial plasma with a non-relativistic velocity.}. This constrain and the neutrino case (where there is weak and gravitational interaction) lead to the proposal of many \emph{weakly interacting massive particles} (WIMPs) as Dark matter particle candidates. This candidates have masses in the GeV regime and a cross section in the same order of magnitude as the weak interaction cross section.  The fact that many extensions of the standard model offered WIMP particles with almost the same thermal relic density as the Dark matter particle was known as the WIMP miracle.
+In order to form large scale structure in a dark matter dominated universe, the dark matter particle must decouple as a cold relic\footnote{A particle that decouples from the primordial plasma with a non-relativistic velocity.}. This constrain and the neutrino case (where there is weak and gravitational interaction) lead to the proposal of many \emph{weakly interacting massive particles} (WIMPs) as dark matter particle candidates. This candidates have masses in the GeV regime and a cross section in the same order of magnitude as the weak interaction cross section.  The fact that many extensions of the standard model offered WIMP particles with almost the same thermal relic density as the dark matter particle was known as the WIMP miracle.
 
-There are many other candidates for a Dark matter particle, but in the end, every candidate must reproduce the thermal relic density, allow for the formation of halos and large scale structure, and not interact with the electromagnetic field. Any interaction that the dark matter particle has (besides gravitational) implies a cross section $\sigma v$ thus making Dark matter collisional. The thermally averaged cross-section $\crosssection$ can be measured using collisions of galaxy clusters such as the Bullet Cluster, once again motivating the study of collisional Dark matter.
+There are many other candidates for a dark matter particle, but in the end, every candidate must reproduce the thermal relic density, allow for the formation of halos and large scale structure, and not interact with the electromagnetic field. Any interaction that the dark matter particle has (besides gravitational) implies a cross section $\crosssection$ thus making dark matter collisional. The thermally averaged cross-section $\crosssection$ can be measured using collisions of galaxy clusters such as the Bullet Cluster, once again motivating the study of collisional dark matter.
 
 
 \section{The Boltzmann Equation}
 The Boltzmann equation was originally proposed in 1872 by Ludwig Boltzmann and is used to model the behavior of statistical systems outside of the equilibrium. 
 Formally, the Boltzmann equation describes the evolution of the phase space of a typical dark matter particle, such that $\f \dd \vb{r} \dd \vb{v}$ is the probability of finding the dark matter particle in a position between $\vb{r}$ and $\vb{r} + \dd \vb{r}$, with velocity velocity between $\vb{v}$ and $\vb{v} + \dd \vb{v}$.
-By multiplying the probability phase space by the mass of a Dark matter particle and the number of particles enclosed in the volume of interest ($n$), we can use the Boltzmann equation to describe the phase space mass density of a fluid, instead of the phase space probability of a single particle.
-In this work we are interested in the phase space mass density of a Dark matter fluid, whose time evolution is described by the Boltzmann equation
+By multiplying the probability phase space by the mass of a dark matter particle and the number of particles enclosed in the volume of interest ($n$), we can use the Boltzmann equation to describe the phase space mass density of a fluid, instead of the phase space probability of a single particle.
+In this work we are interested in the phase space mass density of a dark matter fluid, whose time evolution is described by the Boltzmann equation
 \begin{equation}
 \pdv{f}{t} + \vb{\dot{x}} \pdv{f}{\vb{x}} + \vb{\dot{v}} \pdv{f}{\vb{v}}  = C[f]  \text{,}
 \end{equation}
@@ -110,7 +110,7 @@ In other words, the collisional operator quantifies the effect of the collisions
 A complete modeling of the collisional operator requires knowledge of the short range interactions between particles, given that we do not know the short range interaction of a dark matter particle, we must work with approximation schemes. This is going to be expanded in section \ref{bgk}.\vspace{5mm}\\
 \vspace{1mm}For a collisionless fluid, the Boltzmann equation becomes the Vlasov equation:
 \begin{equation}
-\pdv{f}{t} + \vb{\dot{x}} \pdv{f}{\vb{x}} + \vb{\dot{v}} \pdv{f}{\vb{v}}  = 0 \text{,}
+\pdv{f}{t} + \vb{\dot{x}} \pdv{f}{\vb{x}} + \vb{\dot{v}} \pdv{f}{\vb{v}}  = 0 \text{.}
 \end{equation}
 Which simply dictates that the phase space distribution function is constant along the trajectories of the system\cite{integerLatticeDynamics}
 \section{Lattice Boltzmann Method}

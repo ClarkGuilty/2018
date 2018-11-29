@@ -73,11 +73,10 @@ Inspired by the work of Philip Mocz, Sauro Succi \cite{integerLatticeDynamics}, 
 Usualmente la materia oscura se simula con métodos de N cuerpos, en los que se se muestrea el espacio de fase con el fin de resolver la ecuación de Poisson-Vlasov.\\
 Este tipo de simulaciones ha sido esencial tanto para el desarrollo de la cosmología moderna, como para la caracterización de los halos de materia oscura. Con el desarrollo de la física de particulas, esperamos que en últimas la materia oscura sea una particula fuera del modelo estandar. Mediciones recientes del resultado de colisiones entre cúmulos galácticos, permiten dar límites para los valores del promedio térmico de la sección transversal $\crosssection$, motivando el desarrollo de simulaciones colisionales de materia oscura.\\
 Por otro lado, las simulaciones de Lattice-Boltzmann han sido ampliamente utilizadas para recrear fluidos cada vez más complejos. Sin embargo, la implementación usual no simula el espacio de velocidades en sí, sino un pequeño número de velocidades adventivas.\\
-Inspirados por el trabajo de Philip Mocz, Sauro Succi \cite{integerLatticeDynamics}, y Sebastián Franco \cite{franco}, en donde se simula el espacio de fase de un fluido \emph{no colisional} de materia oscura en una dimensión. Implementamos un método de Lattice-Boltzmann para simular un fluido \emph{colisional} de materia oscura en una, dos y tres dimensiones. Para el paso colisional usamos la aproximación BGK modelada por un tiempo de relajación $\tau$, seleccionado de acuerdo a mediciones recientes de $\crosssection$.
-.}\\
+Inspirados en el trabajo realizado por Philip Mocz, Sauro Succi \cite{integerLatticeDynamics}, y Sebastián Franco \cite{franco}, en donde se simula el espacio de fase de un fluido \emph{no colisional} de materia oscura en una dimensión. Implementamos un método de Lattice-Boltzmann para simular un fluido \emph{colisional} de materia oscura en una, dos y tres dimensiones. Para el paso colisional usamos la aproximación BGK modelada por un tiempo de relajación $\tau$, seleccionado de acuerdo a mediciones recientes de $\crosssection$.}\\
 %      \vspace{-4mm}\Large\textbf{Using a Lattice Boltzmann Method}\\	
 \end{center}
 \thispagestyle{plain}
 %      \vspace*{15mm}\Huge\textbf{Agradecimientos}\\
 \chapter*{Agradecimientos}
-      \normalsize{Utilizando un Método de Lattice Boltzmann}\\
+      \normalsize{Agradezco profundamente a Jaime Forero, por su guía, paciencia y visión en el desarrollo de esta monografía. A Sebastián Franco, por sentar muy bien las bases de este proyecto. Y a todos los se convirtieron en mis amigos en estos años de estudio. }\\

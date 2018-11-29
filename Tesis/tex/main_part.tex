@@ -1,15 +1,15 @@
 \chapter{The Lattice Boltzmann Algorithm}
 \section{General Description}
 \label{implementBoltzmann}
-The heart of the Lattice-Boltzmann Algorithm is the discretization of the phase space\cite{integerLatticeDynamics} \cite{franco} .
+The heart of the Lattice-Boltzmann algorithm is the discretization of the phase space\cite{integerLatticeDynamics} \cite{franco}.
 
 To discretize the phase space, we must choose the region to simulate. In this work, we name the extremal values in the $w$ axis of the phase space $W_{min}$ and $W_{max}$.
 Then, one has to fix either the size of the grid or the size of the lattice.
 We name the size of the grid in the $w$ axis $N_w$ (i.e. $N_x$ or $N_{vz}$).
-The size of a lattice unit in the $w$ axis (which we are going to name $dw$) and the extremal values are related by:
+The size of a lattice unit in the $w$ axis (which we are going to name $dw$) and the extremal values are related by
 \vspace{1mm}
 \begin{equation}
-dw = \frac{W_{max}-W_{min} }{N_w} 
+dw = \frac{W_{max}-W_{min} }{N_w}.
 \end{equation}%\vspace{1mm}
 In this work use the phase space mass density, which means that $\f \dd \vb{r} \dd \vb{v}$ is the \emph{mass} of dark matter whose position is between $\vb{r}$ and $\vb{r} + \dd \vb{r}$, and its velocity is between $\vb{v}$ and $\vb{v} + \dd \vb{v}$.
 Now that we have properly defined the grid, we must initialize the phase space. The initial conditions are discussed in detail in section \ref{initialConditions}.
@@ -195,6 +195,7 @@ No. of axes &$W_{min}$ [us] & $W_{max}$ [us] & $N_w $ & dw [1/us] & dt [ut] \\ \
 We always use grid sizes in the form $2^n$ with $n$ positive integer, because the Fast Fourier Transform algorithm performs better and faster when calculating discrete transforms of sizes $2^n \ 3^m \ 5 ^l$ for $n,m,l$ positive integers.
 
 \section{Initial Conditions}
+\label{initialConditions}
 We made use of different initial conditions depending on the objective of each run of the simulation. For the two dimensional phase space we had three initial conditions: Gaussian distribution, Jeans instability and Bullet Cluster-like scenario.
 For the four and six dimensional phase space we only used Gaussian initial conditions.
 
@@ -436,8 +437,8 @@ The easiest way to solve this is to exploit the symmetry of the initial conditio
 \end{figure}
 
 
-\section{The collisional step}
-To test the collisional step we run a simulation with a very big relaxation time, hoping to recover the collisionless simulation.
+%\section{The collisional step}
+%To test the collisional step we run a simulation with a very big relaxation time, hoping to recover the collisionless simulation.
 
 \chapter{Results}
 In this chapter we discuss the results of the collisional runs of the simulation and the study of Bullet Cluster-like distribution.
@@ -580,7 +581,7 @@ The last frame shows the fourth aphelion of the collisionless case, here, the sm
 
 
 \newpage
-\section{Four dimensional phase space}
+\section{The four dimensional phase space}
 We tested the collisionless case of the four dimensional phase space during the numerical tests of section \ref{fourDtest}. Now, for the collisional case we are going keep using the Gaussian conditions. As in the collisional case from last section, we do not plot the time evolution of the cut $f(x,0,vx,0)$ of the phase space, but the percentage difference $P$ between the cuts as define in equation \ref{Zeta}.
 
 In figure \ref{2dPhaseCol} we plot the time evolution of $P$. The general form of $P$ is exactly the same as in figure \ref{phaseColGauss}, where the collisional case (red) agglomerates outside of the central peak with low velocity, and the collisionless case agglomerates in the central peak with higher velocity than its collisional counterpart.

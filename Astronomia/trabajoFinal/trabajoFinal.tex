@@ -56,7 +56,7 @@
 \setlength{\parskip}{1em}
 \renewcommand{\baselinestretch}{2.0}
 \begin{document}
-\title{Cúmulos Abiertos \\ Trabajo Final \\ Diagrama HR de IC4651}
+\title{Cúmulos Abiertos \\ Trabajo Final \\ Diagrama Magnitud-Color de IC4651}
 
 \author{
 \textbf{Javier Alejandro Acevedo Barroso\thanks{e-mail: \texttt{ja.acevedo12@uniandes.edu.co}}}\\
@@ -71,7 +71,7 @@
 \normalsize
 \newpage
 
-El objetivo del ejercicio es obtener diagramas HR del cúmulo IC 4651 usando imágenes tomadas con el instrumento Wide Field Imager (WFI) del telescopio MPG en el European Southern Observatory (ESO) en La Silla.
+El objetivo del ejercicio es obtener diagramas magnitud-color del cúmulo IC 4651 usando imágenes tomadas con el instrumento Wide Field Imager (WFI) del telescopio MPG en el European Southern Observatory (ESO) en La Silla, Chile.
 Se recuperará de la página web de ESO imágenes del objeto IC 4651 sin procesar en diferentes filtros, así como las imágenes de calibración pertinentes. 
 Se hará las correcciones a las imágenes ciencia del cúmulo, se elegirá los \emph{chips}\footnote{Dado que el instrumento WFI devuelve imágenes en mosaico, se debe ubicar en qué chips efectivamente está el cúmulo.} a utilizar y se hará fotometría en los diferentes filtros.
 Una vez listo el catálogo por filtro, se calculará el color usando las herramientas DAOMATCH y DAOMASTER para relacionar las estrellas y generar el diagrama HR.
@@ -97,19 +97,35 @@ Ahora, como se cargó el instrumento (ESOWFI), ya están cargadas las listas de 
  mscred> sflatcombine @listaFlats
 \end{lstlisting}
 
-Una vez combinadas las imágenes de calibración, se procede a reducir las imágenes ciencia. A estas alturas solo tenemos 3 imágenes flat, tres imágenes ciencia y una imagen bias. La reducción se hace con la clásica tarea\tqt{CCDPROC} del paquete \tqt{MSCRED}. En esta ocasión sí se redujo cada imagen una por una por seguridad. Como se cargó el instrumento, solo es necesario señalar el nombre del archivo de bias, el nombre del archivo de flat, el nombre del archivo a reducir y que no se realizará correción de DARK. Teniendo ahora una imagen ciencia reducida por cada filtro, se puede proceder a la fotometría.
+Una vez combinadas las imágenes de calibración, se procede a reducir las imágenes ciencia. A estas alturas solo tenemos 3 imágenes flat, tres imágenes ciencia y una imagen bias. La reducción se hace con la clásica tarea \tqt{CCDPROC} ahora en el paquete \tqt{MSCRED}. En esta ocasión sí se redujo cada imagen una por una por seguridad. Como se cargó el instrumento, solo es necesario señalar el nombre del archivo de bias, el nombre del archivo de flat, el nombre del archivo a reducir y que no se realizará correción de DARK. Teniendo ahora una imagen ciencia reducida por cada filtro, se puede proceder a la fotometría.
 
 A cada imagen reducida se le realizó el siguiente proceso:
 \begin{itemize}
-\item Se separó la imagen y se encontró que los chips de interés son el 2,3,6 y 7.
-\item Usando IMEXAMINE se encontró un FWHM promedio y una desviación estándar promedio: FWHM promedio fue 4.20, la desviación promedio fue $\sigma$ = 10. Adicionalmente se tomó un número de conteos máximo de 64000, de forma que se excluyen las estrellas saturadas. Usando esos datos y la tarea DAOFIND se generó una lista de coordenadas para cada chip.
-\item Usando la lista de coordenadas se corre PHOT tal cual como se ha hecho en ejercicios pasados. Los datos de cada chip ya están incluidos en el header y se leen sin problema gracias a ESOSETINST.
-\item Se define un radio para el anillo de cielo y el radio de apertura. En este caso, dada la cercanía de algunas estrellas, se toma de radio de apertura 9 pixeles, de radio interior para el anillo de cielo de 12 pixeles y de grosor para el anillo de cielo se tomó 8 pixeles.
-\item Se usa TXDUMP para seleccionar seleccionar las columnas correctas para ejecutar DAOMATCH y DAOMASTER. Esto se hace con el comando:
-
+\item Usando DS9, se concluyó que los chips de interés son el 2,3,6 y 7. Por lo tanto, se separó las imágenes ciencia y se le agregó al header de cada una \tqt{IMAGETYP=OBJECT}.
+\item Usando IMEXAMINE se encontró un FWHM promedio y una desviación estándar promedio para las imagenes mosaico: FWHM promedio fue 4.20, la desviación promedio ($\sigma$ ) fue 10. Adicionalmente se tomó un número de conteos máximo de 63000, de forma que se excluyen las estrellas saturadas. Usando esos datos y la tarea DAOFIND se generó una lista de coordenadas para cada chip.
+\item Usando la lista de coordenadas se corre PHOT tal cual como se ha hecho en ejercicios pasados. Los datos de cada chip ya están incluidos en el header y se leen sin problema gracias a ESOSETINST. 
+\item Se define un radio para el anillo de cielo y el radio de apertura. En este caso, dada la cercanía de algunas estrellas, se toma de radio de apertura 9 pixeles, de radio interior para el anillo de cielo 10 pixeles y de grosor para el anillo de cielo se tomó 10 pixeles.
+\item Se usa TXDUMP para seleccionar seleccionar las columnas correctas para ejecutar DAOMATCH y DAOMASTER. Así mismo, se elimina las líneas con INDEF usando el programa de unix \tqt{grep}. Esto se hace con el comando:
+\begin{lstlisting}[language=bash]
+ecl> txdump imagen.mag.1 id,xcenter,ycenter,mag,merr yes |
+grep -v INDEF > imagen.out
+\end{lstlisting}
+\item Ya con los archivos \tqt{.out} de cada imagen ciencia, utilizamos DAOMATCH y DAOMASTER de a parejas de archivos. Primero se elije el archivo master (se toma el que tenga más estrellas), luego se ejecuta DAOMATCH y la primera entrada correspondería al archivo master, la segunda a la otra imagen ciencia de interés. Por ejemplo, para un diagrama B-V, se tomaría V como master (tiene más imagenes) y B sería la segunda entrada. 
+\item De la ejecución \emph{exitosa} de DAOMATCH, se obtiene un archivo \tqt{.mch} con la transformacion de coordenadas entre los archivos. Se ejecuta DAOMASTER y se le pasa de entrada el archivo .mch. Se selecciona 6 grados de libertad y un número mínimo de frames de 2, una fracción mínima de 0.5 y un número de recuadros suficientes de 2. Estos valores corresponden a los mismos utilizados en el ejercicio de DAOMATCH y DAOMASTER con M92.
+\item De correr exitosamente DAOMASTER se obtiene un archivo \tqt{.raw} con la lista de estrellas detectadas en ambas imágenes, junto a sus coordenadas y magnitudes en las bandas de interés. Escribiendo un script de python, se genera el diagrama magnitud color para cada chip tanto en B-V como V-Rc. Por último, se genera un diagrama para todos los chips en B-V y un diagrama para todos los chips en V-Rc.
 \end{itemize}
-Una vez se ha realizado fotometría en cada filtro y chip, se ejecuta DAOMATCH y DAOMASTER entre las imágenes en B y las imágenes en V. Asi se obtiene los datos necesarios para generar un diagrama HR. Se repite el proceso entre V y Rc.
-\item Se g
+
+\section{Resultados}
+A continuación se presentan los diagrama color magnitud obtenidos para los diferentes chips. Se separá esta sección en subsecciones para cada chip.
+\subsection{Chip 2}
+\begin{figure}[H]
+  \centering
+   \includegraphics[width = 4in]{B-V2.png}
+\end{figure}
+\begin{figure}[H]
+  \centering
+   \includegraphics[width = 4in]{V-Rc2.png}
+\end{figure}
 
 
 %\bibliography{bibte}
