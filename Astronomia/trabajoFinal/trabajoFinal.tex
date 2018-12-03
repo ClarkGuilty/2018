@@ -74,7 +74,7 @@
 El objetivo del ejercicio es obtener diagramas magnitud-color del cúmulo IC 4651 usando imágenes tomadas con el instrumento Wide Field Imager (WFI) del telescopio MPG en el European Southern Observatory (ESO) en La Silla, Chile.
 Se recuperará de la página web de ESO imágenes del objeto IC 4651 sin procesar en diferentes filtros, así como las imágenes de calibración pertinentes. 
 Se hará las correcciones a las imágenes ciencia del cúmulo, se elegirá los \emph{chips}\footnote{Dado que el instrumento WFI devuelve imágenes en mosaico, se debe ubicar en qué chips efectivamente está el cúmulo.} a utilizar y se hará fotometría en los diferentes filtros.
-Una vez listo el catálogo por filtro, se calculará el color usando las herramientas DAOMATCH y DAOMASTER para relacionar las estrellas y generar el diagrama HR.
+Una vez listo el catálogo por filtro, se calculará el color usando las herramientas DAOMATCH y DAOMASTER para relacionar las estrellas y generar el diagrama magnitud-color.
 
 
 \section{Obtención y reducción de imágenes}
@@ -178,12 +178,21 @@ Finalmente, se presentan a continuación los diagramas magnitud-color de los chi
 \end{figure}
    
 
-En ambos diagramas se puede apreciar una secuencia principal y una fuerte aglomeración debajo de la secuencia principal. La aglomeración corresponde a estrellas binarias eclipsadas en algún grado por su compañera, o principalmente a enanas blancas. En los diagramas se aprecia interesantemente bien una curva isocrona: la curva pasa por \tqt{el brazo} del lado derecho de las curvas, luego se curva en un pico pronunciado (ese sería el brazo izquierdo) y baja siguiendo la secuencia principal. Las estrellas regadas por fuera de sectores del diagrama corresponden a estrellas atravesadas en el campo y a los chips en donde falló el DAOMATCH y DAOMASTER.
+En ambos diagramas se puede apreciar una secuencia principal y una fuerte aglomeración debajo de la secuencia principal. La aglomeración corresponde a estrellas binarias eclipsadas en algún grado por su compañera, o principalmente a enanas blancas y estrellas atravezadas en el campo. En los diagramas se aprecia interesantemente bien una curva isocrona: la curva pasa por \tqt{el brazo} del lado derecho de las curvas, luego se curva en un pico pronunciado (ese sería el brazo izquierdo) y baja siguiendo la secuencia principal. Las estrellas regadas por fuera de sectores del diagrama corresponden a estrellas atravesadas en el campo y a los chips en donde falló el DAOMATCH y DAOMASTER.
+
+
+
+
+
 
 
 
 %\bibliography{bibte}
 \bibliographystyle{plain}
+
+
+
+
 
 
 \end{document}
