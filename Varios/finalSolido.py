@@ -39,7 +39,7 @@ plt.plot(x,acusticPhonons1(x), label = 'Fonones ópticos')
 plt.plot(x,acusticPhonons2(x), label = 'Fonones acústicos')
 plt.plot(x,magnons(x), label = 'Magnones')
 plt.legend(loc = 3)
-plt.savefig('imprimirSolido1.png',dpi=300)
+plt.savefig('imprimirSolido1.png',dpi=300, bbox_inches="tight")
 
 
 plt.figure()
@@ -62,7 +62,7 @@ plt.plot(x,eme(x,10000000), label = r'J = $\infty$')
 plt.legend()
 plt.xlabel('y',fontsize=20)
 plt.ylabel(r'$M/M_s$',fontsize=20)
-plt.savefig('imprimirSolido2.png',dpi=300)
+plt.savefig('imprimirSolido2.png',dpi=300, bbox_inches="tight")
 
 plt.figure()
 
@@ -78,12 +78,12 @@ plt.plot(T,invX(T,0.1,PARAMAGNETICO),label ='Paramagnético')
 plt.plot(T,invX(T,0.1,FERROMAGNETICO), label = 'Ferromagnético')
 plt.plot(T,invX(T,0.1,ANTIFERROMAGNETICO), label = 'Antiferromagnético')
 plt.legend()
-plt.title('Inverso de la susceptibilidad',fontsize=20)
+plt.title('Inverso de la susceptibilidad (4)',fontsize=20)
 plt.xlabel('Temperatura',fontsize=20)
 plt.ylabel(r'1 / $\chi$ ',fontsize=20)
 plt.axhline(0, color='black')
 plt.axvline(0, color='black')
-plt.savefig('imprimirSolido3.png',dpi=300)
+plt.savefig('imprimirSolido3.png',dpi=300, bbox_inches="tight")
 
 
 
