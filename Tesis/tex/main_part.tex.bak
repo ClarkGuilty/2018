@@ -6,10 +6,10 @@ The heart of the Lattice-Boltzmann algorithm is the discretization of the phase 
 To discretize the phase space, we must choose the region to simulate. In this work, we name the extremal values in the $w$ axis of the phase space $W_{min}$ and $W_{max}$.
 Then, one has to fix either the size of the grid or the size of the lattice.
 We name the size of the grid in the $w$ axis $N_w$ (i.e. $N_x$ or $N_{vz}$).
-The size of a lattice unit in the $w$ axis (which we are going to name $dw$) and the extremal values are related by:
+The size of a lattice unit in the $w$ axis (which we are going to name $dw$) and the extremal values are related by
 \vspace{1mm}
 \begin{equation}
-dw = \frac{W_{max}-W_{min} }{N_w} 
+dw = \frac{W_{max}-W_{min} }{N_w}.
 \end{equation}%\vspace{1mm}
 In this work use the phase space mass density, which means that $\f \dd \vb{r} \dd \vb{v}$ is the \emph{mass} of dark matter whose position is between $\vb{r}$ and $\vb{r} + \dd \vb{r}$, and its velocity is between $\vb{v}$ and $\vb{v} + \dd \vb{v}$.
 Now that we have properly defined the grid, we must initialize the phase space. The initial conditions are discussed in detail in section \ref{initialConditions}.

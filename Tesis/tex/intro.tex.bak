@@ -83,12 +83,12 @@ Very accurate measurements and estimates of the centroids show a small collision
 Therefore, it is worth exploring the collisional dark matter scenario.
 
 \section{Particle Dark Matter}
-So far when talking about dark matter we have talked about an astrophysics problem, however, this problem has also been tackled by the particle physics community. In quantum field theory, particles are modeled as an excitation of space-time fields, and their interactions as interference among those fields. 
+So far when talking about dark matter we have talked about an astrophysics problem. However, the problem has also been tackled by the particle physics community. In quantum field theory, particles are modeled as an excitation of space-time fields, and their interactions as interference among those fields.
 
 The first good candidate for a dark matter particle is the neutrino. 
-It is a stable particle, and it does not experience electromagnetic or strong interaction\cite{aHistory}. 
+It is a stable particle, and it does not experience electromagnetic or strong interactions\cite{aHistory}. 
 From the measurements of the cosmic microwave background, it is possible to estimate the number of neutrinos that existed in thermal equilibrium during the early universe and the temperature at which they decoupled from the primordial plasma, allowing to define a \emph{thermal relic density}, which is the density of neutrinos (or any specie) at the moment of the decoupling. 
-From there, using general relativity, we can study how this density affects the expansion of the universe and place limits on the mass of the particle.\cite{Gershtein:1966gg}
+From there, using general relativity, we can study how this density affects the expansion of the universe and place limits on the mass of the particle\cite{Gershtein:1966gg}.
 All in all, the neutrino mass was too small to allow for the formation of the large scale structure of the universe. And so, the neutrino was eliminated as a candidate. 
 
 In order to form large scale structure in a dark matter dominated universe, the dark matter particle must decouple as a cold relic\footnote{A particle that decouples from the primordial plasma with a non-relativistic velocity.}. This constrain and the neutrino case (where there is weak and gravitational interaction) lead to the proposal of many \emph{weakly interacting massive particles} (WIMPs) as dark matter particle candidates. This candidates have masses in the GeV regime and a cross section in the same order of magnitude as the weak interaction cross section.  The fact that many extensions of the standard model offered WIMP particles with almost the same thermal relic density as the dark matter particle was known as the WIMP miracle.
