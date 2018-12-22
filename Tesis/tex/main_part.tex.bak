@@ -50,7 +50,7 @@ To solve the Poisson equation we use the Fourier pseudo-spectral method, which a
 \end{myequation}
 Where $\hat{g}(\vb{k},t)$ is the Fourier transform of $g(\vb{r},t)$, and $\lambda_{\vb{k}}$ is a constant that depends on the size of the lattice and the wave vector $\vb{k}$.
 $\lambda_{\vb{k}}$ is calculated according to the approximation scheme used to solve the equation.
-In the the pseudo-spectral approximation, $\lambda_{\vb{k}}$ is given by
+In the the pseudo-spectral approximation, $\lambda_{\vb{k}}$ is given by \cite{freePoisson}:
 \begin{myequation}
 \lambda_{\vb{k}}^2 = -\qty(\frac{2 \pi k_x}{X_{max} - X_{min}})^2 + \qty(\frac{2 \pi k_y}{Y_{max} - Y_{min}})^2 + \qty(\frac{2 \pi k_z}{Z_{max} - Z_{min}})^2.
 \end{myequation}

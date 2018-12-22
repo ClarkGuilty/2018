@@ -50,7 +50,7 @@ Which means that for objects outside of the galaxy disk (but still under the inf
 This unexpected velocity profile implied a mass-to-light ratio that increased with distance and also the existence of mass beyond the visible galactic disk\cite{theIsMassOutside}.
 The overwhelming amount of high quality galaxy rotation curves measure during the 1970s, let to the acceptance of the dark matter hypothesis in the astrophysical community.
 
-Throughout the use of numerical simulations and the measurement of more galaxy rotation curves during the 1980s and the 1990s, it was concluded that the dark matter density in galaxies was well modeled by the Navarro-Frenk-White (NFW) profile:\cite{FWN}\cite{mariangela}
+Throughout the use of numerical simulations and the measurement of more galaxy rotation curves during the 1980s and the 1990s, it was concluded that the dark matter density in galaxies was well modeled by the Navarro-Frenk-White (NFW) profile\cite{FWN}\cite{mariangela}:
 \begin{equation}
 \rho(r) = \frac{\rho_0}{r/r_s(1+r/r_s)^2} \text{.}
 \end{equation}
@@ -67,7 +67,7 @@ They are the only component of a galaxy cluster that can be observed in the visu
 About 90 percent of the mass of a cluster is dark matter (this is not a surprise since Fritz Zwicky measured mass-to-light ratios of 50 during the 1930s). Of the remaining baryonic matter, the ionized gas mass can represent up to 90$\%$ of the baryonic mass, making galaxies responsible for about 1$\%$ of the total cluster mass.
 
 The object Bullet Cluster (also known as 1E 0657-558) is the aftermath of the collision of two galaxy cluster.
-Before the collision, each cluster had its own set galaxies, baryonic gas and dark matter, and the centroid of each constituent coincided with the center of mass of the whole cluster.
+Before the collision, each cluster had its own baryonic gas, dark matter and set of galaxies, and the centroid of each constituent coincided with the center of mass of the whole cluster.
 During the collision, each constituent reacts differently to the situation:
 \begin{itemize}
 \item Galaxies, given that they occupy a minuscule fraction of the total volume of the cluster, are essentially collisionless. Two galaxy clusters can collide without any galaxy (or very little galaxies) colliding per se. 
@@ -83,7 +83,7 @@ Very accurate measurements and estimates of the centroids show a small collision
 Therefore, it is worth exploring the collisional dark matter scenario.
 
 \section{Particle Dark Matter}
-So far when talking about dark matter we have talked about an astrophysics problem. However, the problem has also been tackled by the particle physics community. In quantum field theory, particles are modeled as an excitation of space-time fields, and their interactions as interference among those fields.
+So far when talking about dark matter we have talked about an astrophysics problem. However, the problem has also been tackled by the particle physics community. In quantum field theory, particles are modeled as an excitation of space-time fields, and their interactions as interference among those fields \cite{griffiths} \cite{lahiri}.
 
 The first good candidate for a dark matter particle is the neutrino. 
 It is a stable particle, and it does not experience electromagnetic or strong interactions\cite{aHistory}. 
@@ -112,12 +112,12 @@ A complete modeling of the collisional operator requires knowledge of the short 
 \begin{equation}
 \pdv{f}{t} + \vb{\dot{x}} \pdv{f}{\vb{x}} + \vb{\dot{v}} \pdv{f}{\vb{v}}  = 0 \text{.}
 \end{equation}
-Which simply dictates that the phase space distribution function is constant along the trajectories of the system\cite{integerLatticeDynamics}
+Which simply dictates that the phase space distribution function is constant along the trajectories of the system \cite{integerLatticeDynamics}.
 \section{Lattice Boltzmann Method}
 \label{boltz}
 The Lattice-Boltzmann method divides the phase space into a lattice and solving the Boltzmann equation in such lattice.
 In each cell of the lattice there is a density which represents the mass of fluid in the position and velocity range correspondent to the cell's location in the lattice.
-The main effect of the discretization of the phase space is that we no longer simulate the entire phase space, but a discrete number of velocities and positions, which allows for the use of integer arithmetic. The use of integer arithmetic introduces lattice noise but eliminates the floating point error. In the limit of high resolution, the absence of floating point error and the tendency of the lattice noise towards zero guarantees that the method converges to the continuum solution and makes it a Lagragian and conservative algorithm\footnote{The algorithm recovers the Euler-Lagrange equations }. %TODO 
+The main effect of the discretization of the phase space is that we no longer simulate the entire phase space, but a discrete number of velocities and positions, which allows for the use of integer arithmetic. The use of integer arithmetic introduces lattice noise but eliminates the floating point error. In the limit of high resolution, the absence of floating point error and the tendency of the lattice noise towards zero guarantees that the method converges to the continuum solution of the Boltzmann equation. Overall, the algorithm recovers the Euler-Lagrange equations and conserves mass, momentum and energy.
 
 However, this method has one big drawback. The time evolution of the phase space is calculated using a direct integration scheme, which implies that for a simulation with $N$ spatial dimensions each one having size $n$, we would need to store $n^{2N}$ cell units per timestep. This is in fact a very heavy constrain because most cases of interest are three dimensional. For example, in a three dimensional distribution, if the grid size were to be $64$, then we would need almost 600 Gigabytes of memory just to store the lattice. 
 The specifics of implementing a Lattice Boltzmann method are discussed further in section \ref{implementBoltzmann}.
